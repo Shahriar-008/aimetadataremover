@@ -68,6 +68,9 @@ button:disabled{opacity:.5;cursor:default}
 @media (max-width:700px){ .details{grid-template-columns:1fr} }
 .note{margin-top:32px;font-size:13px;color:var(--muted);border-top:1px solid var(--border);padding-top:16px}
 .note b{color:var(--text);font-weight:600}
+.footer{margin-top:28px;text-align:center;font-size:13px;color:var(--muted)}
+.footer a{color:var(--accent);font-weight:600;text-decoration:none}
+.footer a:hover{text-decoration:underline}
 @media (max-width:560px){
   .row{grid-template-columns:44px 1fr}
   .thumb{width:44px;height:44px}
@@ -116,6 +119,7 @@ button:disabled{opacity:.5;cursor:default}
     Image pixels are not touched for JPG, PNG and WebP.<br><br>
     <b>Good to know:</b> some tools (like Google’s SynthID) also hide an invisible watermark inside the pixels themselves. That is not metadata, so no metadata cleaner can remove it. Also, file names like “ChatGPT Image…” can give it away, so use the rename option if needed.
   </div>
+  <footer class="footer">Made with ❤️ from <a href="https://www.designmonks.co" target="_blank" rel="noopener">Design Monks</a></footer>
 </div>
 
 <script id="core">
