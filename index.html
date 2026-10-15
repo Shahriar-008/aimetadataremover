@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AI Metadata Cleaner</title>
+<title>AI Metadata Remover</title>
 <style>
 :root{
   --bg:#f6f6f3; --surface:#ffffff; --surface-2:#f0f0ec; --text:#17171a; --muted:#6b6b72;
@@ -81,25 +81,25 @@ button:disabled{opacity:.5;cursor:default}
 <body>
 <div class="wrap">
   <header>
-    <div class="pill">● Runs 100% on your computer — nothing is uploaded</div>
-    <h1>AI Metadata Cleaner</h1>
-    <p>Drop images to strip AI tags, C2PA credentials, prompts, EXIF, XMP and IPTC data, in bulk.</p>
+    <div class="pill">● 100% private: your images never leave your computer</div>
+    <h1>AI Metadata Remover</h1>
+    <p>Remove the hidden “made with AI” info from your images. Add as many as you like. It takes just a second.</p>
   </header>
 
   <label class="drop" id="drop">
     <input type="file" id="file" multiple accept="image/*,.heic,.heif,.avif" hidden>
     <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M6 10l6-6 6 6"/><path d="M4 20h16"/></svg></div>
-    <strong>Drop images here or click to choose</strong>
-    <span>JPG, PNG and WebP are cleaned losslessly. Other formats are re-encoded.</span>
+    <strong>Drag your images here, or click to choose them</strong>
+    <span>Works with JPG, PNG, WebP, HEIC and more. Your image quality stays the same.</span>
   </label>
 
   <div class="options">
-    <label><input type="checkbox" id="keepIcc" checked> Keep color profile (recommended)</label>
-    <label>File names
+    <label><input type="checkbox" id="keepIcc" checked> Keep original colors (recommended)</label>
+    <label>New file names
       <select id="nameMode">
-        <option value="suffix">Add “-clean”</option>
-        <option value="keep">Keep original</option>
-        <option value="rename">Rename to image-001…</option>
+        <option value="suffix">photo-clean.jpg</option>
+        <option value="keep">Same as original</option>
+        <option value="rename">image-001, image-002…</option>
       </select>
     </label>
   </div>
@@ -107,17 +107,17 @@ button:disabled{opacity:.5;cursor:default}
   <div class="summary" id="summary">
     <div class="stats" id="stats"></div>
     <div class="btns">
-      <button id="clear">Clear</button>
-      <button class="primary" id="zip">Download all (ZIP)</button>
+      <button id="clear">Start over</button>
+      <button class="primary" id="zip">Download all</button>
     </div>
   </div>
 
   <div class="list" id="list"></div>
 
   <div class="note">
-    <b>What gets removed:</b> C2PA / Content Credentials, IPTC “AI-generated” tags, EXIF, XMP, Photoshop/IPTC blocks, comments, Stable Diffusion &amp; ComfyUI prompt text, and extra data hidden after the image.
-    Image pixels are not touched for JPG, PNG and WebP.<br><br>
-    <b>Good to know:</b> some tools (like Google’s SynthID) also hide an invisible watermark inside the pixels themselves. That is not metadata, so no metadata cleaner can remove it. Also, file names like “ChatGPT Image…” can give it away, so use the rename option if needed.
+    <b>What does this remove?</b> AI tools hide extra info inside image files that says the picture was made with AI. This can include labels from ChatGPT, Midjourney, Gemini or Adobe Firefly, the prompt you typed, and camera or device details. This tool removes all of that. Your picture itself stays exactly the same.<br><br>
+    <b>Is it safe?</b> Yes. Everything happens right here in your browser. Your images are never uploaded anywhere.<br><br>
+    <b>Good to know:</b> some AI tools (like Google’s) also hide an invisible mark inside the picture itself. That is part of the image, not hidden info, so no tool like this can remove it. Also check your file names: a name like “ChatGPT Image…” gives it away, so use the “image-001, image-002…” option.
   </div>
   <footer class="footer">Made with ❤️ from <a href="https://www.designmonks.co" target="_blank" rel="noopener">Design Monks</a></footer>
 </div>
@@ -125,15 +125,15 @@ button:disabled{opacity:.5;cursor:default}
 <script id="core">
 /* ===== Core cleaning logic (no DOM) ===== */
 const AI_PATTERNS = [
-  ['C2PA credentials', /c2pa|jumb|contentauth|claim_generator/i],
-  ['AI-generated tag', /trainedAlgorithmicMedia|ai[- ]generated|generative ai|made with ai/i],
+  ['AI “Content Credentials” label', /c2pa|jumb|contentauth|claim_generator/i],
+  ['“Made with AI” tag', /trainedAlgorithmicMedia|ai[- ]generated|generative ai|made with ai/i],
   ['Midjourney', /midjourney/i],
   ['OpenAI / ChatGPT', /openai|dall[-·\u00b7 ]?e|chatgpt|gpt-4o|sora/i],
   ['Adobe Firefly', /firefly/i],
   ['Google AI', /gemini|\bimagen\b|synthid|google ai/i],
-  ['Stable Diffusion', /stable.?diffusion|negative prompt|sampler:|cfg scale/i],
-  ['ComfyUI', /comfyui|"class_type"/i],
-  ['Flux / Leonardo / Ideogram', /\bflux\b|leonardo\.ai|ideogram|runwayml|\bgrok\b/i],
+  ['Stable Diffusion prompt', /stable.?diffusion|negative prompt|sampler:|cfg scale/i],
+  ['ComfyUI workflow', /comfyui|"class_type"/i],
+  ['Other AI tool (Flux, Leonardo, Ideogram…)', /\bflux\b|leonardo\.ai|ideogram|runwayml|\bgrok\b/i],
 ];
 
 function latin1(u8){
@@ -209,13 +209,13 @@ function stripJPEG(u8, keepICC){
   const out = [u8.subarray(0, 2)], removed = [], meta = [], kept = new Set();
   let i = 2, orientation = 1, insertAt = 1;
   while (i < u8.length){
-    if (u8[i] !== 0xFF) throw new Error('Damaged JPEG');
+    if (u8[i] !== 0xFF) throw new Error('This image seems damaged and could not be opened');
     const m = u8[i+1];
     if (m === 0xFF){ i++; continue; }
     if (m === 0xDA){
       const end = findEOI(u8, i);
-      out.push(u8.subarray(i, end)); kept.add('Image data');
-      if (end < u8.length){ removed.push({ label: 'Hidden data after image', bytes: u8.length - end }); meta.push(u8.subarray(end)); }
+      out.push(u8.subarray(i, end)); kept.add('Your image, untouched');
+      if (end < u8.length){ removed.push({ label: 'Extra data hidden at the end', bytes: u8.length - end }); meta.push(u8.subarray(end)); }
       break;
     }
     if (m === 0xD9){ out.push(u8.subarray(i, i + 2)); break; }
@@ -224,39 +224,39 @@ function stripJPEG(u8, keepICC){
     const seg = u8.subarray(i, i + 2 + len), data = u8.subarray(i + 4, i + 2 + len);
     const id = ascii(data, 0, Math.min(40, data.length));
     let keep = true, label = null;
-    if (m === 0xE0){ keep = id.startsWith('JFIF') || id.startsWith('JFXX'); label = 'APP0 data'; }
+    if (m === 0xE0){ keep = id.startsWith('JFIF') || id.startsWith('JFXX'); label = 'Other hidden info'; }
     else if (m === 0xE1){
       keep = false;
-      if (id.startsWith('Exif')){ label = 'EXIF'; orientation = readOrientation(data); }
-      else label = /adobe\.com\/x(ap|mp)/.test(id) ? 'XMP' : 'APP1 data';
+      if (id.startsWith('Exif')){ label = 'Camera & device details'; orientation = readOrientation(data); }
+      else label = /adobe\.com\/x(ap|mp)/.test(id) ? 'Hidden file history (XMP)' : 'Other hidden info';
     }
     else if (m === 0xE2){
       const icc = id.startsWith('ICC_PROFILE');
       keep = icc && keepICC;
-      label = icc ? 'Color profile' : id.startsWith('MPF') ? 'Multi-picture data' : 'APP2 data';
+      label = icc ? 'Color profile' : id.startsWith('MPF') ? 'Extra preview images' : 'Other hidden info';
     }
-    else if (m === 0xEB){ keep = false; label = 'C2PA / JUMBF'; }
-    else if (m === 0xED){ keep = false; label = 'IPTC / Photoshop'; }
-    else if (m === 0xEE){ keep = id.startsWith('Adobe'); label = 'APP14 data'; }
-    else if (m >= 0xE3 && m <= 0xEF){ keep = false; label = 'APP' + (m - 0xE0) + ' data'; }
-    else if (m === 0xFE){ keep = false; label = 'Comment'; }
+    else if (m === 0xEB){ keep = false; label = 'AI “Content Credentials” label'; }
+    else if (m === 0xED){ keep = false; label = 'Photo tags & captions'; }
+    else if (m === 0xEE){ keep = id.startsWith('Adobe'); label = 'Other hidden info'; }
+    else if (m >= 0xE3 && m <= 0xEF){ keep = false; label = 'Other hidden info'; }
+    else if (m === 0xFE){ keep = false; label = 'Hidden comment'; }
     if (keep){
       out.push(seg);
       if (m === 0xE0 && insertAt === 1) insertAt = out.length;
-      if (m === 0xE2) kept.add('Color profile'); else if (m === 0xEE) kept.add('Adobe color info'); else if (m === 0xE0) kept.add('JFIF header');
+      if (m === 0xE2) kept.add('Color profile'); else if (m === 0xEE) kept.add('Color settings'); else if (m === 0xE0) kept.add('Basic file info');
     }
     else { removed.push({ label, bytes: seg.length }); meta.push(seg); }
     i += 2 + len;
   }
-  if (orientation > 1 && orientation <= 8){ out.splice(insertAt, 0, orientationSegment(orientation)); kept.add('Rotation (only this, rebuilt)'); }
+  if (orientation > 1 && orientation <= 8){ out.splice(insertAt, 0, orientationSegment(orientation)); kept.add('Photo rotation (so it stays upright)'); }
   return { bytes: concat(out), removed: merge(removed), kept: [...kept], meta: concat(meta) };
 }
 
 /* ---- PNG ---- */
 const PNG_KEEP = new Set(['IHDR','PLTE','IDAT','IEND','tRNS','gAMA','cHRM','sRGB','sBIT','pHYs','bKGD','acTL','fcTL','fdAT','cICP','mDCv','cLLi']);
-const PNG_LABEL = { tEXt:'Text / prompts', iTXt:'Text / prompts', zTXt:'Text / prompts', eXIf:'EXIF', caBX:'C2PA / JUMBF', tIME:'Timestamp', iCCP:'Color profile' };
+const PNG_LABEL = { tEXt:'AI prompt & settings text', iTXt:'AI prompt & settings text', zTXt:'AI prompt & settings text', eXIf:'Camera & device details', caBX:'AI “Content Credentials” label', tIME:'Date & time stamp', iCCP:'Color profile' };
 function stripPNG(u8, keepICC){
-  const out = [u8.subarray(0, 8)], removed = [], meta = [], kept = new Set(['Image data']);
+  const out = [u8.subarray(0, 8)], removed = [], meta = [], kept = new Set(['Your image, untouched']);
   const dv = new DataView(u8.buffer, u8.byteOffset, u8.byteLength);
   let i = 8;
   while (i + 12 <= u8.length){
@@ -266,11 +266,11 @@ function stripPNG(u8, keepICC){
       out.push(chunk);
       if (/iCCP|sRGB|gAMA|cHRM|cICP/.test(type)) kept.add('Color profile'); else if (/acTL|fcTL|fdAT/.test(type)) kept.add('Animation'); else if (type === 'tRNS') kept.add('Transparency');
     }
-    else { removed.push({ label: PNG_LABEL[type] || type + ' chunk', bytes: chunk.length }); meta.push(chunk); }
+    else { removed.push({ label: PNG_LABEL[type] || 'Other hidden info', bytes: chunk.length }); meta.push(chunk); }
     i += 12 + len;
     if (type === 'IEND') break;
   }
-  if (i < u8.length){ removed.push({ label: 'Hidden data after image', bytes: u8.length - i }); meta.push(u8.subarray(i)); }
+  if (i < u8.length){ removed.push({ label: 'Extra data hidden at the end', bytes: u8.length - i }); meta.push(u8.subarray(i)); }
   return { bytes: concat(out), removed: merge(removed), kept: [...kept], meta: concat(meta) };
 }
 
@@ -279,7 +279,7 @@ const WEBP_KEEP = new Set(['VP8 ','VP8L','VP8X','ALPH','ANIM','ANMF']);
 function stripWEBP(u8, keepICC){
   const dv = new DataView(u8.buffer, u8.byteOffset, u8.byteLength);
   const total = Math.min(u8.length, 8 + dv.getUint32(4, true));
-  const parts = [], removed = [], meta = [], kept = new Set(['Image data']);
+  const parts = [], removed = [], meta = [], kept = new Set(['Your image, untouched']);
   let i = 12, hasICC = false;
   while (i + 8 <= total){
     const type = ascii(u8, i, 4), size = dv.getUint32(i + 4, true);
@@ -289,7 +289,7 @@ function stripWEBP(u8, keepICC){
       if (type === 'ANIM') kept.add('Animation'); if (type === 'ALPH') kept.add('Transparency');
       parts.push(type === 'VP8X' ? chunk.slice() : chunk);
     } else {
-      removed.push({ label: { EXIF:'EXIF', 'XMP ':'XMP', ICCP:'Color profile' }[type] || type.trim() + ' chunk', bytes: chunk.length });
+      removed.push({ label: { EXIF:'Camera & device details', 'XMP ':'Hidden file history (XMP)', ICCP:'Color profile' }[type] || 'Other hidden info', bytes: chunk.length });
       meta.push(chunk);
     }
     i += 8 + size + (size & 1);
@@ -323,11 +323,11 @@ async function cleanBytes(u8, file, opts){
     const check = fn(r.bytes, opts.keepICC);
     const origExt = (file.name.match(/\.([^.]+)$/) || [])[1];
     return { bytes: r.bytes, mime, ext: origExt && /^(jpe?g|png|webp)$/i.test(origExt) ? origExt : ext,
-      removed: r.removed, kept: r.kept, ai: findAI(r.meta), verified: detectAI(check.meta).length === 0, method: 'lossless' };
+      removed: r.removed, kept: r.kept, ai: findAI(r.meta), verified: detectAI(check.meta).length === 0, method: 'same quality' };
   }
   const ai = findAI(u8.length < 4e6 ? u8 : u8.subarray(0, 4e6));
   const r = await reencode(file, u8);
-  return { ...r, removed: [{ label: 'All metadata (image re-saved)', bytes: null }], kept: ['Image pixels'], ai, verified: true, method: 're-encoded' };
+  return { ...r, removed: [{ label: 'All hidden info (saved as a fresh copy)', bytes: null }], kept: ['Your image'], ai, verified: true, method: 'saved as a fresh copy' };
 }
 
 /* ---- Tiny ZIP writer (store, no compression — images are already compressed) ---- */
@@ -379,7 +379,7 @@ $('#clear').addEventListener('click', () => { items.forEach(it => it.url && URL.
 $('#zip').addEventListener('click', () => {
   const done = items.filter(it => it.status === 'done'); if (!done.length) return;
   const a = document.createElement('a'); a.href = URL.createObjectURL(makeZip(done.map(it => ({ name: outName(it), bytes: it.bytes }))));
-  a.download = 'cleaned-images.zip'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+  a.download = 'clean-images.zip'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 5000);
 });
 
 function addFiles(list){
@@ -399,7 +399,7 @@ async function processQueue(){
       if (it.url) URL.revokeObjectURL(it.url);
       it.url = URL.createObjectURL(new Blob([it.bytes], { type: it.mime }));
       it.status = 'done';
-    }catch(e){ it.status = 'error'; it.error = e.message || 'Could not read this image'; }
+    }catch(e){ it.status = 'error'; it.error = e.message || 'We could not open this image'; }
     if (items.includes(it)) renderRow(it);
     updateSummary();
   }
@@ -424,10 +424,10 @@ function rowHTML(it){
   let details = '';
   if (it.status === 'done'){
     const aiCount = it.ai.length + (it.nameAI.length ? 1 : 0);
-    tags.push(aiCount ? `<span class="tag ai">${aiCount} AI signal${aiCount > 1 ? 's' : ''} found</span>` : '<span class="tag">No AI signals</span>');
-    tags.push(`<span class="tag">${it.removed.length} item${it.removed.length === 1 ? '' : 's'} removed</span>`);
-    tags.push(it.verified ? '<span class="tag ok">✓ Clean</span>' : '<span class="tag err">Check failed</span>');
-    side = `<button class="toggle" data-toggle="${it.id}">${it.open ? 'Hide details' : 'Details'}</button>
+    tags.push(aiCount ? `<span class="tag ai">AI info found (${aiCount})</span>` : '<span class="tag">No AI info found</span>');
+    tags.push(`<span class="tag">${it.removed.length ? it.removed.length + ' thing' + (it.removed.length === 1 ? '' : 's') + ' removed' : 'Nothing to remove'}</span>`);
+    tags.push(it.verified ? '<span class="tag ok">✓ Clean</span>' : '<span class="tag err">Could not fully clean</span>');
+    side = `<button class="toggle" data-toggle="${it.id}">${it.open ? 'Hide details' : 'Show details'}</button>
       <a class="btn small" href="${it.url}" download="${esc(outName(it))}">Download</a>`;
     if (it.open) details = detailsHTML(it);
   }
@@ -442,15 +442,15 @@ function detailsHTML(it){
     ${d.evidence.map(e => `<span class="ev">${esc(e)}</span>`).join('')}</li>`);
   if (it.nameAI.length){
     const renamed = $('#nameMode').value === 'rename';
-    detected.push(`<li class="hit"><span class="lbl">File name mentions ${esc(it.nameAI.join(', '))}</span>
-      <span class="ev">${esc(it.file.name)}</span><span class="sz">${renamed ? 'Fixed by rename option' : 'Tip: use “Rename to image-001”'}</span></li>`);
+    detected.push(`<li class="hit"><span class="lbl">The file name mentions ${esc(it.nameAI.join(', '))}</span>
+      <span class="ev">${esc(it.file.name)}</span><span class="sz">${renamed ? 'Fixed: it will get a new name' : 'Tip: choose “image-001, image-002…” above to rename it'}</span></li>`);
   }
   const removed = it.removed.map(r => `<li><span class="lbl">${esc(r.label)}</span>${r.bytes != null ? `<span class="sz">${fmt(r.bytes)}</span>` : ''}</li>`);
   const kept = (it.kept || []).map(k => `<li>${esc(k)}</li>`);
   return `<div class="details">
-    <div><h4>Detected</h4><ul>${detected.join('') || '<li class="none">No AI signals in this file</li>'}</ul></div>
-    <div><h4>Removed</h4><ul>${removed.join('') || '<li class="none">Nothing to remove</li>'}</ul></div>
-    <div><h4>Kept</h4><ul>${kept.join('')}</ul></div>
+    <div><h4>What we found</h4><ul>${detected.join('') || '<li class="none">No AI info in this image</li>'}</ul></div>
+    <div><h4>What we removed</h4><ul>${removed.join('') || '<li class="none">Nothing hidden. Already clean!</li>'}</ul></div>
+    <div><h4>What we kept</h4><ul>${kept.join('')}</ul></div>
   </div>`;
 }
 $('#list').addEventListener('click', ev => {
@@ -469,10 +469,10 @@ function updateSummary(){
   const pending = items.filter(i => i.status === 'queued' || i.status === 'working').length;
   const errors = items.filter(i => i.status === 'error').length;
   $('#summary').classList.toggle('show', items.length > 0);
-  $('#stats').innerHTML = `<b>${done.length}</b> of ${items.length} cleaned` +
-    (withAI ? ` · <b>${withAI}</b> had AI metadata` : '') +
-    (pending ? ` · working on ${pending}…` : done.length && done.every(i => i.verified) ? ' · all verified clean ✓' : '') +
-    (errors ? ` · ${errors} failed` : '');
+  $('#stats').innerHTML = `<b>${done.length}</b> of ${items.length} image${items.length === 1 ? '' : 's'} cleaned` +
+    (withAI ? ` · <b>${withAI}</b> had hidden AI info` : '') +
+    (pending ? ` · working on ${pending} more…` : done.length && done.every(i => i.verified) ? ' · all checked and clean ✓' : '') +
+    (errors ? ` · ${errors} could not be opened` : '');
   $('#zip').disabled = !done.length || pending > 0;
 }
 </script>
