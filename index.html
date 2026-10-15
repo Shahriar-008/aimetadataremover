@@ -1,0 +1,476 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Metadata Cleaner</title>
+<style>
+:root{
+  --bg:#f6f6f3; --surface:#ffffff; --surface-2:#f0f0ec; --text:#17171a; --muted:#6b6b72;
+  --border:#e3e3de; --accent:#4a47e8; --accent-ink:#ffffff; --accent-soft:#ecebfd;
+  --good:#15803d; --good-soft:#e7f6ec; --warn:#b45309; --warn-soft:#fdf1e2; --bad:#b91c1c; --bad-soft:#fde8e8;
+  --radius:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#111113; --surface:#1a1a1d; --surface-2:#232327; --text:#ededee; --muted:#9a9aa3;
+    --border:#2e2e33; --accent:#8b88ff; --accent-ink:#111113; --accent-soft:#25244a;
+    --good:#4ade80; --good-soft:#15291c; --warn:#fbbf24; --warn-soft:#2e2412; --bad:#f87171; --bad-soft:#2f1717;
+  }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:15px/1.5 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,sans-serif;-webkit-font-smoothing:antialiased}
+.wrap{max-width:920px;margin:0 auto;padding:40px 16px 64px}
+header h1{font-size:28px;letter-spacing:-.02em;margin:0 0 6px}
+header p{margin:0;color:var(--muted)}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:99px;background:var(--good-soft);color:var(--good);margin-bottom:14px}
+.drop{display:block;margin-top:28px;border:2px dashed var(--border);border-radius:var(--radius);background:var(--surface);padding:44px 20px;text-align:center;cursor:pointer;transition:.15s}
+.drop:hover,.drop.over{border-color:var(--accent);background:var(--accent-soft)}
+.drop strong{display:block;font-size:17px;margin-bottom:4px}
+.drop span{color:var(--muted);font-size:14px}
+.drop .icon{width:44px;height:44px;margin:0 auto 12px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
+.options{display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;margin:18px 2px 0;font-size:14px;color:var(--muted)}
+.options label{display:flex;align-items:center;gap:8px;cursor:pointer}
+select{font:inherit;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:5px 8px}
+input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px}
+.summary{display:none;margin-top:28px;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.summary.show{display:flex}
+.summary .stats{font-size:14px}
+.summary .stats b{font-weight:650}
+.btns{display:flex;gap:8px}
+button,.btn{font:inherit;font-weight:600;font-size:14px;border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:10px;padding:8px 14px;cursor:pointer;text-decoration:none;white-space:nowrap}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+button:disabled{opacity:.5;cursor:default}
+.list{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+.row{display:grid;grid-template-columns:56px 1fr auto;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px 12px}
+.thumb{width:56px;height:56px;border-radius:8px;object-fit:cover;background:var(--surface-2)}
+.name{font-weight:600;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sub{font-size:12.5px;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
+.tag{font-size:11.5px;font-weight:600;padding:2px 8px;border-radius:99px;background:var(--surface-2);color:var(--muted)}
+.tag.ai{background:var(--warn-soft);color:var(--warn)}
+.tag.ok{background:var(--good-soft);color:var(--good)}
+.tag.err{background:var(--bad-soft);color:var(--bad)}
+.side{display:flex;align-items:center;gap:8px}
+.btn.small{padding:6px 10px;font-size:13px}
+.spin{width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:s 0.8s linear infinite}
+@keyframes s{to{transform:rotate(360deg)}}
+.details{grid-column:1 / -1;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px;border-top:1px solid var(--border);padding-top:12px;margin-top:2px}
+.details h4{margin:0 0 6px;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.details ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
+.details li{font-size:13px}
+.details .lbl{font-weight:600}
+.details .sz{color:var(--muted);font-size:12px;margin-left:4px}
+.details .ev{display:block;margin-top:3px;font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--muted);background:var(--surface-2);border-radius:6px;padding:4px 7px;word-break:break-all}
+.details .hit .lbl{color:var(--warn)}
+.details .none{color:var(--muted);font-size:13px}
+.toggle{background:none;border:0;color:var(--accent);padding:6px 4px;font-size:13px}
+@media (max-width:700px){ .details{grid-template-columns:1fr} }
+.note{margin-top:32px;font-size:13px;color:var(--muted);border-top:1px solid var(--border);padding-top:16px}
+.note b{color:var(--text);font-weight:600}
+@media (max-width:560px){
+  .row{grid-template-columns:44px 1fr}
+  .thumb{width:44px;height:44px}
+  .side{grid-column:1 / -1;justify-content:flex-end}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <div class="pill">● Runs 100% on your computer — nothing is uploaded</div>
+    <h1>AI Metadata Cleaner</h1>
+    <p>Drop images to strip AI tags, C2PA credentials, prompts, EXIF, XMP and IPTC data, in bulk.</p>
+  </header>
+
+  <label class="drop" id="drop">
+    <input type="file" id="file" multiple accept="image/*,.heic,.heif,.avif" hidden>
+    <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M6 10l6-6 6 6"/><path d="M4 20h16"/></svg></div>
+    <strong>Drop images here or click to choose</strong>
+    <span>JPG, PNG and WebP are cleaned losslessly. Other formats are re-encoded.</span>
+  </label>
+
+  <div class="options">
+    <label><input type="checkbox" id="keepIcc" checked> Keep color profile (recommended)</label>
+    <label>File names
+      <select id="nameMode">
+        <option value="suffix">Add “-clean”</option>
+        <option value="keep">Keep original</option>
+        <option value="rename">Rename to image-001…</option>
+      </select>
+    </label>
+  </div>
+
+  <div class="summary" id="summary">
+    <div class="stats" id="stats"></div>
+    <div class="btns">
+      <button id="clear">Clear</button>
+      <button class="primary" id="zip">Download all (ZIP)</button>
+    </div>
+  </div>
+
+  <div class="list" id="list"></div>
+
+  <div class="note">
+    <b>What gets removed:</b> C2PA / Content Credentials, IPTC “AI-generated” tags, EXIF, XMP, Photoshop/IPTC blocks, comments, Stable Diffusion &amp; ComfyUI prompt text, and extra data hidden after the image.
+    Image pixels are not touched for JPG, PNG and WebP.<br><br>
+    <b>Good to know:</b> some tools (like Google’s SynthID) also hide an invisible watermark inside the pixels themselves. That is not metadata, so no metadata cleaner can remove it. Also, file names like “ChatGPT Image…” can give it away, so use the rename option if needed.
+  </div>
+</div>
+
+<script id="core">
+/* ===== Core cleaning logic (no DOM) ===== */
+const AI_PATTERNS = [
+  ['C2PA credentials', /c2pa|jumb|contentauth|claim_generator/i],
+  ['AI-generated tag', /trainedAlgorithmicMedia|ai[- ]generated|generative ai|made with ai/i],
+  ['Midjourney', /midjourney/i],
+  ['OpenAI / ChatGPT', /openai|dall[-·\u00b7 ]?e|chatgpt|gpt-4o|sora/i],
+  ['Adobe Firefly', /firefly/i],
+  ['Google AI', /gemini|\bimagen\b|synthid|google ai/i],
+  ['Stable Diffusion', /stable.?diffusion|negative prompt|sampler:|cfg scale/i],
+  ['ComfyUI', /comfyui|"class_type"/i],
+  ['Flux / Leonardo / Ideogram', /\bflux\b|leonardo\.ai|ideogram|runwayml|\bgrok\b/i],
+];
+
+function latin1(u8){
+  let s = '';
+  for (let i = 0; i < u8.length; i += 0x8000) s += String.fromCharCode.apply(null, u8.subarray(i, i + 0x8000));
+  return s;
+}
+function snippet(s, i, n){
+  const ok = c => c >= 32 && c < 127;
+  let a = i, b = i + n;
+  while (a > 0 && i - a < 50 && ok(s.charCodeAt(a - 1))) a--;
+  while (b < s.length && b - (i + n) < 50 && ok(s.charCodeAt(b))) b++;
+  const pre = a > 0 && ok(s.charCodeAt(a - 1)) ? '…' : '';
+  const post = b < s.length && ok(s.charCodeAt(b)) ? '…' : '';
+  return pre + s.slice(a, b).trim() + post;
+}
+// Returns [{ name, evidence: [text found in the file] }]
+function findAI(input){
+  const s = typeof input === 'string' ? input : latin1(input);
+  const out = [];
+  for (const [name, re] of AI_PATTERNS){
+    const g = new RegExp(re.source, 'gi'), ev = new Set(); let m;
+    while ((m = g.exec(s)) && ev.size < 3){ ev.add(snippet(s, m.index, m[0].length)); if (!m[0].length) g.lastIndex++; }
+    if (ev.size) out.push({ name, evidence: [...ev] });
+  }
+  return out;
+}
+const detectAI = input => findAI(input).map(d => d.name);
+function merge(list){ // [{label, bytes}] → combined by label
+  const m = new Map();
+  for (const r of list) m.set(r.label, (m.get(r.label) || 0) + r.bytes);
+  return [...m].map(([label, bytes]) => ({ label, bytes }));
+}
+function concat(parts){
+  const len = parts.reduce((a, p) => a + p.length, 0);
+  const out = new Uint8Array(len); let o = 0;
+  for (const p of parts){ out.set(p, o); o += p.length; }
+  return out;
+}
+const uniq = a => [...new Set(a.filter(Boolean))];
+const ascii = (u8, start, n) => latin1(u8.subarray(start, start + n));
+
+function sniff(u8){
+  if (u8[0] === 0xFF && u8[1] === 0xD8) return 'jpeg';
+  if (u8[0] === 0x89 && ascii(u8, 1, 3) === 'PNG') return 'png';
+  if (ascii(u8, 0, 4) === 'RIFF' && ascii(u8, 8, 4) === 'WEBP') return 'webp';
+  return 'other';
+}
+
+/* ---- JPEG ---- */
+function readOrientation(data){ // data starts with "Exif\0\0"
+  try{
+    const t = 6, dv = new DataView(data.buffer, data.byteOffset, data.byteLength);
+    const le = ascii(data, t, 2) === 'II';
+    const ifd = t + dv.getUint32(t + 4, le);
+    const n = dv.getUint16(ifd, le);
+    for (let k = 0; k < n; k++){
+      const e = ifd + 2 + k * 12;
+      if (dv.getUint16(e, le) === 0x0112) return dv.getUint16(e + 8, le);
+    }
+  }catch(e){}
+  return 1;
+}
+function orientationSegment(o){ // minimal EXIF holding only orientation
+  return new Uint8Array([0xFF,0xE1,0x00,0x22, 0x45,0x78,0x69,0x66,0x00,0x00, 0x4D,0x4D,0x00,0x2A,0x00,0x00,0x00,0x08,
+    0x00,0x01, 0x01,0x12,0x00,0x03,0x00,0x00,0x00,0x01,0x00,o,0x00,0x00, 0x00,0x00,0x00,0x00]);
+}
+function findEOI(u8, from){
+  for (let i = from; i < u8.length - 1; i++) if (u8[i] === 0xFF && u8[i+1] === 0xD9) return i + 2;
+  return u8.length;
+}
+function stripJPEG(u8, keepICC){
+  const out = [u8.subarray(0, 2)], removed = [], meta = [], kept = new Set();
+  let i = 2, orientation = 1, insertAt = 1;
+  while (i < u8.length){
+    if (u8[i] !== 0xFF) throw new Error('Damaged JPEG');
+    const m = u8[i+1];
+    if (m === 0xFF){ i++; continue; }
+    if (m === 0xDA){
+      const end = findEOI(u8, i);
+      out.push(u8.subarray(i, end)); kept.add('Image data');
+      if (end < u8.length){ removed.push({ label: 'Hidden data after image', bytes: u8.length - end }); meta.push(u8.subarray(end)); }
+      break;
+    }
+    if (m === 0xD9){ out.push(u8.subarray(i, i + 2)); break; }
+    if ((m >= 0xD0 && m <= 0xD7) || m === 0x01){ out.push(u8.subarray(i, i + 2)); i += 2; continue; }
+    const len = (u8[i+2] << 8) | u8[i+3];
+    const seg = u8.subarray(i, i + 2 + len), data = u8.subarray(i + 4, i + 2 + len);
+    const id = ascii(data, 0, Math.min(40, data.length));
+    let keep = true, label = null;
+    if (m === 0xE0){ keep = id.startsWith('JFIF') || id.startsWith('JFXX'); label = 'APP0 data'; }
+    else if (m === 0xE1){
+      keep = false;
+      if (id.startsWith('Exif')){ label = 'EXIF'; orientation = readOrientation(data); }
+      else label = /adobe\.com\/x(ap|mp)/.test(id) ? 'XMP' : 'APP1 data';
+    }
+    else if (m === 0xE2){
+      const icc = id.startsWith('ICC_PROFILE');
+      keep = icc && keepICC;
+      label = icc ? 'Color profile' : id.startsWith('MPF') ? 'Multi-picture data' : 'APP2 data';
+    }
+    else if (m === 0xEB){ keep = false; label = 'C2PA / JUMBF'; }
+    else if (m === 0xED){ keep = false; label = 'IPTC / Photoshop'; }
+    else if (m === 0xEE){ keep = id.startsWith('Adobe'); label = 'APP14 data'; }
+    else if (m >= 0xE3 && m <= 0xEF){ keep = false; label = 'APP' + (m - 0xE0) + ' data'; }
+    else if (m === 0xFE){ keep = false; label = 'Comment'; }
+    if (keep){
+      out.push(seg);
+      if (m === 0xE0 && insertAt === 1) insertAt = out.length;
+      if (m === 0xE2) kept.add('Color profile'); else if (m === 0xEE) kept.add('Adobe color info'); else if (m === 0xE0) kept.add('JFIF header');
+    }
+    else { removed.push({ label, bytes: seg.length }); meta.push(seg); }
+    i += 2 + len;
+  }
+  if (orientation > 1 && orientation <= 8){ out.splice(insertAt, 0, orientationSegment(orientation)); kept.add('Rotation (only this, rebuilt)'); }
+  return { bytes: concat(out), removed: merge(removed), kept: [...kept], meta: concat(meta) };
+}
+
+/* ---- PNG ---- */
+const PNG_KEEP = new Set(['IHDR','PLTE','IDAT','IEND','tRNS','gAMA','cHRM','sRGB','sBIT','pHYs','bKGD','acTL','fcTL','fdAT','cICP','mDCv','cLLi']);
+const PNG_LABEL = { tEXt:'Text / prompts', iTXt:'Text / prompts', zTXt:'Text / prompts', eXIf:'EXIF', caBX:'C2PA / JUMBF', tIME:'Timestamp', iCCP:'Color profile' };
+function stripPNG(u8, keepICC){
+  const out = [u8.subarray(0, 8)], removed = [], meta = [], kept = new Set(['Image data']);
+  const dv = new DataView(u8.buffer, u8.byteOffset, u8.byteLength);
+  let i = 8;
+  while (i + 12 <= u8.length){
+    const len = dv.getUint32(i), type = ascii(u8, i + 4, 4);
+    const chunk = u8.subarray(i, i + 12 + len);
+    if (PNG_KEEP.has(type) || (type === 'iCCP' && keepICC)){
+      out.push(chunk);
+      if (/iCCP|sRGB|gAMA|cHRM|cICP/.test(type)) kept.add('Color profile'); else if (/acTL|fcTL|fdAT/.test(type)) kept.add('Animation'); else if (type === 'tRNS') kept.add('Transparency');
+    }
+    else { removed.push({ label: PNG_LABEL[type] || type + ' chunk', bytes: chunk.length }); meta.push(chunk); }
+    i += 12 + len;
+    if (type === 'IEND') break;
+  }
+  if (i < u8.length){ removed.push({ label: 'Hidden data after image', bytes: u8.length - i }); meta.push(u8.subarray(i)); }
+  return { bytes: concat(out), removed: merge(removed), kept: [...kept], meta: concat(meta) };
+}
+
+/* ---- WebP ---- */
+const WEBP_KEEP = new Set(['VP8 ','VP8L','VP8X','ALPH','ANIM','ANMF']);
+function stripWEBP(u8, keepICC){
+  const dv = new DataView(u8.buffer, u8.byteOffset, u8.byteLength);
+  const total = Math.min(u8.length, 8 + dv.getUint32(4, true));
+  const parts = [], removed = [], meta = [], kept = new Set(['Image data']);
+  let i = 12, hasICC = false;
+  while (i + 8 <= total){
+    const type = ascii(u8, i, 4), size = dv.getUint32(i + 4, true);
+    const chunk = u8.subarray(i, Math.min(total, i + 8 + size + (size & 1)));
+    if (WEBP_KEEP.has(type) || (type === 'ICCP' && keepICC)){
+      if (type === 'ICCP'){ hasICC = true; kept.add('Color profile'); }
+      if (type === 'ANIM') kept.add('Animation'); if (type === 'ALPH') kept.add('Transparency');
+      parts.push(type === 'VP8X' ? chunk.slice() : chunk);
+    } else {
+      removed.push({ label: { EXIF:'EXIF', 'XMP ':'XMP', ICCP:'Color profile' }[type] || type.trim() + ' chunk', bytes: chunk.length });
+      meta.push(chunk);
+    }
+    i += 8 + size + (size & 1);
+  }
+  const vp8x = parts.find(p => ascii(p, 0, 4) === 'VP8X');
+  if (vp8x){ vp8x[8] &= ~(0x08 | 0x04); if (!hasICC) vp8x[8] &= ~0x20; }
+  const body = concat(parts);
+  const head = new Uint8Array(12);
+  head.set([0x52,0x49,0x46,0x46]); new DataView(head.buffer).setUint32(4, 4 + body.length, true); head.set([0x57,0x45,0x42,0x50], 8);
+  return { bytes: concat([head, body]), removed: merge(removed), kept: [...kept], meta: concat(meta) };
+}
+
+/* ---- Fallback: re-encode through canvas (GIF, AVIF, HEIC, BMP, TIFF…) ---- */
+async function reencode(file, u8){
+  const bmp = await createImageBitmap(new Blob([u8], { type: file.type || '' }));
+  const c = document.createElement('canvas'); c.width = bmp.width; c.height = bmp.height;
+  c.getContext('2d').drawImage(bmp, 0, 0);
+  const lossy = /avif|heic|heif/i.test(file.type + file.name);
+  const mime = lossy ? 'image/jpeg' : 'image/png';
+  const blob = await new Promise(r => c.toBlob(r, mime, 0.95));
+  return { bytes: new Uint8Array(await blob.arrayBuffer()), mime, ext: lossy ? 'jpg' : 'png' };
+}
+
+const STRIPPERS = { jpeg: [stripJPEG, 'image/jpeg', 'jpg'], png: [stripPNG, 'image/png', 'png'], webp: [stripWEBP, 'image/webp', 'webp'] };
+
+async function cleanBytes(u8, file, opts){
+  const kind = sniff(u8);
+  if (STRIPPERS[kind]){
+    const [fn, mime, ext] = STRIPPERS[kind];
+    const r = fn(u8, opts.keepICC);
+    const check = fn(r.bytes, opts.keepICC);
+    const origExt = (file.name.match(/\.([^.]+)$/) || [])[1];
+    return { bytes: r.bytes, mime, ext: origExt && /^(jpe?g|png|webp)$/i.test(origExt) ? origExt : ext,
+      removed: r.removed, kept: r.kept, ai: findAI(r.meta), verified: detectAI(check.meta).length === 0, method: 'lossless' };
+  }
+  const ai = findAI(u8.length < 4e6 ? u8 : u8.subarray(0, 4e6));
+  const r = await reencode(file, u8);
+  return { ...r, removed: [{ label: 'All metadata (image re-saved)', bytes: null }], kept: ['Image pixels'], ai, verified: true, method: 're-encoded' };
+}
+
+/* ---- Tiny ZIP writer (store, no compression — images are already compressed) ---- */
+const CRC_TABLE = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++){ let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
+function crc32(u8){ let c = 0xFFFFFFFF; for (let i = 0; i < u8.length; i++) c = CRC_TABLE[(c ^ u8[i]) & 0xFF] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
+function makeZip(files){
+  const enc = new TextEncoder(), d = new Date();
+  const time = (d.getHours() << 11) | (d.getMinutes() << 5) | (d.getSeconds() >> 1);
+  const date = ((d.getFullYear() - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate();
+  const parts = [], central = []; let offset = 0;
+  for (const f of files){
+    const name = enc.encode(f.name), crc = crc32(f.bytes), size = f.bytes.length;
+    const lh = new DataView(new ArrayBuffer(30));
+    lh.setUint32(0, 0x04034b50, true); lh.setUint16(4, 20, true); lh.setUint16(6, 0x0800, true);
+    lh.setUint16(10, time, true); lh.setUint16(12, date, true); lh.setUint32(14, crc, true);
+    lh.setUint32(18, size, true); lh.setUint32(22, size, true); lh.setUint16(26, name.length, true);
+    parts.push(new Uint8Array(lh.buffer), name, f.bytes);
+    const ch = new DataView(new ArrayBuffer(46));
+    ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true); ch.setUint16(8, 0x0800, true);
+    ch.setUint16(12, time, true); ch.setUint16(14, date, true); ch.setUint32(16, crc, true);
+    ch.setUint32(20, size, true); ch.setUint32(24, size, true); ch.setUint16(28, name.length, true); ch.setUint32(42, offset, true);
+    central.push(new Uint8Array(ch.buffer), name);
+    offset += 30 + name.length + size;
+  }
+  const cdSize = central.reduce((a, b) => a + b.length, 0);
+  const end = new DataView(new ArrayBuffer(22));
+  end.setUint32(0, 0x06054b50, true); end.setUint16(8, files.length, true); end.setUint16(10, files.length, true);
+  end.setUint32(12, cdSize, true); end.setUint32(16, offset, true);
+  return new Blob([...parts, ...central, new Uint8Array(end.buffer)], { type: 'application/zip' });
+}
+</script>
+
+<script>
+/* ===== UI ===== */
+const $ = s => document.querySelector(s);
+const items = []; let busy = false, nextId = 1;
+const fmt = b => b < 1024 ? b + ' B' : b < 1048576 ? (b / 1024).toFixed(0) + ' KB' : (b / 1048576).toFixed(2) + ' MB';
+const esc = s => s.replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+const IMG_RE = /\.(jpe?g|png|webp|gif|avif|heic|heif|bmp|tiff?)$/i;
+
+const drop = $('#drop');
+['dragenter','dragover'].forEach(e => drop.addEventListener(e, ev => { ev.preventDefault(); drop.classList.add('over'); }));
+['dragleave','drop'].forEach(e => drop.addEventListener(e, ev => { ev.preventDefault(); drop.classList.remove('over'); }));
+drop.addEventListener('drop', ev => addFiles(ev.dataTransfer.files));
+$('#file').addEventListener('change', ev => { addFiles(ev.target.files); ev.target.value = ''; });
+$('#keepIcc').addEventListener('change', () => { items.forEach(it => it.status = 'queued'); renderAll(); processQueue(); });
+$('#nameMode').addEventListener('change', renderAll);
+$('#clear').addEventListener('click', () => { items.forEach(it => it.url && URL.revokeObjectURL(it.url)); items.length = 0; renderAll(); });
+$('#zip').addEventListener('click', () => {
+  const done = items.filter(it => it.status === 'done'); if (!done.length) return;
+  const a = document.createElement('a'); a.href = URL.createObjectURL(makeZip(done.map(it => ({ name: outName(it), bytes: it.bytes }))));
+  a.download = 'cleaned-images.zip'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 5000);
+});
+
+function addFiles(list){
+  for (const f of list) if (f.type.startsWith('image/') || IMG_RE.test(f.name))
+    items.push({ id: nextId++, file: f, status: 'queued', nameAI: detectAI(f.name), open: true });
+  renderAll(); processQueue();
+}
+
+async function processQueue(){
+  if (busy) return; busy = true;
+  let it;
+  while ((it = items.find(x => x.status === 'queued'))){
+    it.status = 'working'; renderRow(it);
+    try{
+      const u8 = new Uint8Array(await it.file.arrayBuffer());
+      Object.assign(it, await cleanBytes(u8, it.file, { keepICC: $('#keepIcc').checked }));
+      if (it.url) URL.revokeObjectURL(it.url);
+      it.url = URL.createObjectURL(new Blob([it.bytes], { type: it.mime }));
+      it.status = 'done';
+    }catch(e){ it.status = 'error'; it.error = e.message || 'Could not read this image'; }
+    if (items.includes(it)) renderRow(it);
+    updateSummary();
+  }
+  busy = false;
+}
+
+function outName(it){
+  const mode = $('#nameMode').value, base = it.file.name.replace(/\.[^.]+$/, '');
+  const done = items.filter(x => x.status === 'done');
+  let name = mode === 'keep' ? `${base}.${it.ext}` : mode === 'suffix' ? `${base}-clean.${it.ext}`
+    : `image-${String(done.indexOf(it) + 1).padStart(3, '0')}.${it.ext}`;
+  const dupes = done.filter(x => x !== it && x.file.name.replace(/\.[^.]+$/, '') === base && x.ext.toLowerCase() === it.ext.toLowerCase());
+  if (mode !== 'rename' && dupes.length && done.indexOf(it) > done.indexOf(dupes[0])) name = name.replace(/(\.[^.]+)$/, `-${it.id}$1`);
+  return name;
+}
+
+function rowHTML(it){
+  const tags = [];
+  let side = '';
+  if (it.status === 'working' || it.status === 'queued') side = '<div class="spin"></div>';
+  if (it.status === 'error'){ tags.push(`<span class="tag err">${esc(it.error)}</span>`); }
+  let details = '';
+  if (it.status === 'done'){
+    const aiCount = it.ai.length + (it.nameAI.length ? 1 : 0);
+    tags.push(aiCount ? `<span class="tag ai">${aiCount} AI signal${aiCount > 1 ? 's' : ''} found</span>` : '<span class="tag">No AI signals</span>');
+    tags.push(`<span class="tag">${it.removed.length} item${it.removed.length === 1 ? '' : 's'} removed</span>`);
+    tags.push(it.verified ? '<span class="tag ok">✓ Clean</span>' : '<span class="tag err">Check failed</span>');
+    side = `<button class="toggle" data-toggle="${it.id}">${it.open ? 'Hide details' : 'Details'}</button>
+      <a class="btn small" href="${it.url}" download="${esc(outName(it))}">Download</a>`;
+    if (it.open) details = detailsHTML(it);
+  }
+  const size = it.status === 'done' ? `${fmt(it.file.size)} → ${fmt(it.bytes.length)} · ${it.method}` : fmt(it.file.size);
+  return `<img class="thumb" alt="" ${it.url ? `src="${it.url}"` : ''}>
+    <div style="min-width:0"><div class="name">${esc(it.status === 'done' ? outName(it) : it.file.name)}</div>
+    <div class="sub">${size}</div><div class="tags">${tags.join('')}</div></div>
+    <div class="side">${side}</div>${details}`;
+}
+function detailsHTML(it){
+  const detected = it.ai.map(d => `<li class="hit"><span class="lbl">${esc(d.name)}</span>
+    ${d.evidence.map(e => `<span class="ev">${esc(e)}</span>`).join('')}</li>`);
+  if (it.nameAI.length){
+    const renamed = $('#nameMode').value === 'rename';
+    detected.push(`<li class="hit"><span class="lbl">File name mentions ${esc(it.nameAI.join(', '))}</span>
+      <span class="ev">${esc(it.file.name)}</span><span class="sz">${renamed ? 'Fixed by rename option' : 'Tip: use “Rename to image-001”'}</span></li>`);
+  }
+  const removed = it.removed.map(r => `<li><span class="lbl">${esc(r.label)}</span>${r.bytes != null ? `<span class="sz">${fmt(r.bytes)}</span>` : ''}</li>`);
+  const kept = (it.kept || []).map(k => `<li>${esc(k)}</li>`);
+  return `<div class="details">
+    <div><h4>Detected</h4><ul>${detected.join('') || '<li class="none">No AI signals in this file</li>'}</ul></div>
+    <div><h4>Removed</h4><ul>${removed.join('') || '<li class="none">Nothing to remove</li>'}</ul></div>
+    <div><h4>Kept</h4><ul>${kept.join('')}</ul></div>
+  </div>`;
+}
+$('#list').addEventListener('click', ev => {
+  const b = ev.target.closest('[data-toggle]'); if (!b) return;
+  const it = items.find(x => x.id === +b.dataset.toggle); it.open = !it.open; renderRow(it);
+});
+function renderRow(it){
+  let el = document.querySelector(`[data-id="${it.id}"]`);
+  if (!el){ el = document.createElement('div'); el.className = 'row'; el.dataset.id = it.id; $('#list').appendChild(el); }
+  el.innerHTML = rowHTML(it);
+}
+function renderAll(){ $('#list').innerHTML = ''; items.forEach(renderRow); updateSummary(); }
+function updateSummary(){
+  const done = items.filter(i => i.status === 'done');
+  const withAI = done.filter(i => i.ai.length).length;
+  const pending = items.filter(i => i.status === 'queued' || i.status === 'working').length;
+  const errors = items.filter(i => i.status === 'error').length;
+  $('#summary').classList.toggle('show', items.length > 0);
+  $('#stats').innerHTML = `<b>${done.length}</b> of ${items.length} cleaned` +
+    (withAI ? ` · <b>${withAI}</b> had AI metadata` : '') +
+    (pending ? ` · working on ${pending}…` : done.length && done.every(i => i.verified) ? ' · all verified clean ✓' : '') +
+    (errors ? ` · ${errors} failed` : '');
+  $('#zip').disabled = !done.length || pending > 0;
+}
+</script>
+</body>
+</html>
