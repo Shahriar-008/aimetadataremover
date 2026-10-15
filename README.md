@@ -1,3 +1,5 @@
+<img src="icon-512.png" width="96" alt="AI Metadata Remover icon">
+
 # AI Metadata Remover
 
 A free, private tool that removes AI metadata from images, in bulk. Everything runs in your browser. No images are uploaded anywhere.
