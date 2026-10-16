@@ -74,6 +74,9 @@ button:disabled{opacity:.5;cursor:default}
 .tag.err{background:var(--bad-soft);color:var(--bad)}
 .side{display:flex;align-items:center;gap:8px}
 .btn.small{padding:6px 10px;font-size:13px}
+.remove{display:grid;place-items:center;width:32px;height:32px;padding:0;border:0;border-radius:8px;background:none;color:var(--muted);cursor:pointer}
+.remove:hover{background:var(--bad-soft);color:var(--bad)}
+.remove:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
 .spin{width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:s 0.8s linear infinite}
 @keyframes s{to{transform:rotate(360deg)}}
 .details{grid-column:1 / -1;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px;border-top:1px solid var(--border);padding-top:12px;margin-top:2px}
@@ -541,7 +544,8 @@ function rowHTML(it){
   return `<img class="thumb" alt="" ${it.url ? `src="${it.url}"` : ''}>
     <div style="min-width:0"><div class="name">${esc(it.status === 'done' ? outName(it) : it.file.name)}</div>
     <div class="sub">${size}</div><div class="tags">${tags.join('')}</div></div>
-    <div class="side">${side}</div>${details}`;
+    <div class="side">${side}<button class="remove" data-remove="${it.id}" title="Remove from list" aria-label="Remove ${esc(it.file.name)} from list">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>${details}`;
 }
 function detailsHTML(it){
   const detected = it.ai.map(d => `<li class="hit"><span class="lbl">${esc(d.name)}</span>
@@ -560,6 +564,14 @@ function detailsHTML(it){
   </div>`;
 }
 $('#list').addEventListener('click', ev => {
+  const rm = ev.target.closest('[data-remove]');
+  if (rm){
+    const i = items.findIndex(x => x.id === +rm.dataset.remove); if (i < 0) return;
+    const [it] = items.splice(i, 1);
+    if (it.url) URL.revokeObjectURL(it.url);
+    renderAll();   // refresh names (image-001…) and the summary
+    return;
+  }
   const b = ev.target.closest('[data-toggle]'); if (!b) return;
   const it = items.find(x => x.id === +b.dataset.toggle); it.open = !it.open; renderRow(it);
 });
