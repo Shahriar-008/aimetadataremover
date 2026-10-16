@@ -107,6 +107,10 @@ button:disabled{opacity:.5;cursor:default}
 .faq p{font-size:14.5px;max-width:760px}
 @media (max-width:800px){.cards{grid-template-columns:repeat(2,1fr)}.steps{grid-template-columns:1fr}}
 @media (max-width:480px){.cards{grid-template-columns:1fr}}
+.visits{display:inline-flex;align-items:center;gap:8px;margin-bottom:10px;padding:5px 12px;border-radius:99px;background:var(--surface);border:1px solid var(--border);font-size:13px;color:var(--muted)}
+.visits b{color:var(--text);font-weight:650;font-variant-numeric:tabular-nums}
+.vdot{width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 0 3px var(--good-soft)}
+.footer .visits{display:none}.footer .visits:not([hidden]){display:inline-flex}
 .footer{margin-top:28px;text-align:center;font-size:13px;color:var(--muted)}
 .footer a{color:var(--accent);font-weight:600;text-decoration:none}
 .footer a:hover{text-decoration:underline}
@@ -192,7 +196,7 @@ button:disabled{opacity:.5;cursor:default}
     </div>
   </section>
 
-  <footer class="footer">Made with ❤️ from <a href="https://devmonks.co" target="_blank" rel="noopener">Dev Monks</a> · <a href="https://github.com/atiq31416/aimetadataremover" target="_blank" rel="noopener">Open source on GitHub</a></footer>
+  <footer class="footer"><div class="visits" id="visits" hidden><span class="vdot"></span><b id="visitCount"></b> people have visited</div><div>Made with ❤️ from <a href="https://devmonks.co" target="_blank" rel="noopener">Dev Monks</a> · <a href="https://github.com/atiq31416/aimetadataremover" target="_blank" rel="noopener">Open source on GitHub</a></div></footer>
 </div>
 
 <script id="core">
@@ -598,6 +602,25 @@ function updateSummary(){
     (errors ? ` · ${errors} could not be opened` : '');
   $('#zip').disabled = !done.length || pending > 0;
 }
+</script>
+
+<script>
+/* Visitor counter: counts each browser once (no images or personal data are sent) */
+(async () => {
+  if (!/^https?:$/.test(location.protocol) || /^(localhost|127\.)/.test(location.hostname)) return;
+  const API = 'https://abacus.jasoncameron.dev', NS = 'aimetadataremover-devmonks', KEY = 'visitors';
+  let seen = false;
+  try { seen = localStorage.getItem('amr-visited') === '1'; } catch (e) {}
+  try {
+    const r = await fetch(`${API}/${seen ? 'get' : 'hit'}/${NS}/${KEY}`);
+    if (!r.ok) return;
+    const { value } = await r.json();
+    if (typeof value !== 'number') return;
+    if (!seen) try { localStorage.setItem('amr-visited', '1'); } catch (e) {}
+    document.getElementById('visitCount').textContent = value.toLocaleString('en-US');
+    document.getElementById('visits').hidden = false;
+  } catch (e) { /* counter is optional; stay hidden if it fails */ }
+})();
 </script>
 </body>
 </html>
