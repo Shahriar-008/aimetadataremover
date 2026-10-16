@@ -17,6 +17,9 @@ Other formats (HEIC, AVIF, GIF, BMP, TIFF) are re-saved as JPG or PNG, which dro
 
 ## How to use
 
+Live at **https://www.designmonks.co/aimetadataremover** (also at https://atiq31416.github.io/aimetadataremover/). See [WEBFLOW-SETUP.md](WEBFLOW-SETUP.md) for how the Webflow page loads the tool from this repo.
+
+
 Open the live site, or download `index.html` and open it in any browser. It works offline.
 
 ## Good to know
