@@ -10,6 +10,7 @@ A free, private tool that removes AI metadata from images, in bulk. Everything r
 - **Removes** EXIF, XMP, IPTC / Photoshop blocks, C2PA / JUMBF, PNG text chunks (prompts), comments, and hidden data after the image.
 - **Keeps** the image itself untouched. JPG, PNG and WebP are cleaned losslessly. Rotation and color profile are kept.
 - **Verifies** each output by scanning it again, and marks it "✓ Clean".
+- Optional **"Make each image unique"** mode: tiny invisible pixel changes so the file no longer matches the original exactly (helps against simple duplicate checks, not reverse image search).
 - Bulk upload, one-click ZIP download, and an option to rename files (like "ChatGPT Image…") to `image-001`.
 
 Other formats (HEIC, AVIF, GIF, BMP, TIFF) are re-saved as JPG or PNG, which drops all metadata.

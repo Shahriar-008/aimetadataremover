@@ -99,6 +99,7 @@ button:disabled{opacity:.5;cursor:default}
 
   <div class="options">
     <label><input type="checkbox" id="keepIcc" checked> Keep original colors (recommended)</label>
+    <label title="Adds tiny, invisible pixel changes so the file no longer matches the original exactly. The image is re-saved, so quality can drop very slightly."><input type="checkbox" id="unique"> Make each image unique</label>
     <label>New file names
       <select id="nameMode">
         <option value="suffix">photo-clean.jpg</option>
@@ -121,6 +122,7 @@ button:disabled{opacity:.5;cursor:default}
   <div class="note">
     <b>What does this remove?</b> AI tools hide extra info inside image files that says the picture was made with AI. This can include labels from ChatGPT, Midjourney, Gemini or Adobe Firefly, the prompt you typed, and camera or device details. This tool removes all of that. Your picture itself stays exactly the same.<br><br>
     <b>Is it safe?</b> Yes. Everything happens right here in your browser. Your images are never uploaded anywhere.<br><br>
+    <b>What does “Make each image unique” do?</b> It makes tiny changes to the picture that your eyes can’t see, so the file no longer matches the original exactly. This helps against simple duplicate checks. It does <i>not</i> stop reverse image search (like Google Lens), because those look at what the picture shows. The image is re-saved, so quality can drop very slightly.<br><br>
     <b>Good to know:</b> some AI tools (like Google’s) also hide an invisible mark inside the picture itself. That is part of the image, not hidden info, so no tool like this can remove it. Also check your file names: a name like “ChatGPT Image…” gives it away, so use the “image-001, image-002…” option.
   </div>
   <footer class="footer">Made with ❤️ from <a href="https://www.designmonks.co" target="_blank" rel="noopener">Design Monks</a></footer>
@@ -317,6 +319,28 @@ async function reencode(file, u8){
   return { bytes: new Uint8Array(await blob.arrayBuffer()), mime, ext: lossy ? 'jpg' : 'png' };
 }
 
+/* ---- Optional: make the image unique (tiny invisible pixel changes) ---- */
+function addNoise(img){
+  const d = img.data, rnd = new Uint8Array(65536);
+  for (let i = 0, k = 65536; i < d.length; i += 4, k++){
+    if (k >= 65536){ crypto.getRandomValues(rnd); k = 0; }
+    const r = rnd[k];
+    if ((r & 3) !== 0 || d[i + 3] === 0) continue;        // ~25% of visible pixels
+    const ch = i + ((r >> 2) % 3), v = d[ch] + ((r & 32) ? 1 : -1);
+    d[ch] = v < 0 ? 1 : v > 255 ? 254 : v;               // ±1 on one color channel
+  }
+}
+async function makeUnique(u8, mime){
+  const bmp = await createImageBitmap(new Blob([u8], { type: mime }));
+  const c = document.createElement('canvas'); c.width = bmp.width; c.height = bmp.height;
+  const ctx = c.getContext('2d', { willReadFrequently: true });
+  ctx.drawImage(bmp, 0, 0);
+  const img = ctx.getImageData(0, 0, c.width, c.height); addNoise(img); ctx.putImageData(img, 0, 0);
+  let blob = await new Promise(r => c.toBlob(r, mime, mime === 'image/png' ? undefined : 0.95));
+  if (!blob || blob.type !== mime){ mime = 'image/png'; blob = await new Promise(r => c.toBlob(r, mime)); }
+  return { bytes: new Uint8Array(await blob.arrayBuffer()), mime };
+}
+
 const STRIPPERS = { jpeg: [stripJPEG, 'image/jpeg', 'jpg'], png: [stripPNG, 'image/png', 'png'], webp: [stripWEBP, 'image/webp', 'webp'] };
 
 async function cleanBytes(u8, file, opts){
@@ -326,12 +350,27 @@ async function cleanBytes(u8, file, opts){
     const r = fn(u8, opts.keepICC);
     const check = fn(r.bytes, opts.keepICC);
     const origExt = (file.name.match(/\.([^.]+)$/) || [])[1];
-    return { bytes: r.bytes, mime, ext: origExt && /^(jpe?g|png|webp)$/i.test(origExt) ? origExt : ext,
+    const out = { bytes: r.bytes, mime, ext: origExt && /^(jpe?g|png|webp)$/i.test(origExt) ? origExt : ext,
       removed: r.removed, kept: r.kept, ai: findAI(r.meta), verified: detectAI(check.meta).length === 0, method: 'same quality' };
+    if (opts.unique && !r.kept.includes('Animation')){
+      const u = await makeUnique(r.bytes, mime);
+      if (u.mime !== mime) out.ext = 'png';
+      Object.assign(out, { bytes: u.bytes, mime: u.mime, method: 'unique copy',
+        verified: out.verified && detectAI(u.bytes).length === 0,
+        removed: [...out.removed, { label: 'Exact image fingerprint (changed)', bytes: null }],
+        kept: ['Your image (tiny invisible changes)', ...r.kept.filter(k => !/^Your image|Color profile/.test(k))] });
+    }
+    return out;
   }
   const ai = findAI(u8.length < 4e6 ? u8 : u8.subarray(0, 4e6));
   const r = await reencode(file, u8);
-  return { ...r, removed: [{ label: 'All hidden info (saved as a fresh copy)', bytes: null }], kept: ['Your image'], ai, verified: true, method: 'saved as a fresh copy' };
+  const out = { ...r, removed: [{ label: 'All hidden info (saved as a fresh copy)', bytes: null }], kept: ['Your image'], ai, verified: true, method: 'saved as a fresh copy' };
+  if (opts.unique){
+    const u = await makeUnique(r.bytes, r.mime);
+    Object.assign(out, { bytes: u.bytes, mime: u.mime, method: 'unique copy', kept: ['Your image (tiny invisible changes)'],
+      removed: [...out.removed, { label: 'Exact image fingerprint (changed)', bytes: null }] });
+  }
+  return out;
 }
 
 /* ---- Tiny ZIP writer (store, no compression — images are already compressed) ---- */
@@ -377,7 +416,7 @@ const drop = $('#drop');
 ['dragleave','drop'].forEach(e => drop.addEventListener(e, ev => { ev.preventDefault(); drop.classList.remove('over'); }));
 drop.addEventListener('drop', ev => addFiles(ev.dataTransfer.files));
 $('#file').addEventListener('change', ev => { addFiles(ev.target.files); ev.target.value = ''; });
-$('#keepIcc').addEventListener('change', () => { items.forEach(it => it.status = 'queued'); renderAll(); processQueue(); });
+['#keepIcc', '#unique'].forEach(id => $(id).addEventListener('change', () => { items.forEach(it => it.status = 'queued'); renderAll(); processQueue(); }));
 $('#nameMode').addEventListener('change', renderAll);
 $('#clear').addEventListener('click', () => { items.forEach(it => it.url && URL.revokeObjectURL(it.url)); items.length = 0; renderAll(); });
 $('#zip').addEventListener('click', () => {
@@ -399,7 +438,7 @@ async function processQueue(){
     it.status = 'working'; renderRow(it);
     try{
       const u8 = new Uint8Array(await it.file.arrayBuffer());
-      Object.assign(it, await cleanBytes(u8, it.file, { keepICC: $('#keepIcc').checked }));
+      Object.assign(it, await cleanBytes(u8, it.file, { keepICC: $('#keepIcc').checked, unique: $('#unique').checked }));
       if (it.url) URL.revokeObjectURL(it.url);
       it.url = URL.createObjectURL(new Blob([it.bytes], { type: it.mime }));
       it.status = 'done';
