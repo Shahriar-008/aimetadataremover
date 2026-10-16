@@ -15,7 +15,8 @@
 #amr-app .amr-wrap{max-width:920px;margin:0 auto;padding:40px 16px 64px}
 #amr-app header h1{font-size:28px;letter-spacing:-.02em;margin:0 0 6px}
 #amr-app header p{margin:0;color:var(--muted)}
-#amr-app .amr-pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:99px;background:var(--good-soft);color:var(--good);margin-bottom:14px}
+#amr-app .amr-pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:4px 10px;border-radius:99px;background:var(--good-soft);color:var(--good)}
+#amr-app .amr-badges{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:14px}
 #amr-app .amr-drop{display:block;margin-top:28px;border:2px dashed var(--border);border-radius:var(--radius);background:var(--surface);padding:44px 20px;text-align:center;cursor:pointer;transition:.15s}
 #amr-app .amr-drop:hover,#amr-app .amr-drop.amr-over{border-color:var(--accent);background:var(--accent-soft)}
 #amr-app .amr-drop strong{display:block;font-size:17px;margin-bottom:4px}
@@ -62,7 +63,7 @@
 #amr-app .amr-toggle{background:none;border:0;color:var(--accent);padding:6px 4px;font-size:13px}
 @media (max-width:700px){#amr-app .amr-details{grid-template-columns:1fr}
  }
-#amr-app .amr-note{margin-top:32px;font-size:13px;color:var(--muted);border-top:1px solid var(--border);padding-top:16px}
+#amr-app .amr-note{margin-top:32px;font-size:12px;color:var(--muted);border-top:1px solid var(--border);padding-top:16px}
 #amr-app .amr-note b{color:var(--text);font-weight:600}
 #amr-app .amr-info{margin-top:56px}
 #amr-app .amr-info h2{font-size:24px;letter-spacing:-.01em;margin:0 0 6px}
@@ -82,11 +83,10 @@
 }
 @media (max-width:480px){#amr-app .amr-cards{grid-template-columns:1fr}
 }
-#amr-app .amr-visits{display:inline-flex;align-items:center;gap:8px;margin-bottom:10px;padding:5px 12px;border-radius:99px;background:var(--surface);border:1px solid var(--border);font-size:13px;color:var(--muted)}
+#amr-app .amr-visits{display:inline-flex;align-items:center;gap:7px;padding:3px 10px;border-radius:99px;background:var(--surface);border:1px solid var(--border);font-size:13px;color:var(--muted)}
 #amr-app .amr-visits b{color:var(--text);font-weight:650;font-variant-numeric:tabular-nums}
-#amr-app .amr-vdot{width:7px;height:7px;border-radius:50%;background:var(--good);box-shadow:0 0 0 3px var(--good-soft)}
-#amr-app .amr-footer .amr-visits{display:none}
-#amr-app .amr-footer .amr-visits:not([hidden]){display:inline-flex}
+#amr-app .amr-vdot{width:6px;height:6px;border-radius:50%;background:var(--good);box-shadow:0 0 0 3px var(--good-soft)}
+#amr-app .amr-visits[hidden]{display:none}
 #amr-app .amr-footer{margin-top:28px;text-align:center;font-size:13px;color:var(--muted)}
 #amr-app .amr-footer a{color:var(--accent);font-weight:600;text-decoration:none}
 #amr-app .amr-footer a:hover{text-decoration:underline}
