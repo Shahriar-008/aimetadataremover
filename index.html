@@ -338,7 +338,11 @@ function stripPNG(u8, keepICC){
       out.push(chunk);
       if (/iCCP|sRGB|gAMA|cHRM|cICP/.test(type)) kept.add('Color profile'); else if (/acTL|fcTL|fdAT/.test(type)) kept.add('Animation'); else if (type === 'tRNS') kept.add('Transparency');
     }
-    else { removed.push({ label: PNG_LABEL[type] || 'Other hidden info', bytes: chunk.length }); meta.push(chunk); }
+    else {
+      let label = PNG_LABEL[type] || 'Other hidden info';
+      if (/^(tEXt|iTXt|zTXt)$/.test(type) && !detectAI(chunk).length) label = 'Hidden text info';
+      removed.push({ label, bytes: chunk.length }); meta.push(chunk);
+    }
     i += 12 + len;
     if (type === 'IEND') break;
   }
