@@ -609,6 +609,7 @@ function updateSummary(){
 (async () => {
   if (!/^https?:$/.test(location.protocol) || /^(localhost|127\.)/.test(location.hostname)) return;
   const API = 'https://abacus.jasoncameron.dev', NS = 'aimetadataremover-devmonks', KEY = 'visitors';
+  const START = 1023;   // visits before the counter went live
   let seen = false;
   try { seen = localStorage.getItem('amr-visited') === '1'; } catch (e) {}
   try {
@@ -617,7 +618,7 @@ function updateSummary(){
     const { value } = await r.json();
     if (typeof value !== 'number') return;
     if (!seen) try { localStorage.setItem('amr-visited', '1'); } catch (e) {}
-    document.getElementById('visitCount').textContent = value.toLocaleString('en-US');
+    document.getElementById('visitCount').textContent = (START + value).toLocaleString('en-US');
     document.getElementById('visits').hidden = false;
   } catch (e) { /* counter is optional; stay hidden if it fails */ }
 })();
