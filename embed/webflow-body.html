@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="https://atiq31416.github.io/aimetadataremover/embed/amr.css?v=1">
 <div id="amr-app"><div class="amr-wrap">
 
-  <header>
+  <header id="amr-top">
     <div class="amr-badges">
       <div class="amr-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>100% private: your images never leave your computer</div>
       <div class="amr-visits" id="amr-visits" hidden><span class="amr-vdot"></span><b id="amr-visitCount"></b> people have visited</div>
@@ -12,44 +12,127 @@
   <div id="amr-tool"><noscript><p>Please turn on JavaScript to use the AI Metadata Remover.</p></noscript></div>
 
 
-  <section class="amr-info" aria-labelledby="amr-removes">
-    <h2 id="amr-removes">What this AI metadata remover removes</h2>
-    <p class="amr-lead">All the hidden info that can show your image was made with AI, or tell people more than you want to share.</p>
-    <div class="amr-spec">
-      <div class="amr-spec-item"><h3>Camera & device details (EXIF)</h3><p>Camera model, software, dates and device info.</p></div>
-      <div class="amr-spec-item"><h3>Location (GPS)</h3><p>Where the photo was taken, saved by phones and cameras.</p></div>
-      <div class="amr-spec-item"><h3>File history (XMP & IPTC)</h3><p>Creator name, copyright, captions, keywords and edit history.</p></div>
-      <div class="amr-spec-item"><h3>AI Content Credentials (C2PA)</h3><p>The “made with AI” label added by ChatGPT, Adobe Firefly and others.</p></div>
-      <div class="amr-spec-item"><h3>AI prompts & settings</h3><p>Your prompt, seed, sampler and model from Stable Diffusion, ComfyUI, Automatic1111 and Forge.</p></div>
-      <div class="amr-spec-item"><h3>AI tool names</h3><p>Traces of ChatGPT, DALL·E, Midjourney, Gemini, Firefly, Flux and more.</p></div>
-      <div class="amr-spec-item"><h3>Hidden PNG text</h3><p>Text blocks inside PNG files where AI tools store their settings.</p></div>
-      <div class="amr-spec-item"><h3>Image fingerprint (optional)</h3><p>Turn on “Make each image unique” to change the file’s exact fingerprint too.</p></div>
+  <section class="amr-sec amr-demo-sec" aria-labelledby="amr-demo">
+    <div class="amr-demo-copy">
+      <h2 id="amr-demo">Watch it clean an image in 17 seconds.</h2>
+      <p class="amr-sec-lead">Hidden AI info found, removed and checked, all inside your browser. Nothing is uploaded.</p>
+      <a class="amr-demo-link" href="#top">Try it with your own images</a>
+    </div>
+    <video class="amr-demo-vid" data-loop src="https://atiq31416.github.io/aimetadataremover/demo-loop.mp4" poster="https://atiq31416.github.io/aimetadataremover/demo-poster.jpg" width="720" height="900" muted loop playsinline preload="none" aria-label="Short demo: an AI image's hidden info is found and removed"></video>
+  </section>
+
+  <section class="amr-sec amr-name-sec" aria-labelledby="amr-names">
+    <h2 id="amr-names">Even the file name can tell on you.</h2>
+    <p class="amr-sec-lead">Type a file name to see what the tool notices, and what it saves the file as.</p>
+    <div class="amr-name-ui" data-ui>
+      <label class="amr-sr-only" for="nameTry">File name to check</label>
+      <input id="amr-nameTry" class="amr-name-input" type="text" value="ChatGPT Image Oct 14.png" spellcheck="false" autocomplete="off">
+      <dl class="amr-name-out" aria-live="polite">
+        <div><dt>Mentions</dt><dd id="amr-nameHit">OpenAI / ChatGPT</dd></div>
+        <div><dt>Saved as</dt><dd id="amr-nameKeep">ChatGPT Image Oct 14-clean.png</dd></div>
+        <div><dt>With renaming on</dt><dd id="amr-nameRen">image-001.png</dd></div>
+      </dl>
+    </div>
+    <div class="amr-name-ex" aria-label="Try another file name">
+      <button type="button" data-name="midjourney_cozy_cabin_v6.jpg">midjourney_cozy_cabin_v6.jpg</button>
+      <button type="button" data-name="Gemini_Generated_Image_k2.png">Gemini_Generated_Image_k2.png</button>
+      <button type="button" data-name="holiday-at-the-beach.jpg">holiday-at-the-beach.jpg</button>
     </div>
   </section>
 
-  <section class="amr-info" aria-labelledby="amr-how">
-    <h2 id="amr-how">How to remove AI metadata from an image</h2>
-    <ol class="amr-steps">
-      <li><h3>Add your images</h3><p>Drag them into the box above, or click to choose. Add as many as you like.</p></li>
-      <li><h3>We clean them</h3><p>The hidden info is removed in your browser. Open “Show details” to see what we found.</p></li>
-      <li><h3>Download</h3><p>Save images one by one, or click “Download all” to get them in one go.</p></li>
-    </ol>
+  <section class="amr-sec amr-cmd-sec" aria-labelledby="amr-removes">
+    <h2 id="amr-removes">What this AI metadata remover removes</h2>
+    <div class="amr-cmd-ui" data-ui>
+      <label class="amr-sr-only" for="cmdFind">Search what we remove</label>
+      <input id="amr-cmdFind" class="amr-cmd-find" type="search" placeholder="Search what we remove" autocomplete="off">
+      <ul class="amr-cmd-list">
+        <li class="amr-cmd" data-cmd="0" data-words="camera &amp; device details exif camera model, software, dates and device info. phones and editing apps add it to almost every picture.">
+          <button type="button" class="amr-cmd-btn" aria-expanded="true" aria-controls="cmd-d0"><h3 class="amr-cmd-name">Camera &amp; device details</h3><span class="amr-cmd-tag">EXIF</span></button>
+          <p class="amr-cmd-desc" id="amr-cmd-d0">Camera model, software, dates and device info. Phones and editing apps add it to almost every picture.</p>
+        </li>
+        <li class="amr-cmd" data-cmd="1" data-words="location gps where the photo was taken, saved by phones and cameras. removed with the rest of the camera data.">
+          <button type="button" class="amr-cmd-btn" aria-expanded="false" aria-controls="cmd-d1"><h3 class="amr-cmd-name">Location</h3><span class="amr-cmd-tag">GPS</span></button>
+          <p class="amr-cmd-desc" id="amr-cmd-d1">Where the photo was taken, saved by phones and cameras. Removed with the rest of the camera data.</p>
+        </li>
+        <li class="amr-cmd" data-cmd="2" data-words="file history xmp · iptc creator name, copyright, captions, keywords and edit history written by editing and ai apps.">
+          <button type="button" class="amr-cmd-btn" aria-expanded="false" aria-controls="cmd-d2"><h3 class="amr-cmd-name">File history</h3><span class="amr-cmd-tag">XMP · IPTC</span></button>
+          <p class="amr-cmd-desc" id="amr-cmd-d2">Creator name, copyright, captions, keywords and edit history written by editing and AI apps.</p>
+        </li>
+        <li class="amr-cmd" data-cmd="3" data-words="content credentials c2pa the “made with ai” label added by chatgpt, adobe firefly and others, including which tool made the image.">
+          <button type="button" class="amr-cmd-btn" aria-expanded="false" aria-controls="cmd-d3"><h3 class="amr-cmd-name">Content Credentials</h3><span class="amr-cmd-tag">C2PA</span></button>
+          <p class="amr-cmd-desc" id="amr-cmd-d3">The “made with AI” label added by ChatGPT, Adobe Firefly and others, including which tool made the image.</p>
+        </li>
+        <li class="amr-cmd" data-cmd="4" data-words="prompts &amp; settings sd · comfyui your prompt, seed, sampler and model, saved by stable diffusion, comfyui, automatic1111 and forge.">
+          <button type="button" class="amr-cmd-btn" aria-expanded="false" aria-controls="cmd-d4"><h3 class="amr-cmd-name">Prompts &amp; settings</h3><span class="amr-cmd-tag">SD · ComfyUI</span></button>
+          <p class="amr-cmd-desc" id="amr-cmd-d4">Your prompt, seed, sampler and model, saved by Stable Diffusion, ComfyUI, Automatic1111 and Forge.</p>
+        </li>
+        <li class="amr-cmd" data-cmd="5" data-words="ai tool names text traces of chatgpt, dall·e, midjourney, gemini, firefly, flux and more, wherever they hide in the file.">
+          <button type="button" class="amr-cmd-btn" aria-expanded="false" aria-controls="cmd-d5"><h3 class="amr-cmd-name">AI tool names</h3><span class="amr-cmd-tag">Text</span></button>
+          <p class="amr-cmd-desc" id="amr-cmd-d5">Traces of ChatGPT, DALL·E, Midjourney, Gemini, Firefly, Flux and more, wherever they hide in the file.</p>
+        </li>
+        <li class="amr-cmd" data-cmd="6" data-words="hidden png text text text blocks inside png files where ai tools store their settings. plain notes are removed too.">
+          <button type="button" class="amr-cmd-btn" aria-expanded="false" aria-controls="cmd-d6"><h3 class="amr-cmd-name">Hidden PNG text</h3><span class="amr-cmd-tag">tEXt</span></button>
+          <p class="amr-cmd-desc" id="amr-cmd-d6">Text blocks inside PNG files where AI tools store their settings. Plain notes are removed too.</p>
+        </li>
+        <li class="amr-cmd" data-cmd="7" data-words="image fingerprint optional turn on “make each image unique” to change the file’s exact fingerprint as well as its hidden info.">
+          <button type="button" class="amr-cmd-btn" aria-expanded="false" aria-controls="cmd-d7"><h3 class="amr-cmd-name">Image fingerprint</h3><span class="amr-cmd-tag">Optional</span></button>
+          <p class="amr-cmd-desc" id="amr-cmd-d7">Turn on “Make each image unique” to change the file’s exact fingerprint as well as its hidden info.</p>
+        </li>
+      </ul>
+      <p class="amr-cmd-empty" hidden>Nothing matches. Try “GPS” or “prompt”.</p>
+    </div>
   </section>
 
-  <section class="amr-info" aria-labelledby="amr-faq">
+  <section class="amr-sec amr-how-sec" aria-labelledby="amr-how">
+    <h2 id="amr-how">How to remove AI metadata from an image</h2>
+    <div class="amr-how-grid">
+      <div class="amr-how-steps">
+      <div class="amr-how-step" data-step="0"><h3>First, drop your images in.</h3><p>Drag them into the box at the top, or click to choose. Add as many as you like.</p></div>
+      <div class="amr-how-step" data-step="1"><h3>Then we find what’s hiding.</h3><p>Every file is read right here in your browser. Open “Show details” to see the exact text we found.</p></div>
+      <div class="amr-how-step" data-step="2"><h3>Last, download them clean.</h3><p>Save images one by one, or get them all at once with “Download all”.</p></div>
+      </div>
+      <div class="amr-how-stage" aria-hidden="true">
+        <div class="amr-stage-ui" data-ui data-state="0">
+          <div class="amr-st-drop"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M6 10l6-6 6 6"/><path d="M4 20h16"/></svg><span>Drop images here</span>
+            <div class="amr-st-file"><span class="amr-st-thumb"></span>ChatGPT Image Oct 14.png<small>1.98 MB</small></div>
+          </div>
+          <div class="amr-st-row">
+            <div class="amr-st-head"><span class="amr-st-thumb"></span><div><b>ChatGPT Image Oct 14-clean.png</b><small class="amr-st-size"><span class="amr-s1">1.98 MB · reading…</span><span class="amr-s2">1.98 MB → 1.96 MB · same quality</span></small></div></div>
+            <div class="amr-st-tags"><span class="amr-t amr-warn">AI info found (4)</span><span class="amr-t amr-s2">4 things removed</span><span class="amr-t amr-ok amr-s2"><svg class="amr-ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>Clean</span></div>
+            <ul class="amr-st-found">
+              <li><b>OpenAI / ChatGPT</b><code>claim_generator: ChatGPT</code></li>
+              <li><b>“Made with AI” tag</b><code>trainedAlgorithmicMedia</code></li>
+              <li><b>Content Credentials</b><code>c2pa.manifest</code></li>
+              <li><b>The file name mentions OpenAI</b><code>ChatGPT Image Oct 14.png</code></li>
+            </ul>
+            <div class="amr-st-actions"><span class="amr-st-btn">Download</span><span class="amr-st-btn amr-primary">Download all</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="amr-sec amr-faq-sec" aria-labelledby="amr-faq">
     <h2 id="amr-faq">Frequently asked questions</h2>
     <div class="amr-faq">
-      <div class="amr-q"><h3>What is AI metadata?</h3><p>AI metadata is hidden info saved inside an image file by AI tools. It can say which tool made the image (like ChatGPT, Midjourney, Gemini or Adobe Firefly), include a “made with AI” label, the prompt you typed, and device or location details. You can’t see it in the picture, but anyone can read it from the file.</p></div>
-      <div class="amr-q"><h3>Is this AI metadata remover really free?</h3><p>Yes, it’s 100% free. There’s no sign-up, no daily limit and no watermark. Because everything runs in your own browser, there are no servers to pay for, so we can keep it free.</p></div>
-      <div class="amr-q"><h3>How do I remove AI metadata from an image?</h3><p>Drag your images into the box at the top of this page. The tool removes the hidden info right away. Then click “Download” for one image, or “Download all” to get every cleaned image at once.</p></div>
-      <div class="amr-q"><h3>Are my images uploaded anywhere?</h3><p>No. Everything happens inside your own browser. Your images never leave your computer, and the tool even works offline.</p></div>
-      <div class="amr-q"><h3>Does it reduce image quality?</h3><p>No. For JPG, PNG and WebP files, only the hidden info is removed and the picture itself stays exactly the same. Other formats like HEIC and AVIF are saved as a fresh copy, which drops all hidden info. If you turn on “Make each image unique”, the image is re-saved with tiny changes you can’t see.</p></div>
-      <div class="amr-q"><h3>Which image formats are supported?</h3><p>JPG, PNG and WebP are cleaned with zero quality loss. HEIC, AVIF, GIF, BMP and TIFF also work, and are saved as JPG or PNG.</p></div>
-      <div class="amr-q"><h3>Can it remove invisible AI watermarks like SynthID?</h3><p>No. Some AI tools, like Google’s, hide an invisible watermark inside the picture itself. That is part of the image, not hidden file info, so no metadata remover can take it out.</p></div>
-      <div class="amr-q"><h3>What does “Make each image unique” do?</h3><p>It makes tiny changes to the picture that your eyes can’t see, so the file no longer matches the original exactly. This helps against simple duplicate checks. It does not stop reverse image search (like Google Lens), because those look at what the picture shows.</p></div>
+      <div class="amr-faq-list">
+      <div class="amr-fq" data-q="0"><h3><button type="button" class="amr-fq-btn" aria-expanded="true" aria-controls="fq-a0">What is AI metadata?</button></h3><div class="amr-fq-a" id="amr-fq-a0"><p>AI metadata is hidden info saved inside an image file by AI tools. It can say which tool made the image (like ChatGPT, Midjourney, Gemini or Adobe Firefly), include a “made with AI” label, the prompt you typed, and device or location details. You can’t see it in the picture, but anyone can read it from the file.</p></div></div>
+      <div class="amr-fq" data-q="1"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a1">Is this AI metadata remover really free?</button></h3><div class="amr-fq-a" id="amr-fq-a1"><p>Yes, it’s 100% free. There’s no sign-up, no daily limit and no watermark. Because everything runs in your own browser, there are no servers to pay for, so we can keep it free.</p></div></div>
+      <div class="amr-fq" data-q="2"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a2">How do I remove AI metadata from an image?</button></h3><div class="amr-fq-a" id="amr-fq-a2"><p>Drag your images into the box at the top of this page. The tool removes the hidden info right away. Then click “Download” for one image, or “Download all” to get every cleaned image at once.</p></div></div>
+      <div class="amr-fq" data-q="3"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a3">Are my images uploaded anywhere?</button></h3><div class="amr-fq-a" id="amr-fq-a3"><p>No. Everything happens inside your own browser. Your images never leave your computer, and the tool even works offline.</p></div></div>
+      <div class="amr-fq" data-q="4"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a4">Does it reduce image quality?</button></h3><div class="amr-fq-a" id="amr-fq-a4"><p>No. For JPG, PNG and WebP files, only the hidden info is removed and the picture itself stays exactly the same. Other formats like HEIC and AVIF are saved as a fresh copy, which drops all hidden info. If you turn on “Make each image unique”, the image is re-saved with tiny changes you can’t see.</p></div></div>
+      <div class="amr-fq" data-q="5"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a5">Which image formats are supported?</button></h3><div class="amr-fq-a" id="amr-fq-a5"><p>JPG, PNG and WebP are cleaned with zero quality loss. HEIC, AVIF, GIF, BMP and TIFF also work, and are saved as JPG or PNG.</p></div></div>
+      <div class="amr-fq" data-q="6"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a6">Can it remove invisible AI watermarks like SynthID?</button></h3><div class="amr-fq-a" id="amr-fq-a6"><p>No. Some AI tools, like Google’s, hide an invisible watermark inside the picture itself. That is part of the image, not hidden file info, so no metadata remover can take it out.</p></div></div>
+      <div class="amr-fq" data-q="7"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a7">What does “Make each image unique” do?</button></h3><div class="amr-fq-a" id="amr-fq-a7"><p>It makes tiny changes to the picture that your eyes can’t see, so the file no longer matches the original exactly. This helps against simple duplicate checks. It does not stop reverse image search (like Google Lens), because those look at what the picture shows.</p></div></div>
+      </div>
+      <div class="amr-faq-pane" aria-hidden="true"><p id="amr-faqPane"></p></div>
     </div>
   </section>
 
-  <footer class="amr-footer"><div>Made with ❤️ from <a href="https://devmonks.co" target="_blank" rel="noopener">Dev Monks</a> · <a href="https://github.com/atiq31416/aimetadataremover" target="_blank" rel="noopener">Open source on GitHub</a></div></footer>
+  <footer class="amr-footer">
+    <span>Made with <svg class="amr-heart" width="14" height="14" viewBox="0 0 24 24" aria-label="love" role="img"><path fill="#e5484d" d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.1 0 3.6 1.1 5.2 3 1.6-1.9 3.1-3 5.2-3 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg> from <a href="https://devmonks.co" target="_blank" rel="noopener">Dev Monks</a></span>
+    <span class="amr-f-links"><a href="https://github.com/atiq31416/aimetadataremover" target="_blank" rel="noopener">Open source on GitHub</a><a href="#top">Back to the tool</a></span>
+    <span class="amr-f-end">Free forever · nothing is uploaded</span>
+  </footer>
 </div></div>
 <script src="https://atiq31416.github.io/aimetadataremover/embed/amr.js?v=1" defer></script>

@@ -82,8 +82,9 @@ font_fix = f'\n#{S}{{font-family:inherit;font-size:15px;line-height:1.5;color:va
 # ---------------- markup ----------------
 body = re.search(r'<body>\s*<div class="wrap">(.*?)</div>\s*<script id="core">', src, re.S).group(1)
 tool_start = body.index('  <label class="drop"')
-tool_end = body.index('<div class="list" id="list"></div>') + len('<div class="list" id="list"></div>')
+tool_end = body.index('<div class="list" id="list" data-ui></div>') + len('<div class="list" id="list" data-ui></div>')
 header, tool, rest = (px_code(x) for x in (body[:tool_start], body[tool_start:tool_end], body[tool_end:]))
+rest = rest.replace('src="demo-', f'src="{PAGES}demo-').replace('poster="demo-', f'poster="{PAGES}demo-')
 
 # ---------------- JS ----------------
 scripts = re.findall(r'<script(?: id="core")?>(.*?)</script>', src, re.S)

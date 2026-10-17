@@ -3,7 +3,7 @@
 "use strict";
 var mount = document.getElementById("amr-tool");
 if (!mount) return;
-mount.innerHTML = "<label class=\"amr-drop\" id=\"amr-drop\">\n    <input type=\"file\" id=\"amr-file\" class=\"amr-sr-only\" multiple accept=\"image/*,.heic,.heif,.avif\" aria-label=\"Choose images to clean\">\n    <div class=\"amr-icon\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 16V4M6 10l6-6 6 6\"/><path d=\"M4 20h16\"/></svg></div>\n    <strong>Drag your images here, or click to choose them</strong>\n    <span>Works with JPG, PNG, WebP, HEIC and more. Your image quality stays the same.</span>\n  </label>\n\n  <div class=\"amr-options\">\n    <label><input type=\"checkbox\" id=\"amr-keepIcc\" checked> Keep original colors <span class=\"amr-hint\">recommended</span></label>\n    <label><input type=\"checkbox\" id=\"amr-unique\"> Make each image unique <span class=\"amr-hint\">tiny invisible changes</span></label>\n    <label>New file names\n      <select id=\"amr-nameMode\">\n        <option value=\"suffix\">photo-clean.jpg</option>\n        <option value=\"keep\">Same as original</option>\n        <option value=\"rename\">image-001, image-002\u2026</option>\n      </select>\n    </label>\n  </div>\n\n  <div class=\"amr-summary\" id=\"amr-summary\">\n    <div class=\"amr-stats\" id=\"amr-stats\"></div>\n    <div class=\"amr-btns\">\n      <button id=\"amr-clear\">Start over</button>\n      <button class=\"amr-primary\" id=\"amr-zip\">Download all</button>\n    </div>\n  </div>\n\n  <div class=\"amr-list\" id=\"amr-list\"></div>";
+mount.innerHTML = "<label class=\"amr-drop\" id=\"amr-drop\" data-ui>\n    <input type=\"file\" id=\"amr-file\" class=\"amr-sr-only\" multiple accept=\"image/*,.heic,.heif,.avif\" aria-label=\"Choose images to clean\">\n    <div class=\"amr-icon\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 16V4M6 10l6-6 6 6\"/><path d=\"M4 20h16\"/></svg></div>\n    <strong>Drag your images here, or click to choose them</strong>\n    <span>Works with JPG, PNG, WebP, HEIC and more. Your image quality stays the same.</span>\n    <em class=\"amr-drop-btn\">Choose images</em>\n  </label>\n\n  <div class=\"amr-options\" data-ui>\n    <label><input type=\"checkbox\" id=\"amr-keepIcc\" checked> Keep original colors <span class=\"amr-hint\">recommended</span></label>\n    <label><input type=\"checkbox\" id=\"amr-unique\"> Make each image unique <span class=\"amr-hint\">tiny invisible changes</span></label>\n    <label>New file names\n      <select id=\"amr-nameMode\">\n        <option value=\"suffix\">photo-clean.jpg</option>\n        <option value=\"keep\">Same as original</option>\n        <option value=\"rename\">image-001, image-002\u2026</option>\n      </select>\n    </label>\n  </div>\n\n  <div class=\"amr-summary\" id=\"amr-summary\" data-ui>\n    <div class=\"amr-stats\" id=\"amr-stats\"></div>\n    <div class=\"amr-btns\">\n      <button id=\"amr-clear\">Start over</button>\n      <button class=\"amr-primary\" id=\"amr-zip\">Download all</button>\n    </div>\n  </div>\n\n  <div class=\"amr-list\" id=\"amr-list\" data-ui></div>";
 
 /* ===== Core cleaning logic (no DOM) ===== */
 const AI_PATTERNS = [
@@ -288,6 +288,7 @@ const $ = s => document.querySelector(s);
 const items = []; let busy = false, nextId = 1;
 const fmt = b => b < 1024 ? b + ' B' : b < 1048576 ? (b / 1024).toFixed(0) + ' KB' : (b / 1048576).toFixed(2) + ' MB';
 const esc = s => s.replace(/[&<>"]/g, c => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[c]));
+const CHECK_SVG = '<svg class="amr-ic" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7"/></svg>';
 const IMG_RE = /\.(jpe?g|png|webp|gif|avif|heic|heif|bmp|tiff?)$/i;
 
 const drop = $('#amr-drop');
@@ -348,7 +349,7 @@ function rowHTML(it){
     const aiCount = it.ai.length + (it.nameAI.length ? 1 : 0);
     tags.push(aiCount ? `<span class="amr-tag amr-ai">AI info found (${aiCount})</span>` : '<span class="amr-tag">No AI info found</span>');
     tags.push(`<span class="amr-tag">${it.removed.length ? it.removed.length + ' thing' + (it.removed.length === 1 ? '' : 's') + ' removed' : 'Nothing to remove'}</span>`);
-    tags.push(it.verified ? '<span class="amr-tag amr-ok">✓ Clean</span>' : '<span class="amr-tag amr-err">Could not fully clean</span>');
+    tags.push(it.verified ? '<span class="amr-tag amr-ok">'+CHECK_SVG+'Clean</span>' : '<span class="amr-tag amr-err">Could not fully clean</span>');
     side = `<button class="amr-toggle" data-toggle="${it.id}">${it.open ? 'Hide details' : 'Show details'}</button>
       <a class="amr-btn amr-small" href="${it.url}" download="${esc(outName(it))}">Download</a>`;
     if (it.open) details = detailsHTML(it);
@@ -402,10 +403,100 @@ function updateSummary(){
   $('#amr-summary').classList.toggle('amr-show', items.length > 0);
   $('#amr-stats').innerHTML = `<b>${done.length}</b> of ${items.length} image${items.length === 1 ? '' : 's'} cleaned` +
     (withAI ? ` · <b>${withAI}</b> had hidden AI info` : '') +
-    (pending ? ` · working on ${pending} more…` : done.length && done.every(i => i.verified) ? ' · all checked and clean ✓' : '') +
+    (pending ? ` · working on ${pending} more…` : done.length && done.every(i => i.verified) ? ' · all checked and clean' : '') +
     (errors ? ` · ${errors} could not be opened` : '');
   $('#amr-zip').disabled = !done.length || pending > 0;
 }
+
+
+/* ===== Sections: live fragments ===== */
+(() => {
+  const byId = id => document.getElementById(id);
+  // 1. File name checker (uses the tool's own detector)
+  const nameIn = byId('nameTry');
+  if (nameIn){
+    const hit = byId('nameHit'), keep = byId('nameKeep'), ren = byId('nameRen');
+    const update = () => {
+      const v = nameIn.value.trim() || 'photo.jpg';
+      const m = v.match(/^(.*?)(\.[A-Za-z0-9]{2,5})?$/), base = m[1] || 'photo', ext = (m[2] || '.jpg').toLowerCase();
+      const found = detectAI(v);
+      hit.textContent = found.length ? found.join(', ') : 'No AI tool named';
+      hit.classList.toggle('amr-hit', found.length > 0); hit.classList.toggle('amr-none', !found.length);
+      keep.textContent = base + '-clean' + ext; ren.textContent = 'image-001' + ext;
+    };
+    nameIn.addEventListener('input', update);
+    document.querySelectorAll('[data-name]').forEach(b => b.addEventListener('click', () => { nameIn.value = b.dataset.name; update(); nameIn.focus(); }));
+    update();
+  }
+  // 2. Command list: filter, hover, arrows, click
+  const find = byId('cmdFind');
+  if (find){
+    const ui = find.parentElement, rows = [...ui.querySelectorAll('[data-cmd]')], empty = ui.querySelector('p[hidden]');
+    let cur = 0;
+    const select = i => { cur = i; rows.forEach((r, k) => { const on = k === i; r.setAttribute('aria-current', on ? 'true' : 'false'); r.querySelector('button').setAttribute('aria-expanded', on); }); };
+    const visible = () => rows.filter(r => !r.hidden);
+    rows.forEach((r, i) => {
+      r.addEventListener('mouseenter', () => { if (matchMedia('(hover:hover)').matches) select(i); });
+      r.querySelector('button').addEventListener('click', () => select(i));
+      r.querySelector('button').addEventListener('focus', () => select(i));
+    });
+    find.addEventListener('input', () => {
+      const q = find.value.trim().toLowerCase();
+      rows.forEach(r => { r.hidden = !!q && !r.dataset.words.includes(q); });
+      const v = visible(); empty.hidden = v.length > 0;
+      if (v.length && rows[cur].hidden) select(rows.indexOf(v[0]));
+    });
+    find.addEventListener('keydown', e => {
+      if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp') return;
+      e.preventDefault(); const v = visible(); if (!v.length) return;
+      const at = v.indexOf(rows[cur]); const n = v[(at + (e.key === 'ArrowDown' ? 1 : v.length - 1)) % v.length];
+      select(rows.indexOf(n));
+    });
+    ui.setAttribute('data-ready', ''); select(0);
+  }
+  // 3. Pinned fragment follows the step in view
+  const steps = [...document.querySelectorAll('[data-step]')], stage = document.querySelector('[data-state]');
+  if (steps.length && stage && 'IntersectionObserver' in window){
+    const set = i => { stage.setAttribute('data-state', i); steps.forEach((s, k) => s.setAttribute('aria-current', k === i ? 'true' : 'false')); };
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) set(+e.target.dataset.step); }), { rootMargin: '-45% 0px -45% 0px' });
+    steps.forEach(s => io.observe(s)); set(0);
+  }
+  // 4. FAQ: question index, one answer
+  const pane = byId('faqPane');
+  if (pane){
+    const box = pane.closest('[aria-hidden]').parentElement, qs = [...box.querySelectorAll('[data-q]')];
+    const wide = () => matchMedia('(min-width: 861px)').matches;
+    const pick = (i, toggle) => qs.forEach((q, k) => {
+      const on = k === i && !(toggle && !wide() && q.hasAttribute('data-open'));
+      q.querySelector('button').setAttribute('aria-expanded', on);
+      q.toggleAttribute('data-open', on);
+      if (on){ pane.style.opacity = 0; requestAnimationFrame(() => { pane.textContent = q.querySelector('p').textContent; pane.style.opacity = 1; }); }
+    });
+    qs.forEach((q, i) => {
+      const b = q.querySelector('button');
+      b.addEventListener('click', () => pick(i, true));
+      b.addEventListener('focus', () => { if (wide()) pick(i); });
+      b.addEventListener('mouseenter', () => { if (wide() && matchMedia('(hover:hover)').matches) pick(i); });
+    });
+    box.setAttribute('data-ready', ''); pick(0);
+  }
+  // Demo loop: play only while visible, never for reduced motion
+  const vid = document.querySelector('video[data-loop]');
+  if (vid){
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) vid.controls = true;
+    else new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ vid.preload = 'auto'; vid.play().catch(() => { vid.controls = true; }); } else vid.pause(); }), { threshold: .35 }).observe(vid);
+  }
+  // 5. Entrances: heading, then text, then fragment
+  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
+    const secs = [...document.querySelectorAll('section[aria-labelledby]')];
+    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.setAttribute('data-seen', ''); io.unobserve(e.target); } }), { rootMargin: '0px 0px -12% 0px' });
+    secs.forEach(sec => {
+      if (sec.getBoundingClientRect().top < innerHeight) return;
+      [...sec.children].forEach((c, k) => { c.setAttribute('data-reveal', ''); c.style.setProperty('--d', (k * 0.08) + 's'); });
+      sec.setAttribute('data-armed', ''); io.observe(sec);
+    });
+  }
+})();
 
 
 /* Visitor counter: counts each browser once (no images or personal data are sent) */
