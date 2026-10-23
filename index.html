@@ -674,34 +674,16 @@ body {
 .rx-hero-meta b { color: var(--rx-accent-ink); font-weight: 700; }
 
 .rx-hero-content {
-  display: grid;
-  gap: 2rem;
-  margin-top: 1rem;
-}
-@media (min-width: 1024px) {
-  .rx-hero-content {
-    grid-template-columns: 1.25fr 0.75fr;
-    align-items: end;
-  }
+  max-width: 880px;
+  margin-top: 1.25rem;
 }
 
-/* AEO Definition Snippet Card */
-.rx-aeo-snippet {
-  margin-top: 2rem;
-  padding: 1.25rem 1.5rem;
-  border-radius: 1rem;
-  background: var(--rx-surface);
-  border: 1px solid var(--rx-line);
-  border-left: 4px solid var(--rx-accent);
-}
-.rx-aeo-snippet p {
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.65;
-  color: var(--rx-fg);
-}
-.rx-aeo-snippet b {
-  color: var(--rx-accent-ink);
+.rx-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 1.75rem;
 }
 
 .rx-trust-badges {
@@ -1750,52 +1732,32 @@ button.primary:disabled:hover { background: #0ef277; }
   <section class="rx-hero" data-rx-hero="true">
     <div class="rx-hero-glow-bg" aria-hidden="true"></div>
     <div class="rx-container">
-      <div class="rx-hero-meta">
-        <span>Software &amp; Technology Services</span>
-        <span><b>Reozix Labs</b> · 100% Client-Side Privacy</span>
-        <span>Zero Server Uploads</span>
-      </div>
-
       <div class="rx-hero-content">
-        <div>
-          <span class="rx-h1-sub">Open Source Privacy Tool</span>
-          <h1 class="rx-h1">FREE AI METADATA<br><span class="text-accent">REMOVER</span></h1>
-          <p class="rx-lead" style="margin-top: 1.25rem;">
-            Remove AI metadata, C2PA Content Credentials, Midjourney, ChatGPT, Firefly, EXIF and prompts from images in bulk. 100% private, client-side, zero image uploads.
-          </p>
+        <span class="rx-h1-sub">Open Source Privacy Tool</span>
+        <h1 class="rx-h1">FREE AI METADATA<br><span class="text-accent">REMOVER</span></h1>
+        <p class="rx-lead" style="margin-top: 1.25rem; max-width: 60ch;">
+          Remove AI metadata, C2PA Content Credentials, Midjourney, ChatGPT, Firefly, EXIF and prompts from images in bulk. 100% private, client-side, zero image uploads.
+        </p>
 
-          <!-- Direct Definition Snippet for AI Engines & Featured Snippets (AEO) -->
-          <div class="rx-aeo-snippet">
-            <p>
-              <strong>Reozix AI Metadata Remover</strong> is a free, 100% private in-browser tool that surgically strips <b>C2PA Content Credentials</b>, <b>IPTC AI provenance tags</b>, <b>Stable Diffusion &amp; ComfyUI prompts</b>, and camera <b>EXIF/GPS coordinates</b> from JPG, PNG, and WebP images losslessly at the binary level, with <b>zero server uploads</b>.
-            </p>
-          </div>
-
-          <div class="rx-trust-badges">
-            <div class="pill">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                <rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
-              </svg>
-              100% private: images never leave your browser
-            </div>
-            <div class="visits" id="visits" hidden>
-              <span class="vdot"></span><b id="visitCount">1,023</b> community visits
-            </div>
-          </div>
+        <div class="rx-hero-actions">
+          <a href="#tool" class="rx-btn rx-btn-primary">Drop Images Below</a>
+          <a href="https://github.com/Shahriar-008/aimetadataremover" target="_blank" rel="noopener" class="rx-btn rx-btn-ghost">
+            GitHub Repo
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M7 7h10v10"></path><path d="M7 17 17 7"></path>
+            </svg>
+          </a>
         </div>
 
-        <div style="display: flex; flex-direction: column; gap: 1rem; align-items: flex-start;">
-          <p class="rx-body" style="margin: 0; max-width: 44ch;">
-            Engineered by <strong>Reozix</strong> to provide creators, agencies, photographers, and developers with clean, watermark-free images without trusting external cloud servers.
-          </p>
-          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
-            <a href="#tool" class="rx-btn rx-btn-primary">Drop Images Below</a>
-            <a href="https://github.com/Shahriar-008/aimetadataremover" target="_blank" rel="noopener" class="rx-btn rx-btn-ghost">
-              GitHub Repo
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M7 7h10v10"></path><path d="M7 17 17 7"></path>
-              </svg>
-            </a>
+        <div class="rx-trust-badges">
+          <div class="pill">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
+            </svg>
+            100% private: images never leave your browser
+          </div>
+          <div class="visits" id="visits" hidden>
+            <span class="vdot"></span><b id="visitCount">1,023</b> community visits
           </div>
         </div>
       </div>

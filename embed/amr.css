@@ -333,33 +333,15 @@
 #amr-app .amr-rx-hero-meta span{ display: inline-flex; align-items: center; gap: 0.4rem; }
 #amr-app .amr-rx-hero-meta b{ color: var(--rx-accent-ink); font-weight: 700; }
 #amr-app .amr-rx-hero-content{
-  display: grid;
-  gap: 2rem;
-  margin-top: 1rem;
+  max-width: 880px;
+  margin-top: 1.25rem;
 }
-@media (min-width: 1024px){#amr-app .amr-rx-hero-content{
-    grid-template-columns: 1.25fr 0.75fr;
-    align-items: end;
-  }
-
-}
-#amr-app /* AEO Definition Snippet Card */
-.amr-rx-aeo-snippet{
-  margin-top: 2rem;
-  padding: 1.25rem 1.5rem;
-  border-radius: 1rem;
-  background: var(--rx-surface);
-  border: 1px solid var(--rx-line);
-  border-left: 4px solid var(--rx-accent);
-}
-#amr-app .amr-rx-aeo-snippet p{
-  margin: 0;
-  font-size: 0.95rem;
-  line-height: 1.65;
-  color: var(--rx-fg);
-}
-#amr-app .amr-rx-aeo-snippet b{
-  color: var(--rx-accent-ink);
+#amr-app .amr-rx-hero-actions{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem;
+  margin-top: 1.75rem;
 }
 #amr-app .amr-rx-trust-badges{
   display: flex;
