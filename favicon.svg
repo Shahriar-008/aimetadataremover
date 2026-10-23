@@ -1,8 +1,61 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="16" fill="#0a0c0b"/>
-  <rect x="2" y="2" width="60" height="60" rx="14" fill="none" stroke="#0ef277" stroke-width="1.5" opacity="0.3"/>
-  <g transform="translate(14 14) scale(1.5)" fill="none" stroke="#0ef277" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M12 2l2.2 5.3L19.5 9.5l-5.3 2.2L12 17l-2.2-5.3L4.5 9.5l5.3-2.2z"/>
-    <path d="M4 20l16-16" stroke-width="2.5" stroke="#ffffff"/>
-  </g>
+  <defs>
+    <!-- Background Luxury Obsidian Gradient -->
+    <linearGradient id="rxBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#101813"/>
+      <stop offset="50%" stop-color="#090d0a"/>
+      <stop offset="100%" stop-color="#040605"/>
+    </linearGradient>
+
+    <!-- Inner Shield Surface Gradient -->
+    <linearGradient id="shieldBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#14241b"/>
+      <stop offset="60%" stop-color="#0a130e"/>
+      <stop offset="100%" stop-color="#050a07"/>
+    </linearGradient>
+
+    <!-- Emerald Border Gradient -->
+    <linearGradient id="emeraldStroke" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34d399"/>
+      <stop offset="40%" stop-color="#0ef277"/>
+      <stop offset="100%" stop-color="#059669"/>
+    </linearGradient>
+
+    <!-- Radiant Glow Filter -->
+    <filter id="emeraldHalo" x="-25%" y="-25%" width="150%" height="150%">
+      <feDropShadow dx="0" dy="0" stdDeviation="2.2" flood-color="#0ef277" flood-opacity="0.6"/>
+    </filter>
+
+    <filter id="sparkGlow" x="-30%" y="-30%" width="160%" height="160%">
+      <feDropShadow dx="0" dy="0" stdDeviation="1.8" flood-color="#34d399" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <!-- Squircle Base -->
+  <rect width="64" height="64" rx="16" fill="url(#rxBg)"/>
+  <rect x="1.5" y="1.5" width="61" height="61" rx="14.5" fill="none" stroke="#0ef277" stroke-width="1.2" stroke-opacity="0.25"/>
+
+  <!-- Subtle Radial Backlight -->
+  <circle cx="32" cy="32" r="16" fill="#0ef277" fill-opacity="0.1"/>
+
+  <!-- Bold Cyber Privacy Shield -->
+  <path d="M 32 9.5 L 49.5 16.8 C 49.5 34.5 32 47.5 32 53.5 C 32 47.5 14.5 34.5 14.5 16.8 Z"
+        fill="url(#shieldBg)"
+        stroke="url(#emeraldStroke)"
+        stroke-width="2.6"
+        stroke-linejoin="round"
+        filter="url(#emeraldHalo)"/>
+
+  <!-- Clean Surgical Metadata Checkmark -->
+  <path d="M 23 31.5 L 29 37.5 L 41 23"
+        fill="none"
+        stroke="#ffffff"
+        stroke-width="3.8"
+        stroke-linecap="round"
+        stroke-linejoin="round"/>
+
+  <!-- Radiant Clean Spark at Top Right -->
+  <path d="M 48 7 Q 48 11 52 11 Q 48 11 48 15 Q 48 11 44 11 Q 48 11 48 7 Z"
+        fill="#0ef277"
+        filter="url(#sparkGlow)"/>
 </svg>
