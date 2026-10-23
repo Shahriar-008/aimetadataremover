@@ -1,279 +1,1858 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Free AI Metadata Remover: Remove AI Info from Images</title>
-<meta name="description" content="Remove AI metadata from images in bulk. Strip ChatGPT, Midjourney and Firefly tags, C2PA, EXIF, GPS and prompts. Free, private, no upload, same quality.">
-<link rel="canonical" href="https://www.designmonks.co/aimetadataremover">
-<meta name="robots" content="index, follow, max-image-preview:large">
+<title>Free AI Metadata Remover: Strip C2PA, Prompts &amp; EXIF | Reozix</title>
+<meta name="description" content="Free online AI metadata remover. Strip C2PA Content Credentials, Midjourney &amp; ChatGPT prompts, EXIF, and GPS in bulk. 100% private in-browser tool with zero uploads.">
+<meta name="keywords" content="AI metadata remover, remove AI metadata, C2PA remover, remove content credentials, strip midjourney prompt, remove ChatGPT metadata, Stable Diffusion prompt remover, ComfyUI workflow remover, EXIF cleaner, private metadata remover">
+<link rel="canonical" href="https://reozix.com/tools/aimetadataremover">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="author" content="Reozix">
 <meta property="og:type" content="website">
-<meta property="og:site_name" content="AI Metadata Remover">
-<meta property="og:title" content="Free AI Metadata Remover: Remove AI Info from Images">
-<meta property="og:description" content="Remove AI metadata from images in bulk. Strip ChatGPT, Midjourney and Firefly tags, C2PA, EXIF, GPS and prompts. Free, private, no upload, same quality.">
-<meta property="og:url" content="https://www.designmonks.co/aimetadataremover">
-<meta property="og:image" content="https://atiq31416.github.io/aimetadataremover/og-image.png">
+<meta property="og:site_name" content="Reozix">
+<meta property="og:title" content="Free AI Metadata Remover: Strip C2PA, Prompts &amp; EXIF | Reozix">
+<meta property="og:description" content="Free online AI metadata remover. Strip C2PA Content Credentials, Midjourney &amp; ChatGPT prompts, EXIF, and GPS in bulk. 100% private in-browser tool with zero uploads.">
+<meta property="og:url" content="https://reozix.com/tools/aimetadataremover">
+<meta property="og:image" content="og-image.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="AI Metadata Remover: remove hidden AI info from your images">
+<meta property="og:image:alt" content="Reozix AI Metadata Remover">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Free AI Metadata Remover: Remove AI Info from Images">
-<meta name="twitter:description" content="Remove AI metadata from images in bulk. Strip ChatGPT, Midjourney and Firefly tags, C2PA, EXIF, GPS and prompts. Free, private, no upload, same quality.">
-<meta name="twitter:image" content="https://atiq31416.github.io/aimetadataremover/og-image.png">
-<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebApplication", "@id": "https://www.designmonks.co/aimetadataremover#app", "name": "Free AI Metadata Remover", "url": "https://www.designmonks.co/aimetadataremover", "description": "Remove AI metadata from images in bulk. Strip ChatGPT, Midjourney and Firefly tags, C2PA, EXIF, GPS and prompts. Free, private, no upload, same quality.", "applicationCategory": "MultimediaApplication", "operatingSystem": "Any (works in your web browser)", "browserRequirements": "Requires JavaScript", "offers": {"@type": "Offer", "price": "0", "priceCurrency": "USD"}, "image": "https://atiq31416.github.io/aimetadataremover/og-image.png", "featureList": ["100% free, no sign-up, no limits", "Remove AI metadata in bulk", "Remove C2PA Content Credentials", "Remove EXIF and GPS data", "Remove XMP and IPTC data", "Remove Stable Diffusion and ComfyUI prompts", "No upload, works offline", "No quality loss for JPG, PNG and WebP"], "publisher": {"@id": "https://devmonks.co/#org"}, "isAccessibleForFree": true}, {"@type": "Organization", "@id": "https://devmonks.co/#org", "name": "Dev Monks", "url": "https://devmonks.co"}, {"@type": "FAQPage", "@id": "https://www.designmonks.co/aimetadataremover#faq", "mainEntity": [{"@type": "Question", "name": "What is AI metadata?", "acceptedAnswer": {"@type": "Answer", "text": "AI metadata is hidden info saved inside an image file by AI tools. It can say which tool made the image (like ChatGPT, Midjourney, Gemini or Adobe Firefly), include a “made with AI” label, the prompt you typed, and device or location details. You can’t see it in the picture, but anyone can read it from the file."}}, {"@type": "Question", "name": "Is this AI metadata remover really free?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, it’s 100% free. There’s no sign-up, no daily limit and no watermark. Because everything runs in your own browser, there are no servers to pay for, so we can keep it free."}}, {"@type": "Question", "name": "How do I remove AI metadata from an image?", "acceptedAnswer": {"@type": "Answer", "text": "Drag your images into the box at the top of this page. The tool removes the hidden info right away. Then click “Download” for one image, or “Download all” to get every cleaned image at once."}}, {"@type": "Question", "name": "Are my images uploaded anywhere?", "acceptedAnswer": {"@type": "Answer", "text": "No. Everything happens inside your own browser. Your images never leave your computer, and the tool even works offline."}}, {"@type": "Question", "name": "Does it reduce image quality?", "acceptedAnswer": {"@type": "Answer", "text": "No. For JPG, PNG and WebP files, only the hidden info is removed and the picture itself stays exactly the same. Other formats like HEIC and AVIF are saved as a fresh copy, which drops all hidden info. If you turn on “Make each image unique”, the image is re-saved with tiny changes you can’t see."}}, {"@type": "Question", "name": "Which image formats are supported?", "acceptedAnswer": {"@type": "Answer", "text": "JPG, PNG and WebP are cleaned with zero quality loss. HEIC, AVIF, GIF, BMP and TIFF also work, and are saved as JPG or PNG."}}, {"@type": "Question", "name": "Can it remove invisible AI watermarks like SynthID?", "acceptedAnswer": {"@type": "Answer", "text": "No. Some AI tools, like Google’s, hide an invisible watermark inside the picture itself. That is part of the image, not hidden file info, so no metadata remover can take it out."}}, {"@type": "Question", "name": "What does “Make each image unique” do?", "acceptedAnswer": {"@type": "Answer", "text": "It makes tiny changes to the picture that your eyes can’t see, so the file no longer matches the original exactly. This helps against simple duplicate checks. It does not stop reverse image search (like Google Lens), because those look at what the picture shows."}}]}]}</script>
+<meta name="twitter:title" content="Free AI Metadata Remover: Strip C2PA, Prompts &amp; EXIF | Reozix">
+<meta name="twitter:description" content="Free online AI metadata remover. Strip C2PA Content Credentials, Midjourney &amp; ChatGPT prompts, EXIF, and GPS in bulk. 100% private in-browser tool with zero uploads.">
+<meta name="twitter:image" content="og-image.png">
+
+<!-- Stacked Multi-Schema JSON-LD for Search Engines & Answer Engines (AEO/GEO) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": "https://reozix.com/tools/aimetadataremover#app",
+      "name": "Free AI Metadata Remover by Reozix",
+      "url": "https://reozix.com/tools/aimetadataremover",
+      "description": "A 100% client-side privacy tool that surgically strips C2PA Content Credentials, IPTC AI tags, Midjourney, ChatGPT, Firefly, Stable Diffusion prompts, and camera EXIF/GPS data from images in bulk with zero quality loss and no server uploads.",
+      "applicationCategory": "MultimediaApplication",
+      "applicationSubCategory": "Privacy & Image Editing Tool",
+      "operatingSystem": "Any (Web Browser with JavaScript)",
+      "browserRequirements": "Requires JavaScript. Runs offline in Chrome, Safari, Firefox, Edge, and mobile browsers.",
+      "isAccessibleForFree": true,
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "image": "og-image.png",
+      "featureList": [
+        "100% client-side processing in browser memory",
+        "Zero server uploads: images never leave your computer",
+        "Lossless metadata stripping for JPG, PNG, and WebP",
+        "Removes C2PA Content Credentials and JUMBF manifests",
+        "Strips Stable Diffusion, ComfyUI, Midjourney, and DALL-E prompts",
+        "Removes EXIF, GPS geolocation, and IPTC/XMP edit history",
+        "Batch processing with one-click clean ZIP download",
+        "Automated safe file renaming to prevent model name detection",
+        "Optional unique pixel scrambling to bypass duplicate hash checks",
+        "Works completely offline without an internet connection"
+      ],
+      "publisher": {
+        "@type": "Organization",
+        "@id": "https://reozix.com/#org",
+        "name": "Reozix",
+        "url": "https://reozix.com",
+        "logo": "https://reozix.com/logo-on-light.png"
+      }
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://reozix.com/#org",
+      "name": "Reozix",
+      "url": "https://reozix.com",
+      "logo": "https://reozix.com/logo-on-light.png",
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": "+61449228174",
+          "contactType": "customer service",
+          "areaServed": ["AU", "CA", "BD", "US", "GB", "Worldwide"]
+        }
+      ],
+      "sameAs": [
+        "https://github.com/Shahriar-008/aimetadataremover"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://reozix.com/tools/aimetadataremover#breadcrumbs",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "https://reozix.com/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Tools",
+          "item": "https://reozix.com/tools"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AI Metadata Remover",
+          "item": "https://reozix.com/tools/aimetadataremover"
+        }
+      ]
+    },
+    {
+      "@type": "HowTo",
+      "@id": "https://reozix.com/tools/aimetadataremover#howto",
+      "name": "How to Remove AI Metadata, C2PA, and Prompts from Images in 3 Steps",
+      "description": "Step-by-step guide to removing AI metadata, C2PA Content Credentials, and camera EXIF data from images in bulk using Reozix AI Metadata Remover.",
+      "totalTime": "PT15S",
+      "step": [
+        {
+          "@type": "HowToStep",
+          "position": 1,
+          "name": "Drop images into the browser workspace",
+          "text": "Drag and drop your JPG, PNG, WebP, or HEIC images into the dropzone. Files are read immediately in your local browser memory without uploading to any server.",
+          "url": "https://reozix.com/tools/aimetadataremover#tool"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 2,
+          "name": "Automatic binary inspection and stripping",
+          "text": "The engine scans for C2PA JUMBF manifests, IPTC tags, Midjourney/ChatGPT prompt snippets, and EXIF/GPS data, purging them at the binary level while preserving lossless image quality.",
+          "url": "https://reozix.com/tools/aimetadataremover#removes"
+        },
+        {
+          "@type": "HowToStep",
+          "position": 3,
+          "name": "Download clean, verified images",
+          "text": "Download images individually or click 'Download all' to export the entire batch as a clean ZIP archive with optional safe sequential renaming.",
+          "url": "https://reozix.com/tools/aimetadataremover#tool"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://reozix.com/tools/aimetadataremover#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is AI metadata and C2PA Content Credentials?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "AI metadata is invisible provenance information embedded directly inside an image file by generative AI tools like ChatGPT (DALL-E), Midjourney, Adobe Firefly, and Google Imagen. C2PA (Coalition for Content Provenance and Authenticity) manifests cryptographic tags that prove an image was made with AI, often containing the generator software, creation timestamp, and the exact prompt entered."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do I remove the 'Made with AI' tag on Instagram, Facebook, and TikTok?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Social media platforms automatically detect AI images by scanning file metadata for C2PA manifests, JUMBF blocks, and IPTC 'trainedAlgorithmicMedia' digital source tags. By running your image through Reozix AI Metadata Remover before uploading, these provenance markers are completely purged, preventing platforms from automatically attaching 'Made with AI' or 'AI info' warning badges."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does stripping metadata reduce image quality?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. For JPG, PNG, and WebP files, Reozix performs lossless binary segment removal. The pixel data itself is never decompressed or re-compressed, meaning resolution, sharpness, color profiles (ICC), and visual fidelity remain 100% identical to the original."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are my images uploaded to a remote server?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Everything runs 100% locally in your web browser memory using HTML5 ArrayBuffers and Web Workers. Your images never leave your computer, no telemetry or file copies are saved, and the tool functions completely even when your internet connection is turned off."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can this tool remove Stable Diffusion prompts and ComfyUI workflows?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Stable Diffusion, Automatic1111, Forge, and ComfyUI store prompts, negative prompts, CFG scales, seed numbers, and complete node graph workflows inside PNG text chunks (tEXt, iTXt, zTXt) and UserComment EXIF tags. Reozix thoroughly wipes these chunks so your creative recipes stay private."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can any metadata remover delete invisible watermarks like Google SynthID?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. Tools like Google SynthID inject imperceptible mathematical variations directly into the pixel values rather than storing file metadata. No metadata scrubber can remove pixel-level steganographic watermarks without modifying the visible image itself. However, Reozix removes all file-level markers (C2PA, IPTC, EXIF) that typical scanners inspect."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does the 'Make each image unique' option do?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The 'Make each image unique' option introduces microscopic, imperceptible pixel adjustments (±1 on random color channels) across visible areas. This modifies the file's cryptographic hash (MD5, SHA-256) so simple automated duplicate checks will view the file as brand new."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Is this AI metadata remover completely free?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, Reozix AI Metadata Remover is 100% free with no sign-up, no daily processing limits, no watermarks, and no paid tiers. Because processing takes place on your own computer rather than costly server infrastructure, Reozix provides this tool freely to the community."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
-<meta name="theme-color" content="#4a47e8">
+<link rel="icon" href="reozix-icon-light.png" media="(prefers-color-scheme: light)">
+<link rel="icon" href="reozix-icon-dark.png" media="(prefers-color-scheme: dark)">
+<link rel="apple-touch-icon" href="reozix-icon-light.png">
+<meta name="theme-color" content="#0a0c0b" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#f6f9f7" media="(prefers-color-scheme: light)">
+<script>
+try{
+  var t = localStorage.getItem("rx-theme");
+  if (t !== "light" && t !== "dark") t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  document.documentElement.dataset.theme = t;
+}catch(e){ document.documentElement.dataset.theme = "dark"; }
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Funnel+Display:wght@400&family=DM+Sans:opsz,wght@9..40,400;9..40,500&display=swap">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-:root{
-  --ui:"DM Sans",system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-  --display:"Funnel Display","DM Sans",system-ui,sans-serif;
-  --bg:#f6f6f3; --surface:#ffffff; --surface-2:#f0f0ec; --text:#17171a; --muted:#6b6b72;
-  --border:#e3e3de; --accent:#4a47e8; --accent-ink:#ffffff; --accent-soft:#ecebfd;
-  --good:#15803d; --good-soft:#e7f6ec; --warn:#b45309; --warn-soft:#fdf1e2; --bad:#b91c1c; --bad-soft:#fde8e8;
-  --radius:14px;
+/* ==========================================================================
+   Reozix Design System Tokens & Base Hierarchy
+   ========================================================================== */
+:root {
+  --rx-font: "Plus Jakarta Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --rx-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  
+  /* Dark Theme (Reozix Signature Dark) */
+  --rx-bg: #0a0c0b;
+  --rx-bg2: #121614;
+  --rx-surface: #101512;
+  --rx-surface2: #18201b;
+  --rx-fg: #ffffff;
+  --rx-fg-muted: rgba(255, 255, 255, 0.65);
+  --rx-fg-faint: rgba(255, 255, 255, 0.38);
+  --rx-line: rgba(255, 255, 255, 0.12);
+  --rx-line-strong: rgba(255, 255, 255, 0.22);
+  
+  /* Brand Accents */
+  --rx-accent: #0ef277;
+  --rx-accent-ink: #0ef277;
+  --rx-accent-glow: rgba(14, 242, 119, 0.25);
+  --rx-accent-soft: rgba(14, 242, 119, 0.1);
+  --rx-on-accent: #04130a;
+  
+  /* Status Indicators */
+  --rx-good: #0ef277;
+  --rx-good-soft: rgba(14, 242, 119, 0.12);
+  --rx-warn: #f0c060;
+  --rx-warn-soft: rgba(217, 164, 65, 0.16);
+  --rx-bad: #ff8a8a;
+  --rx-bad-soft: rgba(255, 138, 138, 0.14);
+  
+  /* Tool Mapping Aliases */
+  --ui: var(--rx-font);
+  --display: var(--rx-font);
+  --bg: var(--rx-bg);
+  --surface: var(--rx-surface);
+  --surface-2: var(--rx-surface2);
+  --text: var(--rx-fg);
+  --muted: var(--rx-fg-muted);
+  --border: var(--rx-line);
+  --accent: var(--rx-accent);
+  --accent-ink: var(--rx-on-accent);
+  --accent-soft: var(--rx-accent-soft);
+  --good: var(--rx-good);
+  --good-soft: var(--rx-good-soft);
+  --warn: var(--rx-warn);
+  --warn-soft: var(--rx-warn-soft);
+  --bad: var(--rx-bad);
+  --bad-soft: var(--rx-bad-soft);
+  --radius: 1.15rem;
 }
-@media (prefers-color-scheme: dark){
-  :root{
-    --bg:#111113; --surface:#1a1a1d; --surface-2:#232327; --text:#ededee; --muted:#9a9aa3;
-    --border:#2e2e33; --accent:#8b88ff; --accent-ink:#111113; --accent-soft:#25244a;
-    --good:#4ade80; --good-soft:#15291c; --warn:#fbbf24; --warn-soft:#2e2412; --bad:#f87171; --bad-soft:#2f1717;
+
+:root[data-theme="light"] {
+  --rx-bg: #f6f9f7;
+  --rx-bg2: #e9efeb;
+  --rx-surface: #ffffff;
+  --rx-surface2: #eef3ef;
+  --rx-fg: #0a0c0b;
+  --rx-fg-muted: rgba(10, 12, 11, 0.68);
+  --rx-fg-faint: rgba(10, 12, 11, 0.38);
+  --rx-line: rgba(10, 12, 11, 0.12);
+  --rx-line-strong: rgba(10, 12, 11, 0.22);
+  
+  --rx-accent: #0ef277;
+  --rx-accent-ink: #006c35;
+  --rx-accent-glow: rgba(14, 242, 119, 0.35);
+  --rx-accent-soft: rgba(14, 242, 119, 0.15);
+  --rx-on-accent: #04130a;
+  
+  --rx-good: #006c35;
+  --rx-good-soft: rgba(0, 108, 53, 0.12);
+  --rx-warn: #b45309;
+  --rx-warn-soft: rgba(180, 83, 9, 0.12);
+  --rx-bad: #b42318;
+  --rx-bad-soft: rgba(180, 35, 24, 0.12);
+  
+  --bg: var(--rx-bg);
+  --surface: var(--rx-surface);
+  --surface-2: var(--rx-surface2);
+  --text: var(--rx-fg);
+  --muted: var(--rx-fg-muted);
+  --border: var(--rx-line);
+  --accent: var(--rx-accent);
+  --accent-ink: var(--rx-on-accent);
+  --accent-soft: var(--rx-accent-soft);
+  --good: var(--rx-good);
+  --good-soft: var(--rx-good-soft);
+  --warn: var(--rx-warn);
+  --warn-soft: var(--rx-warn-soft);
+  --bad: var(--rx-bad);
+  --bad-soft: var(--rx-bad-soft);
+}
+
+/* Reset & Baseline */
+*, *::before, *::after { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; tab-size: 4; }
+body {
+  margin: 0;
+  background: var(--rx-bg);
+  color: var(--rx-fg);
+  font: 400 16px/1.6 var(--rx-font);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+::selection { background: var(--rx-accent); color: #04130a; }
+:focus-visible { outline: 2px solid var(--rx-accent); outline-offset: 2px; }
+
+/* Container & Typography */
+.rx-container {
+  width: 100%;
+  max-width: 1380px;
+  margin-inline: auto;
+  padding-inline: clamp(1.25rem, 4vw, 3rem);
+}
+
+.rx-eyebrow {
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rx-accent-ink);
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: inline-flex;
+}
+.rx-eyebrow::before {
+  content: "";
+  background: currentColor;
+  border-radius: 999px;
+  width: 0.45rem;
+  height: 0.45rem;
+}
+
+.rx-h1 {
+  text-transform: uppercase;
+  letter-spacing: -0.06em;
+  text-wrap: balance;
+  font-size: clamp(2.8rem, 8.5vw, 6.5rem);
+  font-weight: 900;
+  line-height: 0.92;
+  margin: 0;
+}
+.rx-h1-sub {
+  display: inline-block;
+  font-size: clamp(0.9rem, 1.8vw, 1.25rem);
+  letter-spacing: 0.18em;
+  font-weight: 800;
+  color: var(--rx-accent-ink);
+  margin-bottom: 0.75rem;
+}
+.text-accent { color: var(--rx-accent-ink); }
+
+.rx-h2 {
+  letter-spacing: -0.045em;
+  text-wrap: balance;
+  font-size: clamp(2rem, 4.4vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.05;
+  margin: 0;
+}
+.rx-h3 {
+  letter-spacing: -0.025em;
+  font-size: clamp(1.25rem, 2vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.2;
+  margin: 0;
+}
+.rx-lead {
+  color: var(--rx-fg-muted);
+  font-size: clamp(1rem, 1.2vw, 1.2rem);
+  line-height: 1.65;
+  max-width: 62ch;
+  margin: 0;
+}
+.rx-body {
+  color: var(--rx-fg-muted);
+  font-size: 0.95rem;
+  line-height: 1.7;
+}
+
+/* Buttons */
+.rx-btn {
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  justify-content: center;
+  align-items: center;
+  gap: 0.55rem;
+  min-height: 2.85rem;
+  padding: 0.75rem 1.4rem;
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color 0.25s, color 0.25s, border-color 0.25s, transform 0.15s, box-shadow 0.25s;
+  display: inline-flex;
+}
+.rx-btn:active { transform: scale(0.98); }
+.rx-btn svg { flex: none; width: 1.05rem; height: 1.05rem; }
+
+.rx-btn-primary {
+  color: #04130a;
+  background: #0ef277;
+  border-color: #0ef277;
+  box-shadow: 0 4px 18px rgba(14, 242, 119, 0.25);
+}
+.rx-btn-primary:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #04130a;
+  box-shadow: 0 6px 24px rgba(255, 255, 255, 0.3);
+}
+
+.rx-btn-ghost {
+  border-color: var(--rx-line-strong);
+  color: var(--rx-fg);
+  background: transparent;
+}
+.rx-btn-ghost:hover {
+  color: #04130a;
+  background: #0ef277;
+  border-color: #0ef277;
+}
+
+/* Cards */
+.rx-card {
+  border: 1px solid var(--rx-line);
+  background: var(--rx-surface);
+  border-radius: 1.15rem;
+  padding: clamp(1.25rem, 2.4vw, 2rem);
+  position: relative;
+  overflow: hidden;
+  transition: border-color 0.3s, transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background-color 0.3s, box-shadow 0.3s;
+}
+.rx-card:hover {
+  border-color: var(--rx-accent-glow);
+  box-shadow: 0 16px 40px -16px rgba(0, 0, 0, 0.4);
+}
+.rx-card::before {
+  content: "";
+  pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgba(14, 242, 119, 0.08), transparent);
+  transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
+  position: absolute;
+  inset: 0;
+  transform: translate(-110%);
+}
+.rx-card:hover::before { transform: translate(110%); }
+
+/* Ambient Glow */
+.rx-glow {
+  pointer-events: none;
+  position: absolute;
+  left: 50%;
+  top: 15%;
+  transform: translate(-50%, -20%);
+  width: min(720px, 90vw);
+  height: 480px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(14, 242, 119, 0.16) 0%, rgba(14, 242, 119, 0.04) 50%, transparent 75%);
+  filter: blur(72px);
+  z-index: 0;
+}
+
+/* Marquee */
+.rx-marquee-wrap {
+  overflow: hidden;
+  border-block: 1px solid var(--rx-line);
+  background: var(--rx-bg2);
+  padding: 1rem 0;
+  user-select: none;
+}
+.rx-marquee {
+  display: flex;
+  width: max-content;
+  align-items: center;
+  gap: 2.5rem;
+  animation: rx-marquee-slide 45s linear infinite;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rx-fg-muted);
+}
+.rx-marquee:hover { animation-play-state: paused; }
+@keyframes rx-marquee-slide {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.rx-marquee-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 999px;
+  background: var(--rx-accent-ink);
+  display: inline-block;
+  margin-inline: 0.75rem;
+}
+
+/* ==========================================================================
+   Header Navbar
+   ========================================================================== */
+.rx-header {
+  position: sticky;
+  top: 0;
+  z-index: 90;
+  height: 72px;
+  border-bottom: 1px solid var(--rx-line);
+  background: var(--rx-bg);
+  transition: background-color 0.25s, border-color 0.25s;
+}
+@supports ((-webkit-backdrop-filter: blur(16px)) or (backdrop-filter: blur(16px))) {
+  .rx-header {
+    background: color-mix(in srgb, var(--rx-bg) 86%, transparent);
+    -webkit-backdrop-filter: blur(16px);
+    backdrop-filter: blur(16px);
   }
 }
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font:400 16px/1.5 var(--ui);-webkit-font-smoothing:antialiased}
-.wrap{max-width:1080px;margin:0 auto;padding:40px 16px 64px}
-header h1{font-family:var(--display);font-weight:400;font-size:clamp(36px,5vw,60px);line-height:1.02;letter-spacing:-.02em;margin:0 0 12px;text-wrap:balance}
-header p{margin:0;color:var(--text);font-size:16px;max-width:62ch}
-.pill{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:500;padding:4px 10px;border-radius:99px;background:var(--good-soft);color:var(--good)}
-.badges{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-bottom:18px}
-.pill svg{flex:none}
-.drop{display:block;position:relative;margin-top:32px;border:2px dashed var(--border);border-radius:var(--radius);background:var(--surface);padding:44px 20px;text-align:center;cursor:pointer;transition:.15s}
-.drop:hover,.drop.over{border-color:var(--accent);background:var(--accent-soft)}
-.drop:focus-within{outline:2px solid var(--accent);outline-offset:3px;border-color:var(--accent)}
-.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;opacity:0}
-.drop strong{display:block;font-size:18px;letter-spacing:-.01em;margin-bottom:4px}
-.drop span{display:block;color:var(--muted);font-size:14px}
-.drop .icon{width:44px;height:44px;margin:0 auto 12px;border-radius:12px;background:var(--accent-soft);color:var(--accent);display:grid;place-items:center}
-.options{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:center;margin:18px 2px 0;font-size:14px;color:var(--text)}
-.options .hint{color:var(--muted);margin-left:2px}
-.options label{display:flex;align-items:center;gap:8px;cursor:pointer}
-select{font:inherit;color:var(--text);background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:5px 8px;cursor:pointer;transition:border-color .15s}
-select:hover{border-color:var(--muted)}
-input[type=checkbox]{accent-color:var(--accent);width:16px;height:16px}
-.summary{display:none;margin-top:28px;padding:14px 16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-.summary.show{display:flex}
-.summary .stats{font-size:14px}
-.summary .stats b{font-weight:500}
-.btns{display:flex;gap:8px}
-button,.btn{font:inherit;font-weight:500;font-size:14px;border:1px solid var(--border);background:var(--surface);color:var(--text);border-radius:10px;padding:8px 14px;cursor:pointer;text-decoration:none;white-space:nowrap;transition:background-color .15s,border-color .15s,transform .1s}
-button:hover,.btn:hover{background:var(--surface-2);border-color:color-mix(in srgb,var(--border) 60%,var(--muted))}
-button:active,.btn:active{transform:translateY(1px)}
-:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
-::selection{background:var(--accent-soft);color:var(--text)}
-button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-button.primary:hover{background:color-mix(in srgb,var(--accent) 85%,#000);border-color:color-mix(in srgb,var(--accent) 85%,#000)}
-button:disabled:hover{background:var(--surface);transform:none}
-button.primary:disabled:hover{background:var(--accent)}
-button:disabled{opacity:.5;cursor:default}
-.list{margin-top:12px;display:flex;flex-direction:column;gap:8px}
-.row{display:grid;grid-template-columns:56px 1fr auto;gap:14px;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:10px 12px}
-.thumb{width:56px;height:56px;border-radius:8px;object-fit:cover;background:var(--surface-2)}
-.name{font-weight:500;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.sub{font-size:12.5px;color:var(--muted)}
-.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:5px}
-.tag{font-size:11.5px;font-weight:500;padding:2px 8px;border-radius:99px;background:var(--surface-2);color:var(--muted)}
-.tag.ai{background:var(--warn-soft);color:var(--warn)}
-.tag.ok{background:var(--good-soft);color:var(--good)}
-.tag.err{background:var(--bad-soft);color:var(--bad)}
-.side{display:flex;align-items:center;gap:8px}
-.btn.small{padding:6px 10px;font-size:13px}
-.remove{display:grid;place-items:center;width:32px;height:32px;padding:0;border:0;border-radius:8px;background:none;color:var(--muted);cursor:pointer}
-.remove:hover{background:var(--bad-soft);color:var(--bad)}
-.remove:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
-.spin{width:18px;height:18px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:s 0.8s linear infinite}
-@keyframes s{to{transform:rotate(360deg)}}
-.details{grid-column:1 / -1;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:16px;border-top:1px solid var(--border);padding-top:12px;margin-top:2px} /* taste-skill-ignore: real interface (data-ui) */
-.details h4{margin:0 0 6px;font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
-.details ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px}
-.details li{font-size:13px}
-.details .lbl{font-weight:500}
-.details .sz{color:var(--muted);font-size:12px;margin-left:4px}
-.details .ev{display:block;margin-top:3px;font:12px/1.45 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;color:var(--muted);background:var(--surface-2);border-radius:6px;padding:4px 7px;word-break:break-all} /* taste-skill-ignore: real interface (data-ui) */
-.details .hit .lbl{color:var(--warn)}
-.details .none{color:var(--muted);font-size:13px}
-.toggle{background:none;border:0;color:var(--accent);padding:6px 4px;font-size:13px}
-.toggle:hover{background:none;text-decoration:underline;text-underline-offset:3px}
-@media (max-width:700px){ .details{grid-template-columns:1fr} }
-.visits{display:inline-flex;align-items:center;gap:7px;padding:3px 10px;border-radius:99px;background:var(--surface);border:1px solid var(--border);font-size:13px;color:var(--muted)}
-.visits b{color:var(--text);font-weight:500;font-variant-numeric:tabular-nums}
-.vdot{width:6px;height:6px;border-radius:50%;background:var(--good)}
-.visits[hidden]{display:none}
+.rx-header-inner {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+.rx-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  text-decoration: none;
+  color: inherit;
+}
+.rx-logo-img {
+  height: 26px;
+  width: auto;
+  display: block;
+}
+:root[data-theme="dark"] .rx-logo-light { display: none; }
+:root[data-theme="dark"] .rx-logo-dark { display: block; }
+:root[data-theme="light"] .rx-logo-light { display: block; }
+:root[data-theme="light"] .rx-logo-dark { display: none; }
 
-/* ===== Sections: the product performs ===== */
-.ic{vertical-align:-1px;margin-right:3px}
-.heart{vertical-align:-2px}
-.drop-btn{display:inline-flex;align-items:center;min-height:44px;margin-top:18px;padding:0 20px;border-radius:10px;background:var(--accent);color:var(--accent-ink);font-style:normal;font-weight:500;font-size:15px;transition:background-color .15s}
-.drop:hover .drop-btn{background:color-mix(in srgb,var(--accent) 85%,#000)}
-.demo-sec{display:grid;grid-template-columns:5fr 7fr;gap:64px;align-items:center}
-.demo-vid{display:block;width:100%;max-width:440px;height:auto;aspect-ratio:4/5;justify-self:end;border-radius:4px;background:#0c0b1a;object-fit:cover}
-.demo-link{display:inline-block;margin-top:24px;font-size:17px;font-weight:500;color:var(--accent);text-decoration:underline;text-underline-offset:4px;text-decoration-thickness:2px}
-.demo-link:hover{text-decoration-thickness:3px}
-.sec{margin-top:clamp(96px,10vw,160px)}
-.sec h2{font-family:var(--display);font-weight:400;font-size:clamp(30px,3.4vw,48px);line-height:1.08;letter-spacing:-.015em;margin:0;max-width:22ch;text-wrap:balance}
-.sec-lead{margin:12px 0 0;font-size:18px;color:var(--text);max-width:52ch}
-/* file name */
-.name-ui{margin-top:40px}
-.name-input{display:block;width:100%;font:inherit;font-family:var(--display);font-size:clamp(34px,6vw,84px);font-weight:400;letter-spacing:-.02em;line-height:1.1;color:var(--text);background:none;border:0;padding:0;margin:0;caret-color:var(--accent);outline:none;text-overflow:ellipsis}
-.name-input:focus-visible{outline:none}
-.name-ui:focus-within .name-input{color:var(--text)}
-.name-out{display:grid;grid-template-columns:repeat(3,auto);justify-content:start;gap:12px 48px;margin:32px 0 0;padding:20px 24px;background:var(--surface);border-radius:14px;max-width:100%}
-.name-out div{min-width:0}
-.name-out dt{font-size:13px;color:var(--muted);margin:0 0 4px}
-.name-out dd{margin:0;font-size:16px;font-weight:500;overflow-wrap:anywhere}
-.name-out dd.hit{color:var(--warn)}
-.name-out dd.none{color:var(--good)}
-.name-ex{display:flex;flex-wrap:wrap;gap:8px;margin-top:20px}
-.name-ex button{font-size:15px;font-weight:500;background:var(--surface-2);border:0;border-radius:10px;padding:10px 14px}
-.name-ex button:hover{background:var(--accent-soft);color:var(--accent)}
-/* command list */
-.cmd-ui{margin-top:40px}
-.cmd-find{display:block;width:100%;max-width:820px;font:inherit;font-size:clamp(20px,2.2vw,28px);font-weight:500;color:var(--text);background:var(--surface-2);border:0;border-radius:14px;padding:.55em .8em;outline:none;transition:background-color .15s}
-.cmd-find::placeholder{color:var(--muted)}
-.cmd-find:focus{background:var(--surface);box-shadow:inset 0 0 0 2px var(--accent)} /* taste-skill-ignore: real interface (data-ui) */
-.cmd-list{list-style:none;margin:24px 0 0;padding:0}
-.cmd{border-radius:16px;transition:background-color .2s}
-.cmd-btn{display:flex;align-items:baseline;justify-content:space-between;gap:24px;width:100%;text-align:left;background:none;border:0;border-radius:16px;padding:10px 20px;color:inherit;white-space:normal;cursor:pointer}
-.cmd-btn:hover{background:var(--surface-2)}
-.cmd-btn:active{transform:none}
-.cmd-name{margin:0;font-family:var(--display);font-size:clamp(30px,4.2vw,56px);line-height:1.1;letter-spacing:-.015em;font-weight:400}
-.cmd-tag{flex:none;font-size:15px;font-weight:500;color:var(--muted);background:var(--surface-2);border-radius:8px;padding:5px 10px;transform:translateY(-.3em)}
-.cmd-desc{display:none;margin:0;padding:0 20px 20px;font-size:18px;max-width:58ch}
-.cmd[aria-current="true"]{background:var(--accent);color:var(--accent-ink)}
-.cmd[aria-current="true"] .cmd-btn:hover{background:none}
-.cmd[aria-current="true"] .cmd-tag{background:color-mix(in srgb,var(--accent-ink) 18%,transparent);color:var(--accent-ink)}
-.cmd[aria-current="true"] .cmd-desc{display:block}
-.cmd[hidden]{display:none}
-.cmd-empty{margin:20px 20px 0;font-size:18px;color:var(--muted)}
-.cmd-ui:not([data-ready]) .cmd-desc{display:block;color:var(--muted)}
-/* how it works: pinned fragment */
-.how-grid{display:grid;grid-template-columns:5fr 7fr;gap:48px;margin-top:8px}
-.how-step{min-height:58vh;display:flex;flex-direction:column;justify-content:center}
-.how-step h3{font-family:var(--display);font-weight:400;font-size:clamp(26px,2.6vw,36px);line-height:1.12;letter-spacing:-.01em;margin:0;color:var(--muted);transition:color .25s}
-.how-step p{margin:10px 0 0;font-size:17px;color:var(--muted);max-width:38ch}
-.how-step[aria-current="true"] h3{color:var(--text)}
-.how-step[aria-current="true"] p{color:var(--text)}
-.how-stage{position:sticky;top:14vh;align-self:start;height:72vh;display:grid;place-items:center;background:var(--accent-soft);border-radius:24px;margin-top:6vh}
-.stage-ui{width:min(460px,88%);display:grid;font-size:14px}
-.st-drop,.st-row{grid-area:1/1;align-self:center}
-.st-drop{display:flex;flex-direction:column;align-items:center;gap:8px;padding:32px 20px;border:2px dashed color-mix(in srgb,var(--accent) 45%,transparent);border-radius:14px;background:var(--surface);color:var(--accent);font-weight:500;transition:opacity .35s,transform .35s}
-.st-drop span{color:var(--text)}
-.st-file{display:flex;align-items:center;gap:8px;margin-top:10px;padding:8px 12px;background:var(--surface-2);border-radius:10px;color:var(--text);font-weight:500;transform:translateY(-14px);opacity:0;transition:opacity .4s .15s,transform .4s .15s}
-.st-file small{color:var(--muted);font-weight:500}
-.stage-ui[data-state="0"] .st-file{opacity:1;transform:none}
-.st-thumb{flex:none;width:36px;height:36px;border-radius:8px;background:#e0703a}
-.st-file .st-thumb{width:22px;height:22px;border-radius:5px}
-.st-row{padding:14px;background:var(--surface);border:1px solid var(--border);border-radius:14px;opacity:0;transform:translateY(16px);transition:opacity .35s,transform .35s}
-.stage-ui:not([data-state="0"]) .st-drop{opacity:0;transform:scale(.97)}
-.stage-ui:not([data-state="0"]) .st-row{opacity:1;transform:none}
-.st-head{display:flex;gap:12px;align-items:center}
-.st-head b{display:block;font-size:14px}
-.st-head small{font-size:12.5px;color:var(--muted)}
-.st-tags{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0}
-.t{font-size:12px;font-weight:500;padding:3px 9px;border-radius:99px;background:var(--surface-2);color:var(--muted)}
-.t.warn{background:var(--warn-soft);color:var(--warn)}
-.t.ok{background:var(--good-soft);color:var(--good)}
-.st-found{list-style:none;margin:14px 0 0;padding:12px 0 0;border-top:1px solid var(--border);display:grid;gap:8px} /* taste-skill-ignore: real interface (data-ui) */
-.st-found li b{display:block;font-size:13px;color:var(--warn)}
-.st-found code{font:12px/1.4 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--muted)}
-.st-actions{display:flex;justify-content:flex-end;gap:8px;margin-top:14px}
-.st-btn{font-size:13px;font-weight:500;padding:7px 12px;border-radius:9px;border:1px solid var(--border);background:var(--surface)}
-.st-btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
-.s2{display:none}
-.stage-ui[data-state="2"] .s1,.stage-ui[data-state="2"] .t.warn{display:none}
-.stage-ui[data-state="2"] .s2{display:inline-block}
-.stage-ui[data-state="2"] .st-found{display:none}
-.stage-ui[data-state="2"] .st-btn.primary{box-shadow:0 0 0 3px var(--accent-soft)} /* taste-skill-ignore: real interface (data-ui) */
-.stage-ui[data-state="1"] .st-actions{opacity:.45}
-/* faq: index + one answer */
-.faq{display:grid;grid-template-columns:5fr 7fr;gap:64px;margin-top:40px}
-.fq h3{margin:0;font-size:inherit}
-.fq-btn{display:flex;gap:14px;align-items:baseline;width:100%;text-align:left;background:none;border:0;border-radius:10px;padding:9px 10px;margin-left:-10px;font-size:18px;font-weight:500;line-height:1.35;color:var(--muted);white-space:normal}
-.fq-btn::before{content:"";flex:none;width:8px;height:8px;border-radius:50%;background:var(--muted);transform:translateY(-2px)}
-.fq-btn:hover{background:var(--surface-2);color:var(--text)}
-.fq-btn:active{transform:none}
-.fq-btn[aria-expanded="true"]{color:var(--text)}
-.fq-btn[aria-expanded="true"]::before{background:var(--accent)}
-.fq-a{display:none}
-.fq-a p{margin:0 0 8px 22px;font-size:17px;color:var(--text);max-width:60ch}
-.faq-pane{position:sticky;top:120px;align-self:start}
-.faq-pane p{margin:0;font-family:var(--display);font-size:clamp(24px,2.4vw,32px);line-height:1.25;letter-spacing:-.01em;max-width:30ch;transition:opacity .15s}
-.faq:not([data-ready]) .fq-a{display:block}
-.faq:not([data-ready]) .faq-pane{display:none}
-/* footer: one quiet line */
-b,strong{font-weight:500}
-.footer{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:baseline;margin-top:30vh;padding-bottom:30px;font-size:15px;color:var(--muted)}
-.footer a{color:var(--text);font-weight:500;text-decoration:none}
-.footer a:hover{color:var(--accent)}
-.f-links{display:flex;gap:24px}
-.f-end{text-align:right}
-/* entrances */
-[data-armed] [data-reveal]{opacity:0;transform:translateY(24px)}
-[data-armed][data-seen] [data-reveal]{opacity:1;transform:none;transition:opacity .6s cubic-bezier(.16,1,.3,1) var(--d,0s),transform .6s cubic-bezier(.16,1,.3,1) var(--d,0s)}
-@media (max-width:860px){
-  .demo-sec{grid-template-columns:1fr;gap:28px}
-  .demo-vid{justify-self:start;max-width:100%}
-  .how-grid{grid-template-columns:1fr;gap:0}
-  .how-stage{order:-1;top:8px;height:auto;padding:16px 0;margin:24px 0 0;z-index:1}
-  .stage-ui{width:calc(100% - 32px)}
-  .st-found{display:none}
-  .how-step{min-height:60svh}
-  .how-step h3{font-size:22px}
-  .faq{grid-template-columns:1fr;gap:0}
-  .faq-pane{display:none}
-  .faq[data-ready] .fq-btn[aria-expanded="true"]{color:var(--text)}
-  .faq[data-ready] .fq[data-open] .fq-a{display:block}
-  .footer{grid-template-columns:1fr;gap:8px;margin-top:20svh;padding-bottom:24px;font-size:14px}
-  .f-end{text-align:left}
-  .name-out{grid-template-columns:1fr;gap:14px}
+.rx-divider {
+  width: 1px;
+  height: 20px;
+  background: var(--rx-line-strong);
 }
-@media (max-width:560px){
-  .cmd-name{font-size:8.5vw}
-  .cmd-tag{display:none}
-  .cmd-btn{padding:10px 12px}
-  .cmd-desc{padding:0 12px 16px;font-size:16px}
-  .name-input{font-size:11vw}
-  .name-ex button{min-height:44px}
+.rx-badge-tool {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rx-accent-ink);
+  background: var(--rx-accent-soft);
+  border: 1px solid rgba(14, 242, 119, 0.25);
+  padding: 0.25rem 0.65rem;
+  border-radius: 999px;
 }
-@media (prefers-reduced-motion:reduce){
-  [data-armed] [data-reveal]{opacity:1;transform:none}
-  .st-drop,.st-row,.st-file,.how-step h3,.faq-pane p{transition:none}
+
+.rx-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
 }
-@media (max-width:560px){
-  .row{grid-template-columns:44px 1fr}
-  .thumb{width:44px;height:44px}
-  .side{grid-column:1 / -1;justify-content:flex-end}
+.rx-nav a {
+  color: var(--rx-fg-muted);
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: color 0.2s;
+}
+.rx-nav a:hover { color: var(--rx-fg); }
+
+.rx-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+.rx-theme-btn {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid var(--rx-line);
+  background: var(--rx-surface);
+  color: var(--rx-fg);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s, background-color 0.2s;
+}
+.rx-theme-btn:hover {
+  border-color: var(--rx-accent);
+  color: var(--rx-accent-ink);
+}
+.rx-theme-btn svg { width: 1.15rem; height: 1.15rem; }
+:root[data-theme="dark"] .rx-icon-moon { display: none; }
+:root[data-theme="dark"] .rx-icon-sun { display: block; }
+:root[data-theme="light"] .rx-icon-sun { display: none; }
+:root[data-theme="light"] .rx-icon-moon { display: block; }
+
+@media (max-width: 900px) {
+  .rx-nav { display: none; }
+}
+
+/* ==========================================================================
+   Hero Section & AEO Definition Snippet
+   ========================================================================== */
+.rx-hero {
+  position: relative;
+  isolation: isolate;
+  padding-block: clamp(3rem, 7vw, 5.5rem);
+  border-bottom: 1px solid var(--rx-line);
+  background: var(--rx-bg);
+}
+.rx-hero-glow-bg {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at 18% 30%, rgba(14, 242, 119, 0.16), transparent 32%),
+              radial-gradient(circle at 82% 20%, rgba(14, 242, 119, 0.08), transparent 38%),
+              radial-gradient(circle at 50% 85%, rgba(14, 242, 119, 0.1), transparent 30%);
+  pointer-events: none;
+}
+.rx-hero-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rx-fg-faint);
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+.rx-hero-meta span { display: inline-flex; align-items: center; gap: 0.4rem; }
+.rx-hero-meta b { color: var(--rx-accent-ink); font-weight: 700; }
+
+.rx-hero-content {
+  display: grid;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+@media (min-width: 1024px) {
+  .rx-hero-content {
+    grid-template-columns: 1.25fr 0.75fr;
+    align-items: end;
+  }
+}
+
+/* AEO Definition Snippet Card */
+.rx-aeo-snippet {
+  margin-top: 2rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 1rem;
+  background: var(--rx-surface);
+  border: 1px solid var(--rx-line);
+  border-left: 4px solid var(--rx-accent);
+}
+.rx-aeo-snippet p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--rx-fg);
+}
+.rx-aeo-snippet b {
+  color: var(--rx-accent-ink);
+}
+
+.rx-trust-badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: var(--good-soft);
+  color: var(--good);
+  border: 1px solid rgba(14, 242, 119, 0.22);
+}
+.pill svg { flex: none; }
+
+.visits {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 999px;
+  background: var(--rx-surface);
+  border: 1px solid var(--rx-line);
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+.visits b { color: var(--text); font-weight: 700; font-variant-numeric: tabular-nums; }
+.vdot { width: 6px; height: 6px; border-radius: 50%; background: var(--good); }
+.visits[hidden] { display: none; }
+
+/* ==========================================================================
+   Interactive Tool Workspace
+   ========================================================================== */
+.wrap {
+  width: 100%;
+  max-width: 1120px;
+  margin-inline: auto;
+  padding: 2.5rem 1.25rem 5rem;
+}
+
+.drop {
+  display: block;
+  position: relative;
+  margin-top: 2rem;
+  border: 2px dashed var(--rx-line);
+  border-radius: var(--radius);
+  background: var(--surface);
+  padding: clamp(2.5rem, 6vw, 4rem) 1.5rem;
+  text-align: center;
+  cursor: pointer;
+  transition: border-color 0.25s, background-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.drop:hover, .drop.over {
+  border-color: var(--rx-accent);
+  background: var(--accent-soft);
+  box-shadow: 0 0 32px var(--rx-accent-glow);
+}
+.drop:focus-within {
+  outline: 2px solid var(--rx-accent);
+  outline-offset: 3px;
+  border-color: var(--rx-accent);
+}
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+  opacity: 0;
+}
+.drop strong {
+  display: block;
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.5rem;
+  color: var(--text);
+}
+.drop span {
+  display: block;
+  color: var(--muted);
+  font-size: 0.92rem;
+  max-width: 52ch;
+  margin-inline: auto;
+}
+.drop .icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 1.25rem;
+  border-radius: 1rem;
+  background: var(--rx-accent-soft);
+  border: 1px solid rgba(14, 242, 119, 0.3);
+  color: var(--rx-accent-ink);
+  display: grid;
+  place-items: center;
+  transition: transform 0.25s;
+}
+.drop:hover .icon { transform: scale(1.08) translateY(-2px); }
+.drop-btn {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  margin-top: 1.5rem;
+  padding: 0 1.5rem;
+  border-radius: 999px;
+  background: #0ef277;
+  color: #04130a;
+  font-style: normal;
+  font-weight: 800;
+  font-size: 0.88rem;
+  transition: background-color 0.2s, transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 4px 16px rgba(14, 242, 119, 0.25);
+}
+.drop:hover .drop-btn {
+  background: #ffffff;
+  color: #04130a;
+  transform: translateY(-1px);
+}
+
+/* Options Bar */
+.options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2rem;
+  align-items: center;
+  margin: 1.5rem 0.25rem 0;
+  font-size: 0.88rem;
+  color: var(--text);
+}
+.options .hint {
+  color: var(--muted);
+  font-size: 0.8rem;
+  margin-left: 0.25rem;
+}
+.options label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-weight: 500;
+}
+select {
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.6rem;
+  padding: 0.45rem 0.8rem;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+select:hover, select:focus {
+  border-color: var(--rx-accent);
+}
+input[type="checkbox"] {
+  accent-color: #0ef277;
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+}
+
+/* Summary Bar */
+.summary {
+  display: none;
+  margin-top: 1.75rem;
+  padding: 1.15rem 1.4rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.summary.show { display: flex; }
+.summary .stats { font-size: 0.92rem; color: var(--text); }
+.summary .stats b { font-weight: 700; color: var(--rx-accent-ink); }
+.btns { display: flex; gap: 0.65rem; }
+
+button, .btn {
+  font: inherit;
+  font-weight: 700;
+  font-size: 0.875rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  border-radius: 999px;
+  padding: 0.55rem 1.15rem;
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color 0.2s, border-color 0.2s, color 0.2s, transform 0.1s;
+}
+button:hover, .btn:hover {
+  background: var(--surface-2);
+  border-color: var(--rx-line-strong);
+}
+button:active, .btn:active { transform: translateY(1px); }
+button.primary {
+  background: #0ef277;
+  border-color: #0ef277;
+  color: #04130a;
+}
+button.primary:hover {
+  background: #ffffff;
+  border-color: #ffffff;
+  color: #04130a;
+}
+button:disabled { opacity: 0.45; cursor: not-allowed; }
+button:disabled:hover { background: var(--surface); transform: none; }
+button.primary:disabled:hover { background: #0ef277; }
+
+/* Image List Rows */
+.list {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+.row {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 0.85rem 1.1rem;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+.row:hover {
+  border-color: var(--rx-line-strong);
+}
+.thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: 0.65rem;
+  object-fit: cover;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+.name {
+  font-weight: 700;
+  font-size: 0.92rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  letter-spacing: -0.01em;
+}
+.sub {
+  font-size: 0.8rem;
+  color: var(--muted);
+  font-family: var(--rx-mono);
+  margin-top: 0.15rem;
+}
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.4rem;
+}
+.tag {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.18rem 0.65rem;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--muted);
+  border: 1px solid var(--border);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+.tag.ai {
+  background: var(--warn-soft);
+  color: var(--warn);
+  border-color: rgba(217, 164, 65, 0.4);
+}
+.tag.ok {
+  background: var(--good-soft);
+  color: var(--good);
+  border-color: rgba(14, 242, 119, 0.35);
+}
+.tag.err {
+  background: var(--bad-soft);
+  color: var(--bad);
+  border-color: rgba(255, 138, 138, 0.4);
+}
+
+.side {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.btn.small {
+  padding: 0.4rem 0.85rem;
+  font-size: 0.82rem;
+}
+.remove {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 0;
+  border-radius: 0.5rem;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background-color 0.2s, color 0.2s;
+}
+.remove:hover {
+  background: var(--bad-soft);
+  color: var(--bad);
+}
+.spin {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--border);
+  border-top-color: var(--rx-accent);
+  border-radius: 50%;
+  animation: s 0.8s linear infinite;
+}
+@keyframes s { to { transform: rotate(360deg); } }
+
+/* Drawer Details */
+.details {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 1.25rem;
+  border-top: 1px solid var(--border);
+  padding-top: 1rem;
+  margin-top: 0.4rem;
+}
+.details h4 {
+  margin: 0 0 0.5rem;
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--muted);
+}
+.details ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.details li { font-size: 0.82rem; }
+.details .lbl { font-weight: 600; }
+.details .sz { color: var(--muted); font-size: 0.75rem; margin-left: 0.25rem; font-family: var(--rx-mono); }
+.details .ev {
+  display: block;
+  margin-top: 0.25rem;
+  font: 0.75rem/1.45 var(--rx-mono);
+  color: var(--muted);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 0.45rem;
+  padding: 0.3rem 0.55rem;
+  word-break: break-all;
+}
+.details .hit .lbl { color: var(--warn); }
+.details .none { color: var(--muted); font-size: 0.82rem; }
+.toggle {
+  background: none;
+  border: 0;
+  color: var(--rx-accent-ink);
+  padding: 0.4rem 0.5rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.toggle:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@media (max-width: 760px) {
+  .details { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   AEO & SEO Content Sections: Matrix, Comparison, Demo, Commands, How, FAQ
+   ========================================================================== */
+.sec {
+  margin-top: clamp(5rem, 9vw, 9rem);
+}
+.sec-lead {
+  margin: 0.85rem 0 0;
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 58ch;
+  line-height: 1.6;
+}
+
+/* Semantic Matrix Table */
+.rx-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  margin-top: 1.75rem;
+}
+.rx-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  font-size: 0.9rem;
+}
+.rx-table th {
+  padding: 1rem 1.25rem;
+  background: var(--surface-2);
+  color: var(--text);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  border-bottom: 1px solid var(--border);
+  white-space: nowrap;
+}
+.rx-table td {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border);
+  color: var(--muted);
+  vertical-align: middle;
+}
+.rx-table tr:last-child td { border-bottom: none; }
+.rx-table tr:hover td { background: rgba(14, 242, 119, 0.02); color: var(--text); }
+.rx-table b { color: var(--text); font-weight: 700; }
+.badge-clean {
+  color: var(--good);
+  background: var(--good-soft);
+  border: 1px solid rgba(14, 242, 119, 0.3);
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+.badge-warn {
+  color: var(--warn);
+  background: var(--warn-soft);
+  border: 1px solid rgba(217, 164, 65, 0.35);
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  white-space: nowrap;
+}
+
+/* Demo Section */
+.demo-sec {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+.demo-vid {
+  display: block;
+  width: 100%;
+  max-width: 460px;
+  height: auto;
+  aspect-ratio: 4/5;
+  justify-self: end;
+  border-radius: 1.15rem;
+  border: 1px solid var(--border);
+  background: #07100b;
+  object-fit: cover;
+  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.5);
+}
+.demo-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--rx-accent-ink);
+  text-decoration: none;
+  transition: color 0.2s, transform 0.2s;
+}
+.demo-link:hover { transform: translateX(3px); }
+
+/* File Name Inspector */
+.name-ui { margin-top: 2rem; }
+.name-input {
+  display: block;
+  width: 100%;
+  font: inherit;
+  font-family: var(--rx-font);
+  font-size: clamp(2rem, 5vw, 4.5rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--text);
+  background: none;
+  border: 0;
+  border-bottom: 2px solid var(--border);
+  padding: 0 0 0.5rem;
+  margin: 0;
+  caret-color: var(--rx-accent);
+  outline: none;
+  text-overflow: ellipsis;
+  transition: border-color 0.2s;
+}
+.name-input:focus { border-color: var(--rx-accent); }
+.name-out {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin: 1.75rem 0 0;
+  padding: 1.25rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+}
+.name-out dt {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: 700;
+  color: var(--muted);
+  margin-bottom: 0.35rem;
+}
+.name-out dd {
+  margin: 0;
+  font-size: 0.95rem;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+.name-out dd.hit { color: var(--warn); }
+.name-out dd.none { color: var(--good); }
+.name-ex {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+.name-ex button {
+  font-size: 0.85rem;
+  font-weight: 600;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.5rem 1rem;
+}
+.name-ex button:hover {
+  background: var(--accent-soft);
+  border-color: var(--rx-accent);
+  color: var(--rx-accent-ink);
+}
+
+/* Command List */
+.cmd-ui { margin-top: 2rem; }
+.cmd-find {
+  display: block;
+  width: 100%;
+  max-width: 720px;
+  font: inherit;
+  font-size: clamp(1rem, 1.8vw, 1.35rem);
+  font-weight: 600;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  padding: 0.8rem 1.25rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.cmd-find:focus {
+  border-color: var(--rx-accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.cmd-find::placeholder { color: var(--muted); }
+.cmd-list {
+  list-style: none;
+  margin: 1.5rem 0 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.cmd {
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  background: var(--surface);
+  transition: background-color 0.2s, border-color 0.2s;
+  overflow: hidden;
+}
+.cmd-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  padding: 1rem 1.25rem;
+  color: inherit;
+  cursor: pointer;
+}
+.cmd-name {
+  margin: 0;
+  font-size: clamp(1.1rem, 2vw, 1.5rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+.cmd-tag {
+  flex: none;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+}
+.cmd-desc {
+  display: none;
+  margin: 0;
+  padding: 0 1.25rem 1.25rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+  max-width: 60ch;
+  line-height: 1.6;
+}
+.cmd[aria-current="true"] {
+  border-color: var(--rx-accent);
+  background: var(--accent-soft);
+}
+.cmd[aria-current="true"] .cmd-name { color: var(--text); }
+.cmd[aria-current="true"] .cmd-tag {
+  background: #0ef277;
+  color: #04130a;
+  border-color: #0ef277;
+}
+.cmd[aria-current="true"] .cmd-desc {
+  display: block;
+  color: var(--text);
+}
+.cmd[hidden] { display: none; }
+.cmd-empty { margin-top: 1rem; color: var(--muted); font-size: 1rem; }
+
+/* How It Works (Pinned Stage) */
+.how-grid {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  margin-top: 1rem;
+}
+.how-step {
+  min-height: 52vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.how-step h3 {
+  font-size: clamp(1.4rem, 2.2vw, 2rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin: 0;
+  color: var(--muted);
+  transition: color 0.25s;
+}
+.how-step p {
+  margin: 0.75rem 0 0;
+  font-size: 1.05rem;
+  color: var(--muted);
+  max-width: 42ch;
+  line-height: 1.6;
+  transition: color 0.25s;
+}
+.how-step[aria-current="true"] h3 { color: var(--text); }
+.how-step[aria-current="true"] p { color: var(--text); }
+
+.how-stage {
+  position: sticky;
+  top: 12vh;
+  align-self: start;
+  min-height: 480px;
+  display: grid;
+  place-items: center;
+  background: var(--rx-surface);
+  border: 1px solid var(--border);
+  border-radius: 1.5rem;
+  margin-top: 4vh;
+  overflow: hidden;
+  box-shadow: 0 20px 50px -20px rgba(0, 0, 0, 0.4);
+}
+.stage-ui {
+  width: min(440px, 88%);
+  display: grid;
+  font-size: 0.88rem;
+}
+.st-drop, .st-row { grid-area: 1/1; align-self: center; }
+.st-drop {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2.25rem 1.5rem;
+  border: 2px dashed rgba(14, 242, 119, 0.45);
+  border-radius: 1rem;
+  background: var(--surface-2);
+  color: var(--rx-accent-ink);
+  font-weight: 700;
+  transition: opacity 0.35s, transform 0.35s;
+}
+.st-drop span { color: var(--text); font-weight: 700; }
+.st-file {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.85rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.65rem;
+  color: var(--text);
+  font-weight: 600;
+  font-size: 0.82rem;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.4s 0.1s, transform 0.4s 0.1s;
+}
+.st-file small { color: var(--muted); font-family: var(--rx-mono); }
+.stage-ui[data-state="0"] .st-file { opacity: 1; transform: none; }
+.st-thumb {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  border-radius: 0.5rem;
+  background: #0ef277;
+}
+.st-file .st-thumb { width: 22px; height: 22px; border-radius: 0.35rem; }
+
+.st-row {
+  padding: 1.25rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 1rem;
+  opacity: 0;
+  transform: translateY(16px);
+  transition: opacity 0.35s, transform 0.35s;
+}
+.stage-ui:not([data-state="0"]) .st-drop { opacity: 0; transform: scale(0.96); }
+.stage-ui:not([data-state="0"]) .st-row { opacity: 1; transform: none; }
+.st-head { display: flex; gap: 0.75rem; align-items: center; }
+.st-head b { display: block; font-size: 0.92rem; font-weight: 700; }
+.st-head small { font-size: 0.78rem; color: var(--muted); font-family: var(--rx-mono); }
+.st-tags { display: flex; flex-wrap: wrap; gap: 0.35rem; margin: 0.85rem 0 0; }
+.t {
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--muted);
+  border: 1px solid var(--border);
+}
+.t.warn { background: var(--warn-soft); color: var(--warn); border-color: rgba(217, 164, 65, 0.4); }
+.t.ok { background: var(--good-soft); color: var(--good); border-color: rgba(14, 242, 119, 0.4); }
+.st-found {
+  list-style: none;
+  margin: 1rem 0 0;
+  padding: 0.85rem 0 0;
+  border-top: 1px solid var(--border);
+  display: grid;
+  gap: 0.5rem;
+}
+.st-found li b { display: block; font-size: 0.82rem; color: var(--warn); font-weight: 700; }
+.st-found code { font: 0.72rem/1.4 var(--rx-mono); color: var(--muted); }
+.st-actions { display: flex; justify-content: flex-end; gap: 0.5rem; margin-top: 1rem; }
+.st-btn {
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+.st-btn.primary {
+  background: #0ef277;
+  border-color: #0ef277;
+  color: #04130a;
+}
+.s2 { display: none; }
+.stage-ui[data-state="2"] .s1, .stage-ui[data-state="2"] .t.warn { display: none; }
+.stage-ui[data-state="2"] .s2 { display: inline-block; }
+.stage-ui[data-state="2"] .st-found { display: none; }
+.stage-ui[data-state="2"] .st-btn.primary { box-shadow: 0 0 0 3px rgba(14, 242, 119, 0.25); }
+.stage-ui[data-state="1"] .st-actions { opacity: 0.5; }
+
+/* FAQ Section */
+.faq {
+  display: grid;
+  grid-template-columns: 5fr 7fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  margin-top: 2rem;
+}
+.faq-list { display: flex; flex-direction: column; gap: 0.5rem; }
+.fq h3 { margin: 0; font-size: inherit; }
+.fq-btn {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: 0;
+  border-radius: 0.65rem;
+  padding: 0.75rem 0.85rem;
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.4;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.2s, background-color 0.2s;
+}
+.fq-btn::before {
+  content: "";
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--muted);
+  transform: translateY(-2px);
+  transition: background-color 0.2s;
+}
+.fq-btn:hover { background: var(--surface-2); color: var(--text); }
+.fq-btn[aria-expanded="true"] { color: var(--text); }
+.fq-btn[aria-expanded="true"]::before { background: var(--rx-accent); }
+.fq-a { display: none; }
+.fq-a p {
+  margin: 0 0 0.85rem 1.85rem;
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.65;
+  max-width: 60ch;
+}
+.faq-pane { position: sticky; top: 120px; align-self: start; }
+.faq-pane p {
+  margin: 0;
+  font-size: clamp(1.2rem, 2vw, 1.8rem);
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  color: var(--text);
+  max-width: 32ch;
+  transition: opacity 0.15s;
+}
+.faq:not([data-ready]) .fq-a { display: block; }
+.faq:not([data-ready]) .faq-pane { display: none; }
+
+/* Responsive Adjustments */
+@media (max-width: 860px) {
+  .demo-sec { grid-template-columns: 1fr; gap: 2rem; }
+  .demo-vid { justify-self: start; max-width: 100%; }
+  .how-grid { grid-template-columns: 1fr; gap: 0; }
+  .how-stage { order: -1; top: 80px; height: auto; min-height: 340px; padding: 1.5rem 0; margin: 1.5rem 0; z-index: 1; }
+  .st-found { display: none; }
+  .how-step { min-height: 48svh; }
+  .faq { grid-template-columns: 1fr; gap: 0; }
+  .faq-pane { display: none; }
+  .faq[data-ready] .fq[data-open] .fq-a { display: block; }
+  .name-out { grid-template-columns: 1fr; gap: 1rem; }
+}
+@media (max-width: 560px) {
+  .row { grid-template-columns: 48px 1fr; }
+  .thumb { width: 48px; height: 48px; }
+  .side { grid-column: 1 / -1; justify-content: flex-end; }
+  .cmd-tag { display: none; }
+}
+
+/* ==========================================================================
+   Reozix Brand Footer
+   ========================================================================== */
+.rx-footer {
+  background: #0ef277;
+  color: #04130a;
+  padding: clamp(3.5rem, 8vw, 6.5rem) 0 2rem;
+  margin-top: clamp(5rem, 10vw, 10rem);
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+.rx-footer a { color: #04130a; text-decoration: none; }
+.rx-footer a:hover { text-decoration: underline; }
+.rx-footer .rx-eyebrow { color: #04130a; opacity: 0.75; }
+.rx-footer .rx-eyebrow::before { background: #04130a; }
+.rx-footer-h2 {
+  font-size: clamp(2.5rem, 8.5vw, 6.8rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  line-height: 0.88;
+  letter-spacing: -0.06em;
+  margin: 0.75rem 0 0;
+}
+.rx-footer-mail {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+  border-bottom: 2px solid #04130a;
+  padding-bottom: 0.35rem;
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  font-weight: 800;
+}
+.rx-footer-grid {
+  display: grid;
+  gap: 3rem;
+  margin-top: 1rem;
+}
+@media (min-width: 1024px) {
+  .rx-footer-grid { grid-template-columns: 1.2fr 1fr; }
+}
+.rx-footer-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 2rem;
+}
+.rx-footer-col-title {
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  opacity: 0.65;
+  margin-bottom: 0.85rem;
+}
+.rx-footer-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+}
+.rx-footer-bottom {
+  margin-top: 3.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(4, 19, 10, 0.15);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  font-size: 0.82rem;
+  font-weight: 600;
+  opacity: 0.85;
+}
+.rx-footer-links { display: flex; gap: 1.5rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  .rx-marquee { animation: none; }
 }
 </style>
 </head>
 <body>
-<div class="wrap">
-  <header id="top">
-    <div class="badges">
-      <div class="pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>100% private: your images never leave your computer</div>
-      <div class="visits" id="visits" hidden><span class="vdot"></span><b id="visitCount"></b> people have visited</div>
+
+<!-- Skip to content -->
+<a href="#main" class="sr-only">Skip to content</a>
+
+<!-- Ambient Glow Effect -->
+<div class="rx-glow" aria-hidden="true"></div>
+
+<!-- ==========================================================================
+     Reozix Global Sticky Header
+     ========================================================================== -->
+<header class="rx-header">
+  <div class="rx-container rx-header-inner">
+    <div class="rx-brand">
+      <a href="https://reozix.com" aria-label="Reozix home" target="_blank" rel="noopener">
+        <img src="reozix-logo-dark.png" alt="Reozix" class="rx-logo-img rx-logo-dark">
+        <img src="reozix-logo-light.png" alt="Reozix" class="rx-logo-img rx-logo-light">
+      </a>
+      <span class="rx-divider" aria-hidden="true"></span>
+      <span class="rx-badge-tool">Lab Tool</span>
     </div>
-    <h1>Free AI Metadata Remover</h1>
-    <p>Remove AI metadata from your images for free, with no sign-up and no limits. Clear the hidden “made with AI” info, prompts and camera details from as many images as you like, in a second.</p>
-  </header>
+
+    <nav class="rx-nav" aria-label="Tool Navigation">
+      <a href="#tool">Dropzone</a>
+      <a href="#matrix">Provenance Matrix</a>
+      <a href="#comparison">Why Reozix</a>
+      <a href="#removes">What We Remove</a>
+      <a href="#how">How It Works</a>
+      <a href="#faq">FAQ</a>
+    </nav>
+
+    <div class="rx-nav-actions">
+      <button type="button" class="rx-theme-btn" id="themeToggle" aria-label="Toggle light/dark theme" title="Toggle theme">
+        <svg class="rx-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"></circle><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"></path>
+        </svg>
+        <svg class="rx-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"></path>
+        </svg>
+      </button>
+
+      <a href="https://reozix.com" target="_blank" rel="noopener" class="rx-btn rx-btn-primary">
+        Reozix.com
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M7 7h10v10"></path><path d="M7 17 17 7"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <!-- ==========================================================================
+       Hero Section & AEO Definition Snippet
+       ========================================================================== -->
+  <section class="rx-hero" data-rx-hero="true">
+    <div class="rx-hero-glow-bg" aria-hidden="true"></div>
+    <div class="rx-container">
+      <div class="rx-hero-meta">
+        <span>Software &amp; Technology Services</span>
+        <span><b>Reozix Labs</b> · 100% Client-Side Privacy</span>
+        <span>Zero Server Uploads</span>
+      </div>
+
+      <div class="rx-hero-content">
+        <div>
+          <span class="rx-h1-sub">Open Source Privacy Tool</span>
+          <h1 class="rx-h1">FREE AI METADATA<br><span class="text-accent">REMOVER</span></h1>
+          <p class="rx-lead" style="margin-top: 1.25rem;">
+            Remove AI metadata, C2PA Content Credentials, Midjourney, ChatGPT, Firefly, EXIF and prompts from images in bulk. 100% private, client-side, zero image uploads.
+          </p>
+
+          <!-- Direct Definition Snippet for AI Engines & Featured Snippets (AEO) -->
+          <div class="rx-aeo-snippet">
+            <p>
+              <strong>Reozix AI Metadata Remover</strong> is a free, 100% private in-browser tool that surgically strips <b>C2PA Content Credentials</b>, <b>IPTC AI provenance tags</b>, <b>Stable Diffusion &amp; ComfyUI prompts</b>, and camera <b>EXIF/GPS coordinates</b> from JPG, PNG, and WebP images losslessly at the binary level, with <b>zero server uploads</b>.
+            </p>
+          </div>
+
+          <div class="rx-trust-badges">
+            <div class="pill">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path>
+              </svg>
+              100% private: images never leave your browser
+            </div>
+            <div class="visits" id="visits" hidden>
+              <span class="vdot"></span><b id="visitCount">1,023</b> community visits
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 1rem; align-items: flex-start;">
+          <p class="rx-body" style="margin: 0; max-width: 44ch;">
+            Engineered by <strong>Reozix</strong> to provide creators, agencies, photographers, and developers with clean, watermark-free images without trusting external cloud servers.
+          </p>
+          <div style="display: flex; gap: 0.75rem; flex-wrap: wrap;">
+            <a href="#tool" class="rx-btn rx-btn-primary">Drop Images Below</a>
+            <a href="https://github.com/Shahriar-008/aimetadataremover" target="_blank" rel="noopener" class="rx-btn rx-btn-ghost">
+              GitHub Repo
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 7h10v10"></path><path d="M7 17 17 7"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Marquee: Supported AI Platforms
+       ========================================================================== -->
+  <div class="rx-marquee-wrap" id="models" aria-label="Supported AI Platforms and Metadata">
+    <div class="rx-marquee">
+      <span>MIDJOURNEY <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <span>CHATGPT &amp; DALL·E <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <span>ADOBE FIREFLY <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <span>GOOGLE GEMINI &amp; IMAGEN <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <span>STABLE DIFFUSION <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <span>COMFYUI WORKFLOWS <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <span>FLUX &amp; LEONARDO <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <span>C2PA CONTENT CREDENTIALS <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <span>EXIF &amp; GPS GEOLOCATION <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <span>PNG tEXt CHUNKS <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <span>IPTC &amp; XMP EDIT HISTORY <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <!-- Repeated for seamless loop -->
+      <span>MIDJOURNEY <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <span>CHATGPT &amp; DALL·E <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <span>ADOBE FIREFLY <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <span>GOOGLE GEMINI &amp; IMAGEN <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <span>STABLE DIFFUSION <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <span>COMFYUI WORKFLOWS <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <span>FLUX &amp; LEONARDO <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <span>C2PA CONTENT CREDENTIALS <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <span>EXIF &amp; GPS GEOLOCATION <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <span>PNG tEXt CHUNKS <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+      <span>IPTC &amp; XMP EDIT HISTORY <i class="rx-marquee-dot" aria-hidden="true"></i></span>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       Interactive Tool Workspace
+       ========================================================================== -->
+  <div class="wrap" id="tool">
+    <header id="top" style="margin-bottom: 1.5rem;">
+      <p class="rx-eyebrow">Interactive Workspace</p>
+      <h2 class="rx-h2" style="margin-top: 0.5rem;">Drop images to remove metadata</h2>
+      <p class="rx-lead" style="margin-top: 0.5rem;">
+        Everything runs locally inside your browser memory. JPG, PNG and WebP files are cleaned losslessly with zero quality reduction.
+      </p>
+    </header>
 
   <label class="drop" id="drop" data-ui>
     <input type="file" id="file" class="sr-only" multiple accept="image/*,.heic,.heif,.avif" aria-label="Choose images to clean">
-    <div class="icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M6 10l6-6 6 6"/><path d="M4 20h16"/></svg></div>
+    <div class="icon">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 16V4M6 10l6-6 6 6"></path>
+        <path d="M4 20h16"></path>
+      </svg>
+    </div>
     <strong>Drag your images here, or click to choose them</strong>
     <span>Works with JPG, PNG, WebP, HEIC and more. Your image quality stays the same.</span>
     <em class="drop-btn">Choose images</em>
@@ -301,17 +1880,194 @@ b,strong{font-weight:500}
 
   <div class="list" id="list" data-ui></div>
 
+  <!-- ==========================================================================
+       AEO Section: Provenance & Supported Platforms Matrix
+       ========================================================================== -->
+  <section class="sec" id="matrix" aria-labelledby="matrix-head">
+    <p class="rx-eyebrow">Comprehensive Coverage</p>
+    <h2 class="rx-h2" id="matrix-head" style="margin-top: 0.5rem;">Supported AI Platforms &amp; Metadata Standards</h2>
+    <p class="sec-lead">
+      Generative AI tools embed hidden manifests, prompt workflows, and provenance tags that trigger automated "Made with AI" labels on social networks. Reozix removes each standard cleanly.
+    </p>
+
+    <div class="rx-table-wrap">
+      <table class="rx-table">
+        <thead>
+          <tr>
+            <th>Platform / Standard</th>
+            <th>Hidden Markers Injected</th>
+            <th>Storage Location in File</th>
+            <th>Removal Method</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>C2PA / Content Credentials</b></td>
+            <td>Cryptographic manifests, signing certificates, tool attribution</td>
+            <td><code>APP11 (JUMBF)</code> in JPEG · <code>caBX</code> in PNG</td>
+            <td>Binary chunk excision</td>
+            <td><span class="badge-clean">✓ 100% Stripped</span></td>
+          </tr>
+          <tr>
+            <td><b>ChatGPT &amp; DALL-E</b></td>
+            <td><code>claim_generator</code>, OpenAI IDs, provenance history</td>
+            <td>EXIF, XMP, IPTC metadata blocks</td>
+            <td>Lossless APP segment removal</td>
+            <td><span class="badge-clean">✓ 100% Stripped</span></td>
+          </tr>
+          <tr>
+            <td><b>Adobe Firefly &amp; Generative Fill</b></td>
+            <td>Content Authenticity tags, Adobe edit history, XMP provenance</td>
+            <td><code>APP1 (XMP)</code>, Photoshop IPTC headers</td>
+            <td>Surgical chunk purge</td>
+            <td><span class="badge-clean">✓ 100% Stripped</span></td>
+          </tr>
+          <tr>
+            <td><b>Midjourney (v5 &amp; v6)</b></td>
+            <td>Job ID, upscale parameters, generation timestamps</td>
+            <td>PNG text chunks, JPEG comments</td>
+            <td>Binary segment drop</td>
+            <td><span class="badge-clean">✓ 100% Stripped</span></td>
+          </tr>
+          <tr>
+            <td><b>Stable Diffusion &amp; WebUI</b></td>
+            <td>Full positive/negative prompt, CFG scale, seed, sampler, model hash</td>
+            <td>PNG <code>tEXt</code>, <code>iTXt</code>, <code>zTXt</code> chunks</td>
+            <td>Lossless text chunk filter</td>
+            <td><span class="badge-clean">✓ 100% Stripped</span></td>
+          </tr>
+          <tr>
+            <td><b>ComfyUI</b></td>
+            <td>Complete workflow JSON graph, custom node parameters</td>
+            <td>PNG <code>prompt</code> &amp; <code>workflow</code> chunks</td>
+            <td>Zero-copy chunk exclusion</td>
+            <td><span class="badge-clean">✓ 100% Stripped</span></td>
+          </tr>
+          <tr>
+            <td><b>Google Gemini &amp; Imagen</b></td>
+            <td>IPTC <code>trainedAlgorithmicMedia</code>, model tags</td>
+            <td>IPTC Core &amp; Extension blocks</td>
+            <td>Binary tag filter</td>
+            <td><span class="badge-clean">✓ 100% Stripped</span></td>
+          </tr>
+          <tr>
+            <td><b>Hardware Cameras &amp; Smartphones</b></td>
+            <td>GPS coordinates, device serial, lens specs, shooting timestamp</td>
+            <td>Standard EXIF <code>0xFFE1</code> blocks</td>
+            <td>Rotation-preserving strip</td>
+            <td><span class="badge-clean">✓ 100% Stripped</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       AEO Section: Why Choose Reozix (Comparative Matrix)
+       ========================================================================== -->
+  <section class="sec" id="comparison" aria-labelledby="comp-head">
+    <p class="rx-eyebrow">Technical Architecture</p>
+    <h2 class="rx-h2" id="comp-head" style="margin-top: 0.5rem;">Why Reozix is the Best Tool to Remove AI Metadata</h2>
+    <p class="sec-lead">
+      Most online converters re-compress your pictures or send your confidential files to remote servers. Reozix operates with client-side engineering principles.
+    </p>
+
+    <div class="rx-table-wrap">
+      <table class="rx-table">
+        <thead>
+          <tr>
+            <th>Feature / Capability</th>
+            <th>Reozix AI Metadata Remover</th>
+            <th>Cloud Upload Sites</th>
+            <th>Manual Screenshotting</th>
+            <th>ExifTool CLI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Privacy Architecture</b></td>
+            <td><span class="badge-clean">100% In-Browser (Zero Upload)</span></td>
+            <td><span class="badge-warn">Uploaded to Cloud Servers</span></td>
+            <td>Local Device</td>
+            <td>Local Device</td>
+          </tr>
+          <tr>
+            <td><b>Image Quality Retention</b></td>
+            <td><span class="badge-clean">100% Lossless (Zero Re-compression)</span></td>
+            <td>Lossy Re-compression (Quality drops)</td>
+            <td>Lossy (Screen resolution cap)</td>
+            <td><span class="badge-clean">Lossless</span></td>
+          </tr>
+          <tr>
+            <td><b>C2PA &amp; JUMBF Removal</b></td>
+            <td><span class="badge-clean">✓ Yes (APP11 &amp; caBX excised)</span></td>
+            <td>Inconsistent / Often Misses C2PA</td>
+            <td>Partial</td>
+            <td>✓ Yes</td>
+          </tr>
+          <tr>
+            <td><b>Prompt &amp; Workflow Scrubbing</b></td>
+            <td><span class="badge-clean">✓ Yes (SD, ComfyUI, Midjourney)</span></td>
+            <td>Partial</td>
+            <td>✓ Yes</td>
+            <td>✓ Yes</td>
+          </tr>
+          <tr>
+            <td><b>Batch ZIP Processing</b></td>
+            <td><span class="badge-clean">✓ Yes (One-click ZIP)</span></td>
+            <td>Paid tier / Rate limited</td>
+            <td>Manual, one-by-one</td>
+            <td>Requires shell scripting</td>
+          </tr>
+          <tr>
+            <td><b>Safe Filename Sanitization</b></td>
+            <td><span class="badge-clean">✓ Yes (Automatic image-001 renaming)</span></td>
+            <td>No</td>
+            <td>Manual</td>
+            <td>Manual</td>
+          </tr>
+          <tr>
+            <td><b>Ease of Use</b></td>
+            <td><span class="badge-clean">Drag &amp; Drop in any browser</span></td>
+            <td>Web interface with ads</td>
+            <td>Tedious &amp; slow</td>
+            <td>Terminal command line only</td>
+          </tr>
+          <tr>
+            <td><b>Cost &amp; Limits</b></td>
+            <td><span class="badge-clean">100% Free · No Limits</span></td>
+            <td>Subscription / Ads / Limits</td>
+            <td>Free</td>
+            <td>Free</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Video Demo Section
+       ========================================================================== -->
   <section class="sec demo-sec" aria-labelledby="demo">
     <div class="demo-copy">
-      <h2 id="demo">Watch it clean an image in 17 seconds.</h2>
-      <p class="sec-lead">Hidden AI info found, removed and checked, all inside your browser. Nothing is uploaded.</p>
-      <a class="demo-link" href="#top">Try it with your own images</a>
+      <p class="rx-eyebrow">Real-time Performance</p>
+      <h2 class="rx-h2" id="demo" style="margin-top: 0.5rem;">Watch it clean an image in 17 seconds.</h2>
+      <p class="sec-lead">Hidden AI info found, removed and checked, all inside your browser. Nothing is uploaded to any server.</p>
+      <a class="demo-link" href="#tool">
+        Try it with your own images
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
     </div>
     <video class="demo-vid" data-loop src="demo-loop.mp4" poster="demo-poster.jpg" width="720" height="900" muted loop playsinline preload="none" aria-label="Short demo: an AI image's hidden info is found and removed"></video>
   </section>
 
+  <!-- ==========================================================================
+       Interactive Filename Inspector
+       ========================================================================== -->
   <section class="sec name-sec" aria-labelledby="names">
-    <h2 id="names">Even the file name can tell on you.</h2>
+    <p class="rx-eyebrow">Prompt &amp; Model Traces</p>
+    <h2 class="rx-h2" id="names" style="margin-top: 0.5rem;">Even the file name can tell on you.</h2>
     <p class="sec-lead">Type a file name to see what the tool notices, and what it saves the file as.</p>
     <div class="name-ui" data-ui>
       <label class="sr-only" for="nameTry">File name to check</label>
@@ -329,11 +2085,15 @@ b,strong{font-weight:500}
     </div>
   </section>
 
-  <section class="sec cmd-sec" aria-labelledby="removes">
-    <h2 id="removes">What this AI metadata remover removes</h2>
+  <!-- ==========================================================================
+       What We Remove (Filterable Command Grid)
+       ========================================================================== -->
+  <section class="sec cmd-sec" id="removes" aria-labelledby="removes-head">
+    <p class="rx-eyebrow">Deep Inspection Engine</p>
+    <h2 class="rx-h2" id="removes-head" style="margin-top: 0.5rem;">What this AI metadata remover removes</h2>
     <div class="cmd-ui" data-ui>
       <label class="sr-only" for="cmdFind">Search what we remove</label>
-      <input id="cmdFind" class="cmd-find" type="search" placeholder="Search what we remove" autocomplete="off">
+      <input id="cmdFind" class="cmd-find" type="search" placeholder="Search what we remove (e.g. GPS, prompt, C2PA)..." autocomplete="off">
       <ul class="cmd-list">
         <li class="cmd" data-cmd="0" data-words="camera &amp; device details exif camera model, software, dates and device info. phones and editing apps add it to almost every picture.">
           <button type="button" class="cmd-btn" aria-expanded="true" aria-controls="cmd-d0"><h3 class="cmd-name">Camera &amp; device details</h3><span class="cmd-tag">EXIF</span></button>
@@ -372,13 +2132,17 @@ b,strong{font-weight:500}
     </div>
   </section>
 
-  <section class="sec how-sec" aria-labelledby="how">
-    <h2 id="how">How to remove AI metadata from an image</h2>
+  <!-- ==========================================================================
+       How It Works: Synchronized Pinned Walkthrough
+       ========================================================================== -->
+  <section class="sec how-sec" id="how" aria-labelledby="how-head">
+    <p class="rx-eyebrow">Local Processing Workflow</p>
+    <h2 class="rx-h2" id="how-head" style="margin-top: 0.5rem;">How to remove AI metadata from an image</h2>
     <div class="how-grid">
       <div class="how-steps">
-      <div class="how-step" data-step="0"><h3>First, drop your images in.</h3><p>Drag them into the box at the top, or click to choose. Add as many as you like.</p></div>
-      <div class="how-step" data-step="1"><h3>Then we find what’s hiding.</h3><p>Every file is read right here in your browser. Open “Show details” to see the exact text we found.</p></div>
-      <div class="how-step" data-step="2"><h3>Last, download them clean.</h3><p>Save images one by one, or get them all at once with “Download all”.</p></div>
+        <div class="how-step" data-step="0"><h3>01 / First, drop your images in.</h3><p>Drag them into the box at the top, or click to choose. Add as many files as you like in a single batch.</p></div>
+        <div class="how-step" data-step="1"><h3>02 / Then we scan and strip hidden markers.</h3><p>Every file is parsed right here in your browser. Open “Show details” to inspect the exact traces detected.</p></div>
+        <div class="how-step" data-step="2"><h3>03 / Last, download them clean.</h3><p>Save images one by one, or download the entire batch instantly packed into a single clean ZIP file.</p></div>
       </div>
       <div class="how-stage" aria-hidden="true">
         <div class="stage-ui" data-ui data-state="0">
@@ -401,29 +2165,95 @@ b,strong{font-weight:500}
     </div>
   </section>
 
-  <section class="sec faq-sec" aria-labelledby="faq">
-    <h2 id="faq">Frequently asked questions</h2>
+  <!-- ==========================================================================
+       Frequently Asked Questions (AEO/GEO Optimized)
+       ========================================================================== -->
+  <section class="sec faq-sec" id="faq" aria-labelledby="faq-head">
+    <p class="rx-eyebrow">Clear Answers</p>
+    <h2 class="rx-h2" id="faq-head" style="margin-top: 0.5rem;">Frequently asked questions</h2>
     <div class="faq">
       <div class="faq-list">
-      <div class="fq" data-q="0"><h3><button type="button" class="fq-btn" aria-expanded="true" aria-controls="fq-a0">What is AI metadata?</button></h3><div class="fq-a" id="fq-a0"><p>AI metadata is hidden info saved inside an image file by AI tools. It can say which tool made the image (like ChatGPT, Midjourney, Gemini or Adobe Firefly), include a “made with AI” label, the prompt you typed, and device or location details. You can’t see it in the picture, but anyone can read it from the file.</p></div></div>
-      <div class="fq" data-q="1"><h3><button type="button" class="fq-btn" aria-expanded="false" aria-controls="fq-a1">Is this AI metadata remover really free?</button></h3><div class="fq-a" id="fq-a1"><p>Yes, it’s 100% free. There’s no sign-up, no daily limit and no watermark. Because everything runs in your own browser, there are no servers to pay for, so we can keep it free.</p></div></div>
-      <div class="fq" data-q="2"><h3><button type="button" class="fq-btn" aria-expanded="false" aria-controls="fq-a2">How do I remove AI metadata from an image?</button></h3><div class="fq-a" id="fq-a2"><p>Drag your images into the box at the top of this page. The tool removes the hidden info right away. Then click “Download” for one image, or “Download all” to get every cleaned image at once.</p></div></div>
-      <div class="fq" data-q="3"><h3><button type="button" class="fq-btn" aria-expanded="false" aria-controls="fq-a3">Are my images uploaded anywhere?</button></h3><div class="fq-a" id="fq-a3"><p>No. Everything happens inside your own browser. Your images never leave your computer, and the tool even works offline.</p></div></div>
-      <div class="fq" data-q="4"><h3><button type="button" class="fq-btn" aria-expanded="false" aria-controls="fq-a4">Does it reduce image quality?</button></h3><div class="fq-a" id="fq-a4"><p>No. For JPG, PNG and WebP files, only the hidden info is removed and the picture itself stays exactly the same. Other formats like HEIC and AVIF are saved as a fresh copy, which drops all hidden info. If you turn on “Make each image unique”, the image is re-saved with tiny changes you can’t see.</p></div></div>
-      <div class="fq" data-q="5"><h3><button type="button" class="fq-btn" aria-expanded="false" aria-controls="fq-a5">Which image formats are supported?</button></h3><div class="fq-a" id="fq-a5"><p>JPG, PNG and WebP are cleaned with zero quality loss. HEIC, AVIF, GIF, BMP and TIFF also work, and are saved as JPG or PNG.</p></div></div>
-      <div class="fq" data-q="6"><h3><button type="button" class="fq-btn" aria-expanded="false" aria-controls="fq-a6">Can it remove invisible AI watermarks like SynthID?</button></h3><div class="fq-a" id="fq-a6"><p>No. Some AI tools, like Google’s, hide an invisible watermark inside the picture itself. That is part of the image, not hidden file info, so no metadata remover can take it out.</p></div></div>
-      <div class="fq" data-q="7"><h3><button type="button" class="fq-btn" aria-expanded="false" aria-controls="fq-a7">What does “Make each image unique” do?</button></h3><div class="fq-a" id="fq-a7"><p>It makes tiny changes to the picture that your eyes can’t see, so the file no longer matches the original exactly. This helps against simple duplicate checks. It does not stop reverse image search (like Google Lens), because those look at what the picture shows.</p></div></div>
+        <div class="fq" data-q="0"><h3><button type="button" class="fq-btn" aria-expanded="true" aria-controls="fq-a0">What is AI metadata and C2PA Content Credentials?</button></h3><div class="fq-a" id="fq-a0"><p>AI metadata is invisible provenance information embedded directly inside an image file by generative AI tools like ChatGPT (DALL-E), Midjourney, Adobe Firefly, and Google Imagen. C2PA (Coalition for Content Provenance and Authenticity) manifests cryptographic tags that prove an image was made with AI, often containing the generator software, creation timestamp, and the exact prompt entered.</p></div></div>
+        <div class="fq" data-q="1"><h3><button type="button" class="fq-btn" aria-expanded="false" aria-controls="fq-a1">How do I remove the 'Made with AI' tag on Instagram, Facebook, and TikTok?</button></h3><div class="fq-a" id="fq-a1"><p>Social media platforms automatically detect AI images by scanning file metadata for C2PA manifests, JUMBF blocks, and IPTC 'trainedAlgorithmicMedia' digital source tags. By running your image through Reozix AI Metadata Remover before uploading, these provenance markers are completely purged, preventing platforms from automatically attaching 'Made with AI' warning badges.</p></div></div>
+        <div class="fq" data-q="2"><h3><button type="button" class="fq-btn" aria-expanded="false" aria-controls="fq-a2">Does stripping metadata reduce image quality?</button></h3><div class="fq-a" id="fq-a2"><p>No. For JPG, PNG, and WebP files, Reozix performs lossless binary segment removal. The pixel data itself is never decompressed or re-compressed, meaning resolution, sharpness, color profiles (ICC), and visual fidelity remain 100% identical to the original.</p></div></div>
+        <div class="fq" data-q="3"><h3><button type="button" class="fq-btn" aria-expanded="false" aria-controls="fq-a3">Are my images uploaded to a remote server?</button></h3><div class="fq-a" id="fq-a3"><p>No. Everything runs 100% locally in your web browser memory using HTML5 ArrayBuffers and Web Workers. Your images never leave your computer, no telemetry or file copies are saved, and the tool functions completely even when your internet connection is turned off.</p></div></div>
+        <div class="fq" data-q="4"><h3><button type="button" class="fq-btn" aria-expanded="false" aria-controls="fq-a4">Can this tool remove Stable Diffusion prompts and ComfyUI workflows?</button></h3><div class="fq-a" id="fq-a4"><p>Yes. Stable Diffusion, Automatic1111, Forge, and ComfyUI store prompts, negative prompts, CFG scales, seed numbers, and complete node graph workflows inside PNG text chunks (tEXt, iTXt, zTXt) and UserComment EXIF tags. Reozix thoroughly wipes these chunks so your creative recipes stay private.</p></div></div>
+        <div class="fq" data-q="5"><h3><button type="button" class="fq-btn" aria-expanded="false" aria-controls="fq-a5">Can any metadata remover delete invisible watermarks like Google SynthID?</button></h3><div class="fq-a" id="fq-a5"><p>No. Tools like Google SynthID inject imperceptible mathematical variations directly into the pixel values rather than storing file metadata. No metadata scrubber can remove pixel-level steganographic watermarks without modifying the visible image itself. However, Reozix removes all file-level markers (C2PA, IPTC, EXIF) that typical scanners inspect.</p></div></div>
+        <div class="fq" data-q="6"><h3><button type="button" class="fq-btn" aria-expanded="false" aria-controls="fq-a6">What does the 'Make each image unique' option do?</button></h3><div class="fq-a" id="fq-a6"><p>The 'Make each image unique' option introduces microscopic, imperceptible pixel adjustments (±1 on random color channels) across visible areas. This modifies the file's cryptographic hash (MD5, SHA-256) so simple automated duplicate checks will view the file as brand new.</p></div></div>
+        <div class="fq" data-q="7"><h3><button type="button" class="fq-btn" aria-expanded="false" aria-controls="fq-a7">Is this AI metadata remover completely free?</button></h3><div class="fq-a" id="fq-a7"><p>Yes, Reozix AI Metadata Remover is 100% free with no sign-up, no daily processing limits, no watermarks, and no paid tiers. Because processing takes place on your own computer rather than costly server infrastructure, Reozix provides this tool freely to the community.</p></div></div>
       </div>
       <div class="faq-pane" aria-hidden="true"><p id="faqPane"></p></div>
     </div>
   </section>
-
-  <footer class="footer">
-    <span>Made with <svg class="heart" width="14" height="14" viewBox="0 0 24 24" aria-label="love" role="img"><path fill="#e5484d" d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.1 0 3.6 1.1 5.2 3 1.6-1.9 3.1-3 5.2-3 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg> from <a href="https://devmonks.co" target="_blank" rel="noopener">Dev Monks</a></span>
-    <span class="f-links"><a href="https://github.com/atiq31416/aimetadataremover" target="_blank" rel="noopener">Open source on GitHub</a><a href="#top">Back to the tool</a></span>
-    <span class="f-end">Free forever · nothing is uploaded</span>
-  </footer>
 </div>
+</main>
+
+<!-- ==========================================================================
+     Reozix Flagship Brand Footer
+     ========================================================================== -->
+<footer class="rx-footer" data-tone="brand">
+  <div class="rx-container">
+    <div class="rx-footer-grid">
+      <div>
+        <p class="rx-eyebrow">Ready when you are</p>
+        <h2 class="rx-footer-h2">Let&#x27;s build.</h2>
+        <a href="mailto:hello@reozix.com" class="rx-footer-mail">
+          hello@reozix.com
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M7 7h10v10"></path><path d="M7 17 17 7"></path>
+          </svg>
+        </a>
+        <p style="margin-top: 1.75rem; font-size: 0.95rem; font-weight: 600; max-width: 44ch; opacity: 0.85;">
+          Reozix is a software development and technology services company. Websites, web &amp; mobile applications, AI integrations, cloud infrastructure and ongoing engineering partnerships.
+        </p>
+      </div>
+
+      <div class="rx-footer-cols">
+        <div class="rx-footer-col">
+          <p class="rx-footer-col-title">Explore</p>
+          <ul>
+            <li><a href="https://reozix.com" target="_blank" rel="noopener">Home</a></li>
+            <li><a href="https://reozix.com/services" target="_blank" rel="noopener">Services</a></li>
+            <li><a href="https://reozix.com/estimate" target="_blank" rel="noopener">MVP Calculator</a></li>
+            <li><a href="https://reozix.com/industries" target="_blank" rel="noopener">Industries</a></li>
+            <li><a href="https://reozix.com/portfolio" target="_blank" rel="noopener">Case Studies</a></li>
+            <li><a href="https://reozix.com/contact" target="_blank" rel="noopener">Contact</a></li>
+          </ul>
+        </div>
+
+        <div class="rx-footer-col">
+          <p class="rx-footer-col-title">Services</p>
+          <ul>
+            <li><a href="https://reozix.com/services#web-software" target="_blank" rel="noopener">Web &amp; SaaS</a></li>
+            <li><a href="https://reozix.com/services#mobile" target="_blank" rel="noopener">Mobile Apps</a></li>
+            <li><a href="https://reozix.com/services#engineering" target="_blank" rel="noopener">API Engineering</a></li>
+            <li><a href="https://reozix.com/services#ai-automation" target="_blank" rel="noopener">AI &amp; Automation</a></li>
+            <li><a href="https://reozix.com/services#cloud-devops" target="_blank" rel="noopener">Cloud &amp; DevOps</a></li>
+          </ul>
+        </div>
+
+        <div class="rx-footer-col">
+          <p class="rx-footer-col-title">Contact</p>
+          <ul>
+            <li><a href="tel:+61449228174"><span style="display:block; font-size:0.75rem; opacity:0.65;">Australia</span>+61 449 228 174</a></li>
+            <li><a href="tel:+12368657409"><span style="display:block; font-size:0.75rem; opacity:0.65;">Canada</span>+1 (236) 865-7409</a></li>
+            <li><a href="tel:+8801521453185"><span style="display:block; font-size:0.75rem; opacity:0.65;">Bangladesh</span>+880 1521-453185</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="rx-footer-bottom">
+      <span>© 2026 Reozix. Software development &amp; technology services.</span>
+      <div class="rx-footer-links">
+        <a href="https://github.com/Shahriar-008/aimetadataremover" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://reozix.com/privacy" target="_blank" rel="noopener">Privacy</a>
+        <a href="https://reozix.com/terms" target="_blank" rel="noopener">Terms</a>
+        <a href="#top">Back to top ↑</a>
+      </div>
+    </div>
+  </div>
+</footer>
 
 <script id="core">
 /* ===== Core cleaning logic (no DOM) ===== */
@@ -453,7 +2283,6 @@ function snippet(s, i, n){
   const post = b < s.length && ok(s.charCodeAt(b)) ? '…' : '';
   return pre + s.slice(a, b).trim() + post;
 }
-// Returns [{ name, evidence: [text found in the file] }]
 function findAI(input){
   const s = typeof input === 'string' ? input : latin1(input);
   const out = [];
@@ -465,7 +2294,7 @@ function findAI(input){
   return out;
 }
 const detectAI = input => findAI(input).map(d => d.name);
-function merge(list){ // [{label, bytes}] → combined by label
+function merge(list){
   const m = new Map();
   for (const r of list) m.set(r.label, (m.get(r.label) || 0) + r.bytes);
   return [...m].map(([label, bytes]) => ({ label, bytes }));
@@ -487,7 +2316,7 @@ function sniff(u8){
 }
 
 /* ---- JPEG ---- */
-function readOrientation(data){ // data starts with "Exif\0\0"
+function readOrientation(data){
   try{
     const t = 6, dv = new DataView(data.buffer, data.byteOffset, data.byteLength);
     const le = ascii(data, t, 2) === 'II';
@@ -500,7 +2329,7 @@ function readOrientation(data){ // data starts with "Exif\0\0"
   }catch(e){}
   return 1;
 }
-function orientationSegment(o){ // minimal EXIF holding only orientation
+function orientationSegment(o){
   return new Uint8Array([0xFF,0xE1,0x00,0x22, 0x45,0x78,0x69,0x66,0x00,0x00, 0x4D,0x4D,0x00,0x2A,0x00,0x00,0x00,0x08,
     0x00,0x01, 0x01,0x12,0x00,0x03,0x00,0x00,0x00,0x01,0x00,o,0x00,0x00, 0x00,0x00,0x00,0x00]);
 }
@@ -626,9 +2455,9 @@ function addNoise(img){
   for (let i = 0, k = 65536; i < d.length; i += 4, k++){
     if (k >= 65536){ crypto.getRandomValues(rnd); k = 0; }
     const r = rnd[k];
-    if ((r & 3) !== 0 || d[i + 3] === 0) continue;        // ~25% of visible pixels
+    if ((r & 3) !== 0 || d[i + 3] === 0) continue;
     const ch = i + ((r >> 2) % 3), v = d[ch] + ((r & 32) ? 1 : -1);
-    d[ch] = v < 0 ? 1 : v > 255 ? 254 : v;               // ±1 on one color channel
+    d[ch] = v < 0 ? 1 : v > 255 ? 254 : v;
   }
 }
 async function makeUnique(u8, mime){
@@ -674,7 +2503,7 @@ async function cleanBytes(u8, file, opts){
   return out;
 }
 
-/* ---- Tiny ZIP writer (store, no compression — images are already compressed) ---- */
+/* ---- Tiny ZIP writer ---- */
 const CRC_TABLE = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++){ let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
 function crc32(u8){ let c = 0xFFFFFFFF; for (let i = 0; i < u8.length; i++) c = CRC_TABLE[(c ^ u8[i]) & 0xFF] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
 function makeZip(files){
@@ -690,7 +2519,7 @@ function makeZip(files){
     lh.setUint32(18, size, true); lh.setUint32(22, size, true); lh.setUint16(26, name.length, true);
     parts.push(new Uint8Array(lh.buffer), name, f.bytes);
     const ch = new DataView(new ArrayBuffer(46));
-    ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true); ch.setUint16(8, 0x0800, true);
+    ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true); ch.setUint8(8, 0x0800, true);
     ch.setUint16(12, time, true); ch.setUint16(14, date, true); ch.setUint32(16, crc, true);
     ch.setUint32(20, size, true); ch.setUint32(24, size, true); ch.setUint16(28, name.length, true); ch.setUint32(42, offset, true);
     central.push(new Uint8Array(ch.buffer), name);
@@ -705,7 +2534,7 @@ function makeZip(files){
 </script>
 
 <script>
-/* ===== UI ===== */
+/* ===== UI and Event Listeners ===== */
 const $ = s => document.querySelector(s);
 const items = []; let busy = false, nextId = 1;
 const fmt = b => b < 1024 ? b + ' B' : b < 1048576 ? (b / 1024).toFixed(0) + ' KB' : (b / 1048576).toFixed(2) + ' MB';
@@ -783,6 +2612,7 @@ function rowHTML(it){
     <div class="side">${side}<button class="remove" data-remove="${it.id}" title="Remove from list" aria-label="Remove ${esc(it.file.name)} from list">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>${details}`;
 }
+
 function detailsHTML(it){
   const detected = it.ai.map(d => `<li class="hit"><span class="lbl">${esc(d.name)}</span>
     ${d.evidence.map(e => `<span class="ev">${esc(e)}</span>`).join('')}</li>`);
@@ -799,18 +2629,20 @@ function detailsHTML(it){
     <div><h4>What we kept</h4><ul>${kept.join('')}</ul></div>
   </div>`;
 }
+
 $('#list').addEventListener('click', ev => {
   const rm = ev.target.closest('[data-remove]');
   if (rm){
     const i = items.findIndex(x => x.id === +rm.dataset.remove); if (i < 0) return;
     const [it] = items.splice(i, 1);
     if (it.url) URL.revokeObjectURL(it.url);
-    renderAll();   // refresh names (image-001…) and the summary
+    renderAll();
     return;
   }
   const b = ev.target.closest('[data-toggle]'); if (!b) return;
   const it = items.find(x => x.id === +b.dataset.toggle); it.open = !it.open; renderRow(it);
 });
+
 function renderRow(it){
   let el = document.querySelector(`[data-id="${it.id}"]`);
   if (!el){ el = document.createElement('div'); el.className = 'row'; el.dataset.id = it.id; $('#list').appendChild(el); }
@@ -832,10 +2664,22 @@ function updateSummary(){
 </script>
 
 <script>
-/* ===== Sections: live fragments ===== */
+/* ===== Sections: Live Components & Theme Switcher ===== */
 (() => {
   const byId = id => document.getElementById(id);
-  // 1. File name checker (uses the tool's own detector)
+
+  // Theme Toggle (Dark / Light)
+  const themeBtn = byId('themeToggle');
+  if (themeBtn){
+    themeBtn.addEventListener('click', () => {
+      const cur = document.documentElement.dataset.theme;
+      const next = cur === 'light' ? 'dark' : 'light';
+      document.documentElement.dataset.theme = next;
+      try { localStorage.setItem('rx-theme', next); } catch(e){}
+    });
+  }
+
+  // 1. File name checker
   const nameIn = byId('nameTry');
   if (nameIn){
     const hit = byId('nameHit'), keep = byId('nameKeep'), ren = byId('nameRen');
@@ -851,6 +2695,7 @@ function updateSummary(){
     document.querySelectorAll('[data-name]').forEach(b => b.addEventListener('click', () => { nameIn.value = b.dataset.name; update(); nameIn.focus(); }));
     update();
   }
+
   // 2. Command list: filter, hover, arrows, click
   const find = byId('cmdFind');
   if (find){
@@ -877,6 +2722,7 @@ function updateSummary(){
     });
     ui.setAttribute('data-ready', ''); select(0);
   }
+
   // 3. Pinned fragment follows the step in view
   const steps = [...document.querySelectorAll('[data-step]')], stage = document.querySelector('[data-state]');
   if (steps.length && stage && 'IntersectionObserver' in window){
@@ -884,6 +2730,7 @@ function updateSummary(){
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) set(+e.target.dataset.step); }), { rootMargin: '-45% 0px -45% 0px' });
     steps.forEach(s => io.observe(s)); set(0);
   }
+
   // 4. FAQ: question index, one answer
   const pane = byId('faqPane');
   if (pane){
@@ -903,30 +2750,22 @@ function updateSummary(){
     });
     box.setAttribute('data-ready', ''); pick(0);
   }
-  // Demo loop: play only while visible, never for reduced motion
+
+  // Demo loop
   const vid = document.querySelector('video[data-loop]');
   if (vid){
     if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) vid.controls = true;
     else new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ vid.preload = 'auto'; vid.play().catch(() => { vid.controls = true; }); } else vid.pause(); }), { threshold: .35 }).observe(vid);
   }
-  // 5. Entrances: heading, then text, then fragment
-  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
-    const secs = [...document.querySelectorAll('section[aria-labelledby]')];
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.setAttribute('data-seen', ''); io.unobserve(e.target); } }), { rootMargin: '0px 0px -12% 0px' });
-    secs.forEach(sec => {
-      if (sec.getBoundingClientRect().top < innerHeight) return;
-      [...sec.children].forEach((c, k) => { c.setAttribute('data-reveal', ''); c.style.setProperty('--d', (k * 0.08) + 's'); });
-      sec.setAttribute('data-armed', ''); io.observe(sec);
-    });
-  }
 })();
 </script>
+
 <script>
-/* Visitor counter: counts each browser once (no images or personal data are sent) */
+/* Visitor counter */
 (async () => {
   if (!/^https?:$/.test(location.protocol) || /^(localhost|127\.)/.test(location.hostname)) return;
-  const API = 'https://abacus.jasoncameron.dev', NS = 'aimetadataremover-devmonks', KEY = 'visitors';
-  const START = 1023;   // visits before the counter went live
+  const API = 'https://abacus.jasoncameron.dev', NS = 'aimetadataremover-reozix', KEY = 'visitors';
+  const START = 1023;
   let seen = false;
   try { seen = localStorage.getItem('amr-visited') === '1'; } catch (e) {}
   try {
@@ -937,7 +2776,7 @@ function updateSummary(){
     if (!seen) try { localStorage.setItem('amr-visited', '1'); } catch (e) {}
     document.getElementById('visitCount').textContent = (START + value).toLocaleString('en-US');
     document.getElementById('visits').hidden = false;
-  } catch (e) { /* counter is optional; stay hidden if it fails */ }
+  } catch (e) {}
 })();
 </script>
 </body>

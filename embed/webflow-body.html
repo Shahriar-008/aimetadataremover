@@ -1,28 +1,204 @@
-<link rel="stylesheet" href="https://atiq31416.github.io/aimetadataremover/embed/amr.css?v=1">
+<link rel="stylesheet" href="https://atiq31416.github.io/aimetadataremover/embed/amr.css?v=2">
 <div id="amr-app"><div class="amr-wrap">
 
-  <header id="amr-top">
-    <div class="amr-badges">
-      <div class="amr-pill"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>100% private: your images never leave your computer</div>
-      <div class="amr-visits" id="amr-visits" hidden><span class="amr-vdot"></span><b id="amr-visitCount"></b> people have visited</div>
-    </div>
-    <h1>Free AI Metadata Remover</h1>
-    <p>Remove AI metadata from your images for free, with no sign-up and no limits. Clear the hidden “made with AI” info, prompts and camera details from as many images as you like, in a second.</p>
-  </header>
+    <header id="amr-top" style="margin-bottom: 1.5rem;">
+      <p class="amr-rx-eyebrow">Interactive Workspace</p>
+      <h2 class="amr-rx-h2" style="margin-top: 0.5rem;">Drop images to remove metadata</h2>
+      <p class="amr-rx-lead" style="margin-top: 0.5rem;">
+        Everything runs locally inside your browser memory. JPG, PNG and WebP files are cleaned losslessly with zero quality reduction.
+      </p>
+    </header>
   <div id="amr-tool"><noscript><p>Please turn on JavaScript to use the AI Metadata Remover.</p></noscript></div>
 
 
+  <!-- ==========================================================================
+       AEO Section: Provenance & Supported Platforms Matrix
+       ========================================================================== -->
+  <section class="amr-sec" id="amr-matrix" aria-labelledby="amr-matrix-head">
+    <p class="amr-rx-eyebrow">Comprehensive Coverage</p>
+    <h2 class="amr-rx-h2" id="amr-matrix-head" style="margin-top: 0.5rem;">Supported AI Platforms &amp; Metadata Standards</h2>
+    <p class="amr-sec-lead">
+      Generative AI tools embed hidden manifests, prompt workflows, and provenance tags that trigger automated "Made with AI" labels on social networks. Reozix removes each standard cleanly.
+    </p>
+
+    <div class="amr-rx-table-wrap">
+      <table class="amr-rx-table">
+        <thead>
+          <tr>
+            <th>Platform / Standard</th>
+            <th>Hidden Markers Injected</th>
+            <th>Storage Location in File</th>
+            <th>Removal Method</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>C2PA / Content Credentials</b></td>
+            <td>Cryptographic manifests, signing certificates, tool attribution</td>
+            <td><code>APP11 (JUMBF)</code> in JPEG · <code>caBX</code> in PNG</td>
+            <td>Binary chunk excision</td>
+            <td><span class="amr-badge-clean">✓ 100% Stripped</span></td>
+          </tr>
+          <tr>
+            <td><b>ChatGPT &amp; DALL-E</b></td>
+            <td><code>claim_generator</code>, OpenAI IDs, provenance history</td>
+            <td>EXIF, XMP, IPTC metadata blocks</td>
+            <td>Lossless APP segment removal</td>
+            <td><span class="amr-badge-clean">✓ 100% Stripped</span></td>
+          </tr>
+          <tr>
+            <td><b>Adobe Firefly &amp; Generative Fill</b></td>
+            <td>Content Authenticity tags, Adobe edit history, XMP provenance</td>
+            <td><code>APP1 (XMP)</code>, Photoshop IPTC headers</td>
+            <td>Surgical chunk purge</td>
+            <td><span class="amr-badge-clean">✓ 100% Stripped</span></td>
+          </tr>
+          <tr>
+            <td><b>Midjourney (v5 &amp; v6)</b></td>
+            <td>Job ID, upscale parameters, generation timestamps</td>
+            <td>PNG text chunks, JPEG comments</td>
+            <td>Binary segment drop</td>
+            <td><span class="amr-badge-clean">✓ 100% Stripped</span></td>
+          </tr>
+          <tr>
+            <td><b>Stable Diffusion &amp; WebUI</b></td>
+            <td>Full positive/negative prompt, CFG scale, seed, sampler, model hash</td>
+            <td>PNG <code>tEXt</code>, <code>iTXt</code>, <code>zTXt</code> chunks</td>
+            <td>Lossless text chunk filter</td>
+            <td><span class="amr-badge-clean">✓ 100% Stripped</span></td>
+          </tr>
+          <tr>
+            <td><b>ComfyUI</b></td>
+            <td>Complete workflow JSON graph, custom node parameters</td>
+            <td>PNG <code>prompt</code> &amp; <code>workflow</code> chunks</td>
+            <td>Zero-copy chunk exclusion</td>
+            <td><span class="amr-badge-clean">✓ 100% Stripped</span></td>
+          </tr>
+          <tr>
+            <td><b>Google Gemini &amp; Imagen</b></td>
+            <td>IPTC <code>trainedAlgorithmicMedia</code>, model tags</td>
+            <td>IPTC Core &amp; Extension blocks</td>
+            <td>Binary tag filter</td>
+            <td><span class="amr-badge-clean">✓ 100% Stripped</span></td>
+          </tr>
+          <tr>
+            <td><b>Hardware Cameras &amp; Smartphones</b></td>
+            <td>GPS coordinates, device serial, lens specs, shooting timestamp</td>
+            <td>Standard EXIF <code>0xFFE1</code> blocks</td>
+            <td>Rotation-preserving strip</td>
+            <td><span class="amr-badge-clean">✓ 100% Stripped</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       AEO Section: Why Choose Reozix (Comparative Matrix)
+       ========================================================================== -->
+  <section class="amr-sec" id="amr-comparison" aria-labelledby="amr-comp-head">
+    <p class="amr-rx-eyebrow">Technical Architecture</p>
+    <h2 class="amr-rx-h2" id="amr-comp-head" style="margin-top: 0.5rem;">Why Reozix is the Best Tool to Remove AI Metadata</h2>
+    <p class="amr-sec-lead">
+      Most online converters re-compress your pictures or send your confidential files to remote servers. Reozix operates with client-side engineering principles.
+    </p>
+
+    <div class="amr-rx-table-wrap">
+      <table class="amr-rx-table">
+        <thead>
+          <tr>
+            <th>Feature / Capability</th>
+            <th>Reozix AI Metadata Remover</th>
+            <th>Cloud Upload Sites</th>
+            <th>Manual Screenshotting</th>
+            <th>ExifTool CLI</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><b>Privacy Architecture</b></td>
+            <td><span class="amr-badge-clean">100% In-Browser (Zero Upload)</span></td>
+            <td><span class="amr-badge-warn">Uploaded to Cloud Servers</span></td>
+            <td>Local Device</td>
+            <td>Local Device</td>
+          </tr>
+          <tr>
+            <td><b>Image Quality Retention</b></td>
+            <td><span class="amr-badge-clean">100% Lossless (Zero Re-compression)</span></td>
+            <td>Lossy Re-compression (Quality drops)</td>
+            <td>Lossy (Screen resolution cap)</td>
+            <td><span class="amr-badge-clean">Lossless</span></td>
+          </tr>
+          <tr>
+            <td><b>C2PA &amp; JUMBF Removal</b></td>
+            <td><span class="amr-badge-clean">✓ Yes (APP11 &amp; caBX excised)</span></td>
+            <td>Inconsistent / Often Misses C2PA</td>
+            <td>Partial</td>
+            <td>✓ Yes</td>
+          </tr>
+          <tr>
+            <td><b>Prompt &amp; Workflow Scrubbing</b></td>
+            <td><span class="amr-badge-clean">✓ Yes (SD, ComfyUI, Midjourney)</span></td>
+            <td>Partial</td>
+            <td>✓ Yes</td>
+            <td>✓ Yes</td>
+          </tr>
+          <tr>
+            <td><b>Batch ZIP Processing</b></td>
+            <td><span class="amr-badge-clean">✓ Yes (One-click ZIP)</span></td>
+            <td>Paid tier / Rate limited</td>
+            <td>Manual, one-by-one</td>
+            <td>Requires shell scripting</td>
+          </tr>
+          <tr>
+            <td><b>Safe Filename Sanitization</b></td>
+            <td><span class="amr-badge-clean">✓ Yes (Automatic image-001 renaming)</span></td>
+            <td>No</td>
+            <td>Manual</td>
+            <td>Manual</td>
+          </tr>
+          <tr>
+            <td><b>Ease of Use</b></td>
+            <td><span class="amr-badge-clean">Drag &amp; Drop in any browser</span></td>
+            <td>Web interface with ads</td>
+            <td>Tedious &amp; slow</td>
+            <td>Terminal command line only</td>
+          </tr>
+          <tr>
+            <td><b>Cost &amp; Limits</b></td>
+            <td><span class="amr-badge-clean">100% Free · No Limits</span></td>
+            <td>Subscription / Ads / Limits</td>
+            <td>Free</td>
+            <td>Free</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       Video Demo Section
+       ========================================================================== -->
   <section class="amr-sec amr-demo-sec" aria-labelledby="amr-demo">
     <div class="amr-demo-copy">
-      <h2 id="amr-demo">Watch it clean an image in 17 seconds.</h2>
-      <p class="amr-sec-lead">Hidden AI info found, removed and checked, all inside your browser. Nothing is uploaded.</p>
-      <a class="amr-demo-link" href="#top">Try it with your own images</a>
+      <p class="amr-rx-eyebrow">Real-time Performance</p>
+      <h2 class="amr-rx-h2" id="amr-demo" style="margin-top: 0.5rem;">Watch it clean an image in 17 seconds.</h2>
+      <p class="amr-sec-lead">Hidden AI info found, removed and checked, all inside your browser. Nothing is uploaded to any server.</p>
+      <a class="amr-demo-link" href="#tool">
+        Try it with your own images
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
     </div>
     <video class="amr-demo-vid" data-loop src="https://atiq31416.github.io/aimetadataremover/demo-loop.mp4" poster="https://atiq31416.github.io/aimetadataremover/demo-poster.jpg" width="720" height="900" muted loop playsinline preload="none" aria-label="Short demo: an AI image's hidden info is found and removed"></video>
   </section>
 
+  <!-- ==========================================================================
+       Interactive Filename Inspector
+       ========================================================================== -->
   <section class="amr-sec amr-name-sec" aria-labelledby="amr-names">
-    <h2 id="amr-names">Even the file name can tell on you.</h2>
+    <p class="amr-rx-eyebrow">Prompt &amp; Model Traces</p>
+    <h2 class="amr-rx-h2" id="amr-names" style="margin-top: 0.5rem;">Even the file name can tell on you.</h2>
     <p class="amr-sec-lead">Type a file name to see what the tool notices, and what it saves the file as.</p>
     <div class="amr-name-ui" data-ui>
       <label class="amr-sr-only" for="nameTry">File name to check</label>
@@ -40,11 +216,15 @@
     </div>
   </section>
 
-  <section class="amr-sec amr-cmd-sec" aria-labelledby="amr-removes">
-    <h2 id="amr-removes">What this AI metadata remover removes</h2>
+  <!-- ==========================================================================
+       What We Remove (Filterable Command Grid)
+       ========================================================================== -->
+  <section class="amr-sec amr-cmd-sec" id="amr-removes" aria-labelledby="amr-removes-head">
+    <p class="amr-rx-eyebrow">Deep Inspection Engine</p>
+    <h2 class="amr-rx-h2" id="amr-removes-head" style="margin-top: 0.5rem;">What this AI metadata remover removes</h2>
     <div class="amr-cmd-ui" data-ui>
       <label class="amr-sr-only" for="cmdFind">Search what we remove</label>
-      <input id="amr-cmdFind" class="amr-cmd-find" type="search" placeholder="Search what we remove" autocomplete="off">
+      <input id="amr-cmdFind" class="amr-cmd-find" type="search" placeholder="Search what we remove (e.g. GPS, prompt, C2PA)..." autocomplete="off">
       <ul class="amr-cmd-list">
         <li class="amr-cmd" data-cmd="0" data-words="camera &amp; device details exif camera model, software, dates and device info. phones and editing apps add it to almost every picture.">
           <button type="button" class="amr-cmd-btn" aria-expanded="true" aria-controls="cmd-d0"><h3 class="amr-cmd-name">Camera &amp; device details</h3><span class="amr-cmd-tag">EXIF</span></button>
@@ -83,13 +263,17 @@
     </div>
   </section>
 
-  <section class="amr-sec amr-how-sec" aria-labelledby="amr-how">
-    <h2 id="amr-how">How to remove AI metadata from an image</h2>
+  <!-- ==========================================================================
+       How It Works: Synchronized Pinned Walkthrough
+       ========================================================================== -->
+  <section class="amr-sec amr-how-sec" id="amr-how" aria-labelledby="amr-how-head">
+    <p class="amr-rx-eyebrow">Local Processing Workflow</p>
+    <h2 class="amr-rx-h2" id="amr-how-head" style="margin-top: 0.5rem;">How to remove AI metadata from an image</h2>
     <div class="amr-how-grid">
       <div class="amr-how-steps">
-      <div class="amr-how-step" data-step="0"><h3>First, drop your images in.</h3><p>Drag them into the box at the top, or click to choose. Add as many as you like.</p></div>
-      <div class="amr-how-step" data-step="1"><h3>Then we find what’s hiding.</h3><p>Every file is read right here in your browser. Open “Show details” to see the exact text we found.</p></div>
-      <div class="amr-how-step" data-step="2"><h3>Last, download them clean.</h3><p>Save images one by one, or get them all at once with “Download all”.</p></div>
+        <div class="amr-how-step" data-step="0"><h3>01 / First, drop your images in.</h3><p>Drag them into the box at the top, or click to choose. Add as many files as you like in a single batch.</p></div>
+        <div class="amr-how-step" data-step="1"><h3>02 / Then we scan and strip hidden markers.</h3><p>Every file is parsed right here in your browser. Open “Show details” to inspect the exact traces detected.</p></div>
+        <div class="amr-how-step" data-step="2"><h3>03 / Last, download them clean.</h3><p>Save images one by one, or download the entire batch instantly packed into a single clean ZIP file.</p></div>
       </div>
       <div class="amr-how-stage" aria-hidden="true">
         <div class="amr-stage-ui" data-ui data-state="0">
@@ -112,27 +296,25 @@
     </div>
   </section>
 
-  <section class="amr-sec amr-faq-sec" aria-labelledby="amr-faq">
-    <h2 id="amr-faq">Frequently asked questions</h2>
+  <!-- ==========================================================================
+       Frequently Asked Questions (AEO/GEO Optimized)
+       ========================================================================== -->
+  <section class="amr-sec amr-faq-sec" id="amr-faq" aria-labelledby="amr-faq-head">
+    <p class="amr-rx-eyebrow">Clear Answers</p>
+    <h2 class="amr-rx-h2" id="amr-faq-head" style="margin-top: 0.5rem;">Frequently asked questions</h2>
     <div class="amr-faq">
       <div class="amr-faq-list">
-      <div class="amr-fq" data-q="0"><h3><button type="button" class="amr-fq-btn" aria-expanded="true" aria-controls="fq-a0">What is AI metadata?</button></h3><div class="amr-fq-a" id="amr-fq-a0"><p>AI metadata is hidden info saved inside an image file by AI tools. It can say which tool made the image (like ChatGPT, Midjourney, Gemini or Adobe Firefly), include a “made with AI” label, the prompt you typed, and device or location details. You can’t see it in the picture, but anyone can read it from the file.</p></div></div>
-      <div class="amr-fq" data-q="1"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a1">Is this AI metadata remover really free?</button></h3><div class="amr-fq-a" id="amr-fq-a1"><p>Yes, it’s 100% free. There’s no sign-up, no daily limit and no watermark. Because everything runs in your own browser, there are no servers to pay for, so we can keep it free.</p></div></div>
-      <div class="amr-fq" data-q="2"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a2">How do I remove AI metadata from an image?</button></h3><div class="amr-fq-a" id="amr-fq-a2"><p>Drag your images into the box at the top of this page. The tool removes the hidden info right away. Then click “Download” for one image, or “Download all” to get every cleaned image at once.</p></div></div>
-      <div class="amr-fq" data-q="3"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a3">Are my images uploaded anywhere?</button></h3><div class="amr-fq-a" id="amr-fq-a3"><p>No. Everything happens inside your own browser. Your images never leave your computer, and the tool even works offline.</p></div></div>
-      <div class="amr-fq" data-q="4"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a4">Does it reduce image quality?</button></h3><div class="amr-fq-a" id="amr-fq-a4"><p>No. For JPG, PNG and WebP files, only the hidden info is removed and the picture itself stays exactly the same. Other formats like HEIC and AVIF are saved as a fresh copy, which drops all hidden info. If you turn on “Make each image unique”, the image is re-saved with tiny changes you can’t see.</p></div></div>
-      <div class="amr-fq" data-q="5"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a5">Which image formats are supported?</button></h3><div class="amr-fq-a" id="amr-fq-a5"><p>JPG, PNG and WebP are cleaned with zero quality loss. HEIC, AVIF, GIF, BMP and TIFF also work, and are saved as JPG or PNG.</p></div></div>
-      <div class="amr-fq" data-q="6"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a6">Can it remove invisible AI watermarks like SynthID?</button></h3><div class="amr-fq-a" id="amr-fq-a6"><p>No. Some AI tools, like Google’s, hide an invisible watermark inside the picture itself. That is part of the image, not hidden file info, so no metadata remover can take it out.</p></div></div>
-      <div class="amr-fq" data-q="7"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a7">What does “Make each image unique” do?</button></h3><div class="amr-fq-a" id="amr-fq-a7"><p>It makes tiny changes to the picture that your eyes can’t see, so the file no longer matches the original exactly. This helps against simple duplicate checks. It does not stop reverse image search (like Google Lens), because those look at what the picture shows.</p></div></div>
+        <div class="amr-fq" data-q="0"><h3><button type="button" class="amr-fq-btn" aria-expanded="true" aria-controls="fq-a0">What is AI metadata and C2PA Content Credentials?</button></h3><div class="amr-fq-a" id="amr-fq-a0"><p>AI metadata is invisible provenance information embedded directly inside an image file by generative AI tools like ChatGPT (DALL-E), Midjourney, Adobe Firefly, and Google Imagen. C2PA (Coalition for Content Provenance and Authenticity) manifests cryptographic tags that prove an image was made with AI, often containing the generator software, creation timestamp, and the exact prompt entered.</p></div></div>
+        <div class="amr-fq" data-q="1"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a1">How do I remove the 'Made with AI' tag on Instagram, Facebook, and TikTok?</button></h3><div class="amr-fq-a" id="amr-fq-a1"><p>Social media platforms automatically detect AI images by scanning file metadata for C2PA manifests, JUMBF blocks, and IPTC 'trainedAlgorithmicMedia' digital source tags. By running your image through Reozix AI Metadata Remover before uploading, these provenance markers are completely purged, preventing platforms from automatically attaching 'Made with AI' warning badges.</p></div></div>
+        <div class="amr-fq" data-q="2"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a2">Does stripping metadata reduce image quality?</button></h3><div class="amr-fq-a" id="amr-fq-a2"><p>No. For JPG, PNG, and WebP files, Reozix performs lossless binary segment removal. The pixel data itself is never decompressed or re-compressed, meaning resolution, sharpness, color profiles (ICC), and visual fidelity remain 100% identical to the original.</p></div></div>
+        <div class="amr-fq" data-q="3"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a3">Are my images uploaded to a remote server?</button></h3><div class="amr-fq-a" id="amr-fq-a3"><p>No. Everything runs 100% locally in your web browser memory using HTML5 ArrayBuffers and Web Workers. Your images never leave your computer, no telemetry or file copies are saved, and the tool functions completely even when your internet connection is turned off.</p></div></div>
+        <div class="amr-fq" data-q="4"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a4">Can this tool remove Stable Diffusion prompts and ComfyUI workflows?</button></h3><div class="amr-fq-a" id="amr-fq-a4"><p>Yes. Stable Diffusion, Automatic1111, Forge, and ComfyUI store prompts, negative prompts, CFG scales, seed numbers, and complete node graph workflows inside PNG text chunks (tEXt, iTXt, zTXt) and UserComment EXIF tags. Reozix thoroughly wipes these chunks so your creative recipes stay private.</p></div></div>
+        <div class="amr-fq" data-q="5"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a5">Can any metadata remover delete invisible watermarks like Google SynthID?</button></h3><div class="amr-fq-a" id="amr-fq-a5"><p>No. Tools like Google SynthID inject imperceptible mathematical variations directly into the pixel values rather than storing file metadata. No metadata scrubber can remove pixel-level steganographic watermarks without modifying the visible image itself. However, Reozix removes all file-level markers (C2PA, IPTC, EXIF) that typical scanners inspect.</p></div></div>
+        <div class="amr-fq" data-q="6"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a6">What does the 'Make each image unique' option do?</button></h3><div class="amr-fq-a" id="amr-fq-a6"><p>The 'Make each image unique' option introduces microscopic, imperceptible pixel adjustments (±1 on random color channels) across visible areas. This modifies the file's cryptographic hash (MD5, SHA-256) so simple automated duplicate checks will view the file as brand new.</p></div></div>
+        <div class="amr-fq" data-q="7"><h3><button type="button" class="amr-fq-btn" aria-expanded="false" aria-controls="fq-a7">Is this AI metadata remover completely free?</button></h3><div class="amr-fq-a" id="amr-fq-a7"><p>Yes, Reozix AI Metadata Remover is 100% free with no sign-up, no daily processing limits, no watermarks, and no paid tiers. Because processing takes place on your own computer rather than costly server infrastructure, Reozix provides this tool freely to the community.</p></div></div>
       </div>
       <div class="amr-faq-pane" aria-hidden="true"><p id="amr-faqPane"></p></div>
     </div>
   </section>
-
-  <footer class="amr-footer">
-    <span>Made with <svg class="amr-heart" width="14" height="14" viewBox="0 0 24 24" aria-label="love" role="img"><path fill="#e5484d" d="M12 21s-7.5-4.6-9.6-9.2C.9 8.4 3 4.5 6.8 4.5c2.1 0 3.6 1.1 5.2 3 1.6-1.9 3.1-3 5.2-3 3.8 0 5.9 3.9 4.4 7.3C19.5 16.4 12 21 12 21z"/></svg> from <a href="https://devmonks.co" target="_blank" rel="noopener">Dev Monks</a></span>
-    <span class="amr-f-links"><a href="https://github.com/atiq31416/aimetadataremover" target="_blank" rel="noopener">Open source on GitHub</a><a href="#top">Back to the tool</a></span>
-    <span class="amr-f-end">Free forever · nothing is uploaded</span>
-  </footer>
 </div></div>
-<script src="https://atiq31416.github.io/aimetadataremover/embed/amr.js?v=1" defer></script>
+<script src="https://atiq31416.github.io/aimetadataremover/embed/amr.js?v=2" defer></script>

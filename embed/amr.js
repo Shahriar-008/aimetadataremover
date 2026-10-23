@@ -3,7 +3,14 @@
 "use strict";
 var mount = document.getElementById("amr-tool");
 if (!mount) return;
-mount.innerHTML = "<label class=\"amr-drop\" id=\"amr-drop\" data-ui>\n    <input type=\"file\" id=\"amr-file\" class=\"amr-sr-only\" multiple accept=\"image/*,.heic,.heif,.avif\" aria-label=\"Choose images to clean\">\n    <div class=\"amr-icon\"><svg width=\"22\" height=\"22\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 16V4M6 10l6-6 6 6\"/><path d=\"M4 20h16\"/></svg></div>\n    <strong>Drag your images here, or click to choose them</strong>\n    <span>Works with JPG, PNG, WebP, HEIC and more. Your image quality stays the same.</span>\n    <em class=\"amr-drop-btn\">Choose images</em>\n  </label>\n\n  <div class=\"amr-options\" data-ui>\n    <label><input type=\"checkbox\" id=\"amr-keepIcc\" checked> Keep original colors <span class=\"amr-hint\">recommended</span></label>\n    <label><input type=\"checkbox\" id=\"amr-unique\"> Make each image unique <span class=\"amr-hint\">tiny invisible changes</span></label>\n    <label>New file names\n      <select id=\"amr-nameMode\">\n        <option value=\"suffix\">photo-clean.jpg</option>\n        <option value=\"keep\">Same as original</option>\n        <option value=\"rename\">image-001, image-002\u2026</option>\n      </select>\n    </label>\n  </div>\n\n  <div class=\"amr-summary\" id=\"amr-summary\" data-ui>\n    <div class=\"amr-stats\" id=\"amr-stats\"></div>\n    <div class=\"amr-btns\">\n      <button id=\"amr-clear\">Start over</button>\n      <button class=\"amr-primary\" id=\"amr-zip\">Download all</button>\n    </div>\n  </div>\n\n  <div class=\"amr-list\" id=\"amr-list\" data-ui></div>";
+mount.innerHTML = "<label class=\"amr-drop\" id=\"amr-drop\" data-ui>\n    <input type=\"file\" id=\"amr-file\" class=\"amr-sr-only\" multiple accept=\"image/*,.heic,.heif,.avif\" aria-label=\"Choose images to clean\">\n    <div class=\"amr-icon\">\n      <svg width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.2\" stroke-linecap=\"round\" stroke-linejoin=\"round\">\n        <path d=\"M12 16V4M6 10l6-6 6 6\"></path>\n        <path d=\"M4 20h16\"></path>\n      </svg>\n    </div>\n    <strong>Drag your images here, or click to choose them</strong>\n    <span>Works with JPG, PNG, WebP, HEIC and more. Your image quality stays the same.</span>\n    <em class=\"amr-drop-btn\">Choose images</em>\n  </label>\n\n  <div class=\"amr-options\" data-ui>\n    <label><input type=\"checkbox\" id=\"amr-keepIcc\" checked> Keep original colors <span class=\"amr-hint\">recommended</span></label>\n    <label><input type=\"checkbox\" id=\"amr-unique\"> Make each image unique <span class=\"amr-hint\">tiny invisible changes</span></label>\n    <label>New file names\n      <select id=\"amr-nameMode\">\n        <option value=\"suffix\">photo-clean.jpg</option>\n        <option value=\"keep\">Same as original</option>\n        <option value=\"rename\">image-001, image-002\u2026</option>\n      </select>\n    </label>\n  </div>\n\n  <div class=\"amr-summary\" id=\"amr-summary\" data-ui>\n    <div class=\"amr-stats\" id=\"amr-stats\"></div>\n    <div class=\"amr-btns\">\n      <button id=\"amr-clear\">Start over</button>\n      <button class=\"amr-primary\" id=\"amr-zip\">Download all</button>\n    </div>\n  </div>\n\n  <div class=\"amr-list\" id=\"amr-list\" data-ui></div>";
+
+try{
+  var t = localStorage.getItem("rx-theme");
+  if (t !== "light" && t !== "dark") t = matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+  document.documentElement.dataset.theme = t;
+}catch(e){ document.documentElement.dataset.theme = "dark"; }
+
 
 /* ===== Core cleaning logic (no DOM) ===== */
 const AI_PATTERNS = [
@@ -32,7 +39,6 @@ function snippet(s, i, n){
   const post = b < s.length && ok(s.charCodeAt(b)) ? '…' : '';
   return pre + s.slice(a, b).trim() + post;
 }
-// Returns [{ name, evidence: [text found in the file] }]
 function findAI(input){
   const s = typeof input === 'string' ? input : latin1(input);
   const out = [];
@@ -44,7 +50,7 @@ function findAI(input){
   return out;
 }
 const detectAI = input => findAI(input).map(d => d.name);
-function merge(list){ // [{label, bytes}] → combined by label
+function merge(list){
   const m = new Map();
   for (const r of list) m.set(r.label, (m.get(r.label) || 0) + r.bytes);
   return [...m].map(([label, bytes]) => ({ label, bytes }));
@@ -66,7 +72,7 @@ function sniff(u8){
 }
 
 /* ---- JPEG ---- */
-function readOrientation(data){ // data starts with "Exif\0\0"
+function readOrientation(data){
   try{
     const t = 6, dv = new DataView(data.buffer, data.byteOffset, data.byteLength);
     const le = ascii(data, t, 2) === 'II';
@@ -79,7 +85,7 @@ function readOrientation(data){ // data starts with "Exif\0\0"
   }catch(e){}
   return 1;
 }
-function orientationSegment(o){ // minimal EXIF holding only orientation
+function orientationSegment(o){
   return new Uint8Array([0xFF,0xE1,0x00,0x22, 0x45,0x78,0x69,0x66,0x00,0x00, 0x4D,0x4D,0x00,0x2A,0x00,0x00,0x00,0x08,
     0x00,0x01, 0x01,0x12,0x00,0x03,0x00,0x00,0x00,0x01,0x00,o,0x00,0x00, 0x00,0x00,0x00,0x00]);
 }
@@ -205,9 +211,9 @@ function addNoise(img){
   for (let i = 0, k = 65536; i < d.length; i += 4, k++){
     if (k >= 65536){ crypto.getRandomValues(rnd); k = 0; }
     const r = rnd[k];
-    if ((r & 3) !== 0 || d[i + 3] === 0) continue;        // ~25% of visible pixels
+    if ((r & 3) !== 0 || d[i + 3] === 0) continue;
     const ch = i + ((r >> 2) % 3), v = d[ch] + ((r & 32) ? 1 : -1);
-    d[ch] = v < 0 ? 1 : v > 255 ? 254 : v;               // ±1 on one color channel
+    d[ch] = v < 0 ? 1 : v > 255 ? 254 : v;
   }
 }
 async function makeUnique(u8, mime){
@@ -253,7 +259,7 @@ async function cleanBytes(u8, file, opts){
   return out;
 }
 
-/* ---- Tiny ZIP writer (store, no compression — images are already compressed) ---- */
+/* ---- Tiny ZIP writer ---- */
 const CRC_TABLE = (() => { const t = new Uint32Array(256); for (let n = 0; n < 256; n++){ let c = n; for (let k = 0; k < 8; k++) c = c & 1 ? 0xEDB88320 ^ (c >>> 1) : c >>> 1; t[n] = c >>> 0; } return t; })();
 function crc32(u8){ let c = 0xFFFFFFFF; for (let i = 0; i < u8.length; i++) c = CRC_TABLE[(c ^ u8[i]) & 0xFF] ^ (c >>> 8); return (c ^ 0xFFFFFFFF) >>> 0; }
 function makeZip(files){
@@ -269,7 +275,7 @@ function makeZip(files){
     lh.setUint32(18, size, true); lh.setUint32(22, size, true); lh.setUint16(26, name.length, true);
     parts.push(new Uint8Array(lh.buffer), name, f.bytes);
     const ch = new DataView(new ArrayBuffer(46));
-    ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true); ch.setUint16(8, 0x0800, true);
+    ch.setUint32(0, 0x02014b50, true); ch.setUint16(4, 20, true); ch.setUint16(6, 20, true); ch.setUint8(8, 0x0800, true);
     ch.setUint16(12, time, true); ch.setUint16(14, date, true); ch.setUint32(16, crc, true);
     ch.setUint32(20, size, true); ch.setUint32(24, size, true); ch.setUint16(28, name.length, true); ch.setUint32(42, offset, true);
     central.push(new Uint8Array(ch.buffer), name);
@@ -283,7 +289,7 @@ function makeZip(files){
 }
 
 
-/* ===== UI ===== */
+/* ===== UI and Event Listeners ===== */
 const $ = s => document.querySelector(s);
 const items = []; let busy = false, nextId = 1;
 const fmt = b => b < 1024 ? b + ' B' : b < 1048576 ? (b / 1024).toFixed(0) + ' KB' : (b / 1048576).toFixed(2) + ' MB';
@@ -361,6 +367,7 @@ function rowHTML(it){
     <div class="amr-side">${side}<button class="amr-remove" data-remove="${it.id}" title="Remove from list" aria-label="Remove ${esc(it.file.name)} from list">
       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button></div>${details}`;
 }
+
 function detailsHTML(it){
   const detected = it.ai.map(d => `<li class="amr-hit"><span class="amr-lbl">${esc(d.name)}</span>
     ${d.evidence.map(e => `<span class="amr-ev">${esc(e)}</span>`).join('')}</li>`);
@@ -377,18 +384,20 @@ function detailsHTML(it){
     <div><h4>What we kept</h4><ul>${kept.join('')}</ul></div>
   </div>`;
 }
+
 $('#amr-list').addEventListener('click', ev => {
   const rm = ev.target.closest('[data-remove]');
   if (rm){
     const i = items.findIndex(x => x.id === +rm.dataset.remove); if (i < 0) return;
     const [it] = items.splice(i, 1);
     if (it.url) URL.revokeObjectURL(it.url);
-    renderAll();   // refresh names (image-001…) and the summary
+    renderAll();
     return;
   }
   const b = ev.target.closest('[data-toggle]'); if (!b) return;
   const it = items.find(x => x.id === +b.dataset.toggle); it.open = !it.open; renderRow(it);
 });
+
 function renderRow(it){
   let el = document.querySelector(`[data-id="${it.id}"]`);
   if (!el){ el = document.createElement('div'); el.className = 'amr-row'; el.dataset.id = it.id; $('#amr-list').appendChild(el); }
@@ -409,10 +418,22 @@ function updateSummary(){
 }
 
 
-/* ===== Sections: live fragments ===== */
+/* ===== Sections: Live Components & Theme Switcher ===== */
 (() => {
   const byId = id => document.getElementById(id);
-  // 1. File name checker (uses the tool's own detector)
+
+  // Theme Toggle (Dark / Light)
+  const themeBtn = byId('themeToggle');
+  if (themeBtn){
+    themeBtn.addEventListener('click', () => {
+      const cur = document.documentElement.dataset.theme;
+      const next = cur === 'light' ? 'dark' : 'light';
+      document.documentElement.dataset.theme = next;
+      try { localStorage.setItem('rx-theme', next); } catch(e){}
+    });
+  }
+
+  // 1. File name checker
   const nameIn = byId('nameTry');
   if (nameIn){
     const hit = byId('nameHit'), keep = byId('nameKeep'), ren = byId('nameRen');
@@ -428,6 +449,7 @@ function updateSummary(){
     document.querySelectorAll('[data-name]').forEach(b => b.addEventListener('click', () => { nameIn.value = b.dataset.name; update(); nameIn.focus(); }));
     update();
   }
+
   // 2. Command list: filter, hover, arrows, click
   const find = byId('cmdFind');
   if (find){
@@ -454,6 +476,7 @@ function updateSummary(){
     });
     ui.setAttribute('data-ready', ''); select(0);
   }
+
   // 3. Pinned fragment follows the step in view
   const steps = [...document.querySelectorAll('[data-step]')], stage = document.querySelector('[data-state]');
   if (steps.length && stage && 'IntersectionObserver' in window){
@@ -461,6 +484,7 @@ function updateSummary(){
     const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) set(+e.target.dataset.step); }), { rootMargin: '-45% 0px -45% 0px' });
     steps.forEach(s => io.observe(s)); set(0);
   }
+
   // 4. FAQ: question index, one answer
   const pane = byId('faqPane');
   if (pane){
@@ -480,30 +504,21 @@ function updateSummary(){
     });
     box.setAttribute('data-ready', ''); pick(0);
   }
-  // Demo loop: play only while visible, never for reduced motion
+
+  // Demo loop
   const vid = document.querySelector('video[data-loop]');
   if (vid){
     if (matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) vid.controls = true;
     else new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ vid.preload = 'auto'; vid.play().catch(() => { vid.controls = true; }); } else vid.pause(); }), { threshold: .35 }).observe(vid);
   }
-  // 5. Entrances: heading, then text, then fragment
-  if ('IntersectionObserver' in window && !matchMedia('(prefers-reduced-motion: reduce)').matches){
-    const secs = [...document.querySelectorAll('section[aria-labelledby]')];
-    const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting){ e.target.setAttribute('data-seen', ''); io.unobserve(e.target); } }), { rootMargin: '0px 0px -12% 0px' });
-    secs.forEach(sec => {
-      if (sec.getBoundingClientRect().top < innerHeight) return;
-      [...sec.children].forEach((c, k) => { c.setAttribute('data-reveal', ''); c.style.setProperty('--d', (k * 0.08) + 's'); });
-      sec.setAttribute('data-armed', ''); io.observe(sec);
-    });
-  }
 })();
 
 
-/* Visitor counter: counts each browser once (no images or personal data are sent) */
+/* Visitor counter */
 (async () => {
   if (!/^https?:$/.test(location.protocol) || /^(localhost|127\.)/.test(location.hostname)) return;
-  const API = 'https://abacus.jasoncameron.dev', NS = 'aimetadataremover-devmonks', KEY = 'visitors';
-  const START = 1023;   // visits before the counter went live
+  const API = 'https://abacus.jasoncameron.dev', NS = 'aimetadataremover-reozix', KEY = 'visitors';
+  const START = 1023;
   let seen = false;
   try { seen = localStorage.getItem('amr-visited') === '1'; } catch (e) {}
   try {
@@ -514,7 +529,7 @@ function updateSummary(){
     if (!seen) try { localStorage.setItem('amr-visited', '1'); } catch (e) {}
     document.getElementById('amr-visitCount').textContent = (START + value).toLocaleString('en-US');
     document.getElementById('amr-visits').hidden = false;
-  } catch (e) { /* counter is optional; stay hidden if it fails */ }
+  } catch (e) {}
 })();
 
 })();

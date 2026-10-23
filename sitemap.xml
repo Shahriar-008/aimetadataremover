@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://reozix.com/tools/aimetadataremover</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://reozix.com/tools/aimetadataremover/og-image.png</image:loc>
+      <image:title>Free AI Metadata Remover by Reozix</image:title>
+      <image:caption>Free in-browser tool to remove C2PA Content Credentials, AI prompts, and EXIF metadata from images losslessly.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://shahriar-008.github.io/aimetadataremover/</loc>
+    <lastmod>2026-10-23</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+</urlset>

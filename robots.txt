@@ -1,0 +1,33 @@
+User-agent: *
+Allow: /
+
+# Dedicated AI Search Engine Crawlers & Answer Engines
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+Sitemap: https://reozix.com/tools/aimetadataremover/sitemap.xml
+Sitemap: https://shahriar-008.github.io/aimetadataremover/sitemap.xml
